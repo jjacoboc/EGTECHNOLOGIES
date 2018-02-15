@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 10-ene-2018 4:21:49 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+  <class catalog="sgtapp" name="com.egtechnologies.sgtapp.domain.TPerson" optimistic-lock="version" table="t_person">
+    <id name="idPerson" type="java.lang.Integer">
+      <column name="id_person"/>
+      <generator class="identity"/>
+    </id>
+    <property name="idnumber" type="string">
+      <column length="45" name="idnumber"/>
+    </property>
+    <property name="name" type="string">
+      <column length="100" name="name"/>
+    </property>
+    <property name="lastname" type="string">
+      <column length="100" name="lastname"/>
+    </property>
+    <property name="address" type="string">
+      <column name="address"/>
+    </property>
+    <property name="city" type="string">
+      <column length="45" name="city"/>
+    </property>
+    <property name="country" type="string">
+      <column length="100" name="country"/>
+    </property>
+    <property name="zipcode" type="string">
+      <column length="10" name="zipcode"/>
+    </property>
+    <property name="phone" type="string">
+      <column length="15" name="phone"/>
+    </property>
+    <property name="cellphone" type="string">
+      <column length="15" name="cellphone"/>
+    </property>
+    <property name="homeemail" type="string">
+      <column length="100" name="homeemail"/>
+    </property>
+    <property name="active" type="java.lang.Boolean">
+      <column name="active"/>
+    </property>
+    <property name="createdBy" type="java.lang.Integer">
+      <column name="created_by"/>
+    </property>
+    <property name="createdDate" type="timestamp">
+      <column length="19" name="created_date"/>
+    </property>
+    <property name="modifiedBy" type="java.lang.Integer">
+      <column name="modified_by"/>
+    </property>
+    <property name="modifiedDate" type="timestamp">
+      <column length="19" name="modified_date"/>
+    </property>
+  </class>
+</hibernate-mapping>

@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 09-feb-2018 0:17:06 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.egtechnologies.sgtapp.domain.THardware" table="t_hardware" catalog="sgtapp" optimistic-lock="version">
+        <id name="idHardware" type="java.lang.Integer">
+            <column name="id_hardware" />
+            <generator class="identity" />
+        </id>
+        <property name="idCompany" type="java.lang.Integer">
+            <column name="id_company" />
+        </property>
+        <property name="idHardwareType" type="java.lang.Integer">
+            <column name="id_hardware_type" />
+        </property>
+        <property name="brand" type="string">
+            <column name="brand" length="45" />
+        </property>
+        <property name="model" type="string">
+            <column name="model" length="45" />
+        </property>
+        <property name="serialNumber" type="string">
+            <column name="serial_number" length="45" />
+        </property>
+        <property name="active" type="java.lang.Boolean">
+            <column name="active" />
+        </property>
+        <property name="createdBy" type="java.lang.Integer">
+            <column name="created_by" />
+        </property>
+        <property name="createdDate" type="timestamp">
+            <column name="created_date" length="19" />
+        </property>
+        <property name="modifiedBy" type="java.lang.Integer">
+            <column name="modified_by" />
+        </property>
+        <property name="modifiedDate" type="timestamp">
+            <column name="modified_date" length="19" />
+        </property>
+        <set name="TAssignations" table="t_assignation" inverse="true" lazy="false" fetch="join">
+            <key>
+                <column name="id_hardware" not-null="true" />
+            </key>
+            <one-to-many class="com.egtechnologies.sgtapp.domain.TAssignation" />
+        </set>
+        <set name="TInstallations" table="t_installation" inverse="true" lazy="false" fetch="join">
+            <key>
+                <column name="id_hardware" not-null="true" />
+            </key>
+            <one-to-many class="com.egtechnologies.sgtapp.domain.TInstallation" />
+        </set>
+    </class>
+</hibernate-mapping>

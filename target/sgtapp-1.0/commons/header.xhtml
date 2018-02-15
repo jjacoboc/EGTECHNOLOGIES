@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title></title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <h:outputStylesheet name="css/mycss.css" />
+    </h:head>
+    <style>
+        .valign-bottom tr td {
+            vertical-align: bottom
+        }
+    </style>
+    <f:loadBundle var="msgs" basename="com.egtechnologies.sgtapp.resources.messages"/>
+    <h:body>
+        <h:form>
+            <h:panelGrid columns="1" cellpadding="0" cellspacing="0" width="100%">
+                <h:panelGrid columns="2" width="100%" cellpadding="0" cellspacing="0" style="vertical-align: bottom;">
+                    <h:panelGroup>
+                        <p:graphicImage library="images" name="eg-tech-logo-1.jpg" style="max-height: 36px; max-width: 210px;"/>
+                        <p:spacer width="5"/>
+                        <h:panelGroup>
+                            <h:outputText value="#{msgs.welcome} #{loginMB.personSession.name} #{loginMB.personSession.lastname} " style="font-size: 12px;font-weight: bold;"/>
+                            <h:outputText value=" (#{loginMB.roleSession.name})" style="font-size: 10px;font-weight: bold;"/>
+                        </h:panelGroup>
+                    </h:panelGroup>
+                    <h:panelGrid columns="5" style="float: right;" styleClass="valign-bottom">
+                        <h:commandLink action="/pages/welcome.xhtml">
+                            <p:graphicImage library="images" name="house.png" style="border: 0;" alt="home" title="home"/>
+                        </h:commandLink>
+                        <h:commandLink action="/pages/cambioClaveHeader.xhtml">
+                            <p:graphicImage library="images" name="key_go.png" style="border: 0;" alt="change password" title="change password"/>
+                        </h:commandLink>
+                        <h:commandLink action="#{loginMB.closeSession}">
+                            <p:graphicImage library="images" name="power.png" style="border: 0;" alt="close session" title="close session"/>
+                        </h:commandLink>
+                        <p:spacer width="5"/>
+                        <p:graphicImage library="images" name="norton_secured.png" style="border: 0;float: right" alt="VeriSign Secured" title="VeriSign Secured"/>
+                    </h:panelGrid>
+                </h:panelGrid>
+
+                <p:menubar style="font-size: 12px" >
+                    <p:submenu label="#{msgs.submenu1}" icon="ui-icon-document">
+                        <p:menuitem value="#{msgs.menuitem11}" rendered="#{loginMB.mapObjetos['menu01']}" outcome="/pages/person.xhtml"/>
+                        <p:menuitem value="#{msgs.menuitem12}" rendered="#{loginMB.mapObjetos['menu02']}" outcome="/pages/user.xhtml"/>
+                        <p:menuitem value="#{msgs.menuitem13}" rendered="#{loginMB.mapObjetos['menu03']}" outcome="/pages/role.xhtml"/>
+                        <p:menuitem value="#{msgs.menuitem14}" rendered="#{loginMB.mapObjetos['menu04']}" outcome="/pages/assignPermissions.xhtml"/>
+                        <p:separator />
+                        <p:menuitem value="#{msgs.menuitem15}" action="#{loginMB.closeSession}" ajax="false" />
+                    </p:submenu>
+                    <p:submenu label="#{msgs.submenu2}" icon="ui-icon-document">
+                        <p:menuitem value="#{msgs.menuitem21}" rendered="#{loginMB.mapObjetos['menu04']}" outcome="/pages/company.xhtml"/>
+                        <p:menuitem value="#{msgs.menuitem22}" rendered="#{loginMB.mapObjetos['menu04']}" outcome="/pages/hardwareType.xhtml"/>
+                        <p:menuitem value="#{msgs.menuitem23}" rendered="#{loginMB.mapObjetos['menu04']}" outcome="/pages/position.xhtml"/>
+                        <p:menuitem value="#{msgs.menuitem24}" rendered="#{loginMB.mapObjetos['menu04']}" outcome="/pages/network.xhtml"/>
+                    </p:submenu>
+                </p:menubar>
+            </h:panelGrid>
+        </h:form>
+        
+        <p:ajaxStatus onstart="PF('statusDialog').show();" onsuccess="PF('statusDialog').hide();" />
+
+        <p:dialog widgetVar="statusDialog" modal="true" appendTo="@(body)" draggable="false" closable="false" resizable="false" showHeader="false">
+            <h:graphicImage library="images" name="156.gif" style="border: 0;" />
+        </p:dialog>
+    </h:body>
+</html>

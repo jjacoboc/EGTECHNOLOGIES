@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+  <session-factory>
+    <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+    <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/sgtapp</property>
+    <property name="hibernate.connection.username">root</property>
+    <property name="hibernate.connection.password">admin</property>
+    <mapping resource="com/egtechnologies/sgtapp/domain/TRights.hbm.xml"/>
+    <mapping resource="com/egtechnologies/sgtapp/domain/TNetworkUser.hbm.xml"/>
+    <mapping resource="com/egtechnologies/sgtapp/domain/TPosition.hbm.xml"/>
+    <mapping resource="com/egtechnologies/sgtapp/domain/TPassword.hbm.xml"/>
+    <mapping resource="com/egtechnologies/sgtapp/domain/TFacilities.hbm.xml"/>
+    <mapping resource="com/egtechnologies/sgtapp/domain/TCompany.hbm.xml"/>
+    <mapping resource="com/egtechnologies/sgtapp/domain/TDepartment.hbm.xml"/>
+    <mapping resource="com/egtechnologies/sgtapp/domain/TAssignation.hbm.xml"/>
+    <mapping resource="com/egtechnologies/sgtapp/domain/TInstallation.hbm.xml"/>
+    <mapping resource="com/egtechnologies/sgtapp/domain/THardwareType.hbm.xml"/>
+    <mapping resource="com/egtechnologies/sgtapp/domain/TSoftware.hbm.xml"/>
+    <mapping resource="com/egtechnologies/sgtapp/domain/TNetwork.hbm.xml"/>
+    <mapping resource="com/egtechnologies/sgtapp/domain/TRole.hbm.xml"/>
+    <mapping resource="com/egtechnologies/sgtapp/domain/TUser.hbm.xml"/>
+    <mapping resource="com/egtechnologies/sgtapp/domain/TPerson.hbm.xml"/>
+    <mapping resource="com/egtechnologies/sgtapp/domain/THardware.hbm.xml"/>
+    <mapping resource="com/egtechnologies/sgtapp/domain/TBranchOffice.hbm.xml"/>
+    <mapping resource="com/egtechnologies/sgtapp/domain/TEmployee.hbm.xml"/>
+  </session-factory>
+</hibernate-configuration>

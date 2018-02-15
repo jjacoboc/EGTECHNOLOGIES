@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+              http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
+    
+    <import resource="applicationContext.xml"/>
+
+    <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="location"><value>classpath:com/egtechnologies/sgtapp/resources/jdbc.properties</value></property>
+    </bean>
+
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName"><value>${driver}</value></property>
+        <property name="url"><value>${url}</value></property>
+        <property name="username"><value>${username}</value></property>
+        <property name="password"><value>${password}</value></property>
+    </bean>
+
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+        <property name="dataSource" ref="dataSource" />
+        <property name="mappingLocations">
+            <list>
+                <value>classpath:com/egtechnologies/sgtapp/domain/TAssignation.hbm.xml</value>
+                <value>classpath:com/egtechnologies/sgtapp/domain/TBranchOffice.hbm.xml</value>
+                <value>classpath:com/egtechnologies/sgtapp/domain/TCompany.hbm.xml</value>
+                <value>classpath:com/egtechnologies/sgtapp/domain/TDepartment.hbm.xml</value>
+                <value>classpath:com/egtechnologies/sgtapp/domain/TEmployee.hbm.xml</value>
+                <value>classpath:com/egtechnologies/sgtapp/domain/TFacilities.hbm.xml</value>
+                <value>classpath:com/egtechnologies/sgtapp/domain/THardware.hbm.xml</value>
+                <value>classpath:com/egtechnologies/sgtapp/domain/THardwareType.hbm.xml</value>
+                <value>classpath:com/egtechnologies/sgtapp/domain/TInstallation.hbm.xml</value>
+                <value>classpath:com/egtechnologies/sgtapp/domain/TNetwork.hbm.xml</value>
+                <value>classpath:com/egtechnologies/sgtapp/domain/TNetworkUser.hbm.xml</value>
+                <value>classpath:com/egtechnologies/sgtapp/domain/TPassword.hbm.xml</value>
+                <value>classpath:com/egtechnologies/sgtapp/domain/TPerson.hbm.xml</value>
+                <value>classpath:com/egtechnologies/sgtapp/domain/TPosition.hbm.xml</value>
+                <value>classpath:com/egtechnologies/sgtapp/domain/TRights.hbm.xml</value>
+                <value>classpath:com/egtechnologies/sgtapp/domain/TRole.hbm.xml</value>
+                <value>classpath:com/egtechnologies/sgtapp/domain/TSoftware.hbm.xml</value>
+                <value>classpath:com/egtechnologies/sgtapp/domain/TUser.hbm.xml</value>
+            </list>
+        </property>
+        <property name="hibernateProperties">
+            <value>
+                hibernate.dialect                       =   org.hibernate.dialect.MySQLDialect
+                hibernate.format_sql                    =   true
+                hibernate.show_sql                      =   true
+            </value>
+        </property>
+    </bean>
+
+    <bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    
+</beans>

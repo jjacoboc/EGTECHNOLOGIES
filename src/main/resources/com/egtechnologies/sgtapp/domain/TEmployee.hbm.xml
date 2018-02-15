@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 09-feb-2018 0:17:06 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.egtechnologies.sgtapp.domain.TEmployee" table="t_employee" catalog="sgtapp" optimistic-lock="version">
+        <id name="idEmployee" type="java.lang.Integer">
+            <column name="id_employee" />
+            <generator class="identity" />
+        </id>
+        <property name="idDepartment" type="java.lang.Integer">
+            <column name="id_department" />
+        </property>
+        <property name="idPosition" type="java.lang.Integer">
+            <column name="id_position" />
+        </property>
+        <property name="idnumber" type="string">
+            <column name="idnumber" length="45" />
+        </property>
+        <property name="name" type="string">
+            <column name="name" length="100" />
+        </property>
+        <property name="lastname" type="string">
+            <column name="lastname" length="100" />
+        </property>
+        <property name="homeemail" type="string">
+            <column name="homeemail" length="100" />
+        </property>
+        <property name="phone" type="string">
+            <column name="phone" length="15" />
+        </property>
+        <property name="cellphone" type="string">
+            <column name="cellphone" length="15" />
+        </property>
+        <property name="address" type="string">
+            <column name="address" />
+        </property>
+        <property name="city" type="string">
+            <column name="city" length="45" />
+        </property>
+        <property name="state" type="string">
+            <column name="state" length="45" />
+        </property>
+        <property name="country" type="string">
+            <column name="country" length="100" />
+        </property>
+        <property name="zipcode" type="string">
+            <column name="zipcode" length="10" />
+        </property>
+        <property name="active" type="java.lang.Boolean">
+            <column name="active" />
+        </property>
+        <property name="createdBy" type="java.lang.Integer">
+            <column name="created_by" />
+        </property>
+        <property name="createdDate" type="timestamp">
+            <column name="created_date" length="19" />
+        </property>
+        <property name="modifiedBy" type="java.lang.Integer">
+            <column name="modified_by" />
+        </property>
+        <property name="modifiedDate" type="timestamp">
+            <column name="modified_date" length="19" />
+        </property>
+        <set name="TNetworkUsers" table="t_network_user" inverse="true" lazy="false" fetch="join">
+            <key>
+                <column name="id_employee" not-null="true" />
+            </key>
+            <one-to-many class="com.egtechnologies.sgtapp.domain.TNetworkUser" />
+        </set>
+        <set name="TAssignations" table="t_assignation" inverse="true" lazy="false" fetch="join">
+            <key>
+                <column name="id_employee" not-null="true" />
+            </key>
+            <one-to-many class="com.egtechnologies.sgtapp.domain.TAssignation" />
+        </set>
+    </class>
+</hibernate-mapping>
