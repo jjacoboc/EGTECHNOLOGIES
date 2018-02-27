@@ -72,6 +72,15 @@ public class CompanyDaoHibernate extends HibernateDaoSupport implements CompanyD
         if(StringUtils.isNotBlank(tcompany.getName())) {
             criteria.add(Restrictions.like("name", tcompany.getName(), MatchMode.ANYWHERE));
         }
+        if(StringUtils.isNotBlank(tcompany.getCity())) {
+            criteria.add(Restrictions.like("city", tcompany.getCity(), MatchMode.ANYWHERE));
+        }
+        if(StringUtils.isNotBlank(tcompany.getState())) {
+            criteria.add(Restrictions.like("state", tcompany.getState(), MatchMode.ANYWHERE));
+        }
+        if(StringUtils.isNotBlank(tcompany.getCountry())) {
+            criteria.add(Restrictions.like("country", tcompany.getCountry(), MatchMode.ANYWHERE));
+        }
         criteria.addOrder(Order.asc("name"));
         return (List<TCompany>) criteria.list();
     }

@@ -16,10 +16,12 @@ import java.util.Set;
  */
 public class Employee implements Serializable {
     
+    private Integer idCompany;
+    private Integer idBranchOffice;
     private Integer idEmployee;
     private Integer idDepartment;
     private Integer idPosition;
-    private String idnumber;
+    private String code;
     private String name;
     private String lastname;
     private String homeemail;
@@ -39,6 +41,22 @@ public class Employee implements Serializable {
     private Set<Assignation> Assignations = new HashSet<>(0);
     
     public Employee() {
+    }
+
+    public Integer getIdCompany() {
+        return idCompany;
+    }
+
+    public void setIdCompany(Integer idCompany) {
+        this.idCompany = idCompany;
+    }
+
+    public Integer getIdBranchOffice() {
+        return idBranchOffice;
+    }
+
+    public void setIdBranchOffice(Integer idBranchOffice) {
+        this.idBranchOffice = idBranchOffice;
     }
 
     public Integer getIdEmployee() {
@@ -65,12 +83,12 @@ public class Employee implements Serializable {
         this.idPosition = idPosition;
     }
 
-    public String getIdnumber() {
-        return idnumber;
+    public String getCode() {
+        return code;
     }
 
-    public void setIdnumber(String idnumber) {
-        this.idnumber = idnumber;
+    public void setCode(String code) {
+        this.code = code;
     }
 
     public String getName() {

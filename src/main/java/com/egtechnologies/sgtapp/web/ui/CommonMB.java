@@ -5,7 +5,9 @@
  */
 package com.egtechnologies.sgtapp.web.ui;
 
+import com.egtechnologies.sgtapp.service.BranchOfficeService;
 import com.egtechnologies.sgtapp.service.CompanyService;
+import com.egtechnologies.sgtapp.service.DepartmentService;
 import com.egtechnologies.sgtapp.service.FacilityService;
 import com.egtechnologies.sgtapp.service.RoleService;
 import com.egtechnologies.sgtapp.util.JSFUtils;
@@ -14,7 +16,9 @@ import java.io.Serializable;
 import java.util.List;
 import javax.enterprise.context.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
+import javax.faces.event.AjaxBehaviorEvent;
 import javax.faces.model.SelectItem;
+import org.primefaces.component.selectonemenu.SelectOneMenu;
 
 /**
  *
@@ -28,6 +32,14 @@ public class CommonMB implements Serializable {
     private List<SelectItem> listAllFacilities;
     private List<SelectItem> listAllCompanies;
     private List<SelectItem> listAllActiveCompanies;
+    private List<SelectItem> listAllBranchOffice;
+    private List<SelectItem> listAllActiveBranchOffice;
+    private List<SelectItem> listAllBranchOfficeByCompany;
+    private List<SelectItem> listAllActiveBranchOfficeByCompany;
+    private List<SelectItem> listAllDepartment;
+    private List<SelectItem> listAllActiveDepartment;
+    private List<SelectItem> listAllDepartmentByBranchOffice;
+    private List<SelectItem> listAllActiveDepartmentByBranchOffice;
     
     /**
      * Creates a new instance of CommonMB
@@ -82,5 +94,124 @@ public class CommonMB implements Serializable {
     public void setListAllActiveCompanies(List<SelectItem> listAllActiveCompanies) {
         this.listAllActiveCompanies = listAllActiveCompanies;
     }
+
+    public List<SelectItem> getListAllBranchOffice() {
+        if(this.listAllBranchOffice == null){
+            BranchOfficeService branchOfficeService = (BranchOfficeService) JSFUtils.findBean("BranchOfficeService");
+            this.listAllBranchOffice = new Items(branchOfficeService.getAllBranchOffices(), Items.FIRST_ITEM_SELECT, "idBranchOffice", "name").getItems();
+        }
+        return listAllBranchOffice;
+    }
+
+    public void setListAllBranchOffice(List<SelectItem> listAllBranchOffice) {
+        this.listAllBranchOffice = listAllBranchOffice;
+    }
+
+    public List<SelectItem> getListAllActiveBranchOffice() {
+        if(this.listAllActiveBranchOffice == null){
+            BranchOfficeService branchOfficeService = (BranchOfficeService) JSFUtils.findBean("BranchOfficeService");
+            this.listAllActiveBranchOffice = new Items(branchOfficeService.getAllActiveBranchOffices(), Items.FIRST_ITEM_SELECT, "idBranchOffice", "name").getItems();
+        }
+        return listAllActiveBranchOffice;
+    }
+
+    public void setListAllActiveBranchOffice(List<SelectItem> listAllActiveBranchOffice) {
+        this.listAllActiveBranchOffice = listAllActiveBranchOffice;
+    }
+
+    public List<SelectItem> getListAllBranchOfficeByCompany() {
+        return listAllBranchOfficeByCompany;
+    }
+
+    public void setListAllBranchOfficeByCompany(List<SelectItem> listAllBranchOfficeByCompany) {
+        this.listAllBranchOfficeByCompany = listAllBranchOfficeByCompany;
+    }
     
+    public void getListBranchOfficeByCompany(AjaxBehaviorEvent e) {
+        if(e!=null){
+            Integer idCompany = (Integer)((SelectOneMenu) e.getSource()).getValue();
+            BranchOfficeService branchOfficeService = (BranchOfficeService) JSFUtils.findBean("BranchOfficeService");
+            listAllBranchOfficeByCompany =  new Items(branchOfficeService.getAllBranchOfficesByCompany(idCompany), Items.FIRST_ITEM_SELECT, "idBranchOffice","name").getItems();
+        }else{
+            listAllBranchOfficeByCompany =  new Items(null, Items.FIRST_ITEM_SELECT, "idBranchOffice","name").getItems();
+        }
+    }
+
+    public List<SelectItem> getListAllActiveBranchOfficeByCompany() {
+        return listAllActiveBranchOfficeByCompany;
+    }
+
+    public void setListAllActiveBranchOfficeByCompany(List<SelectItem> listAllActiveBranchOfficeByCompany) {
+        this.listAllActiveBranchOfficeByCompany = listAllActiveBranchOfficeByCompany;
+    }
+    
+    public void getListActiveBranchOfficeByCompany(AjaxBehaviorEvent e) {
+        if(e!=null){
+            Integer idCompany = (Integer)((SelectOneMenu) e.getSource()).getValue();
+            BranchOfficeService branchOfficeService = (BranchOfficeService) JSFUtils.findBean("BranchOfficeService");
+            listAllActiveBranchOfficeByCompany =  new Items(branchOfficeService.getAllActiveBranchOfficesByCompany(idCompany), Items.FIRST_ITEM_SELECT, "idBranchOffice","name").getItems();
+        }else{
+            listAllActiveBranchOfficeByCompany =  new Items(null, Items.FIRST_ITEM_SELECT, "idBranchOffice","name").getItems();
+        }
+    }
+
+    public List<SelectItem> getListAllDepartment() {
+        if(this.listAllDepartment == null){
+            DepartmentService departmentService = (DepartmentService) JSFUtils.findBean("DepartmentService");
+            this.listAllDepartment = new Items(departmentService.getAllDepartments(), Items.FIRST_ITEM_SELECT, "idDepartment", "name").getItems();
+        }
+        return listAllDepartment;
+    }
+
+    public void setListAllDepartment(List<SelectItem> listAllDepartment) {
+        this.listAllDepartment = listAllDepartment;
+    }
+
+    public List<SelectItem> getListAllActiveDepartment() {
+        if(this.listAllDepartment == null){
+            DepartmentService departmentService = (DepartmentService) JSFUtils.findBean("DepartmentService");
+            this.listAllDepartment = new Items(departmentService.getAllActiveDepartments(), Items.FIRST_ITEM_SELECT, "idDepartment", "name").getItems();
+        }
+        return listAllActiveDepartment;
+    }
+
+    public void setListAllActiveDepartment(List<SelectItem> listAllActiveDepartment) {
+        this.listAllActiveDepartment = listAllActiveDepartment;
+    }
+
+    public List<SelectItem> getListAllDepartmentByBranchOffice() {
+        return listAllDepartmentByBranchOffice;
+    }
+
+    public void setListAllDepartmentByBranchOffice(List<SelectItem> listAllDepartmentByBranchOffice) {
+        this.listAllDepartmentByBranchOffice = listAllDepartmentByBranchOffice;
+    }
+    
+    public void getListDepartmentByBranchOffice(AjaxBehaviorEvent e) {
+        if(e!=null){
+            Integer idBranchOffice = (Integer)((SelectOneMenu) e.getSource()).getValue();
+            DepartmentService departmentService = (DepartmentService) JSFUtils.findBean("DepartmentService");
+            listAllBranchOfficeByCompany =  new Items(departmentService.getAllDepartmentsByBranchOffice(idBranchOffice), Items.FIRST_ITEM_SELECT, "idDepartment","name").getItems();
+        }else{
+            listAllBranchOfficeByCompany =  new Items(null, Items.FIRST_ITEM_SELECT, "idDepartment","name").getItems();
+        }
+    }
+
+    public List<SelectItem> getListAllActiveDepartmentByBranchOffice() {
+        return listAllActiveDepartmentByBranchOffice;
+    }
+
+    public void setListAllActiveDepartmentByBranchOffice(List<SelectItem> listAllActiveDepartmentByBranchOffice) {
+        this.listAllActiveDepartmentByBranchOffice = listAllActiveDepartmentByBranchOffice;
+    }
+    
+    public void getListActiveDepartmentByBranchOffice(AjaxBehaviorEvent e) {
+        if(e!=null){
+            Integer idBranchOffice = (Integer)((SelectOneMenu) e.getSource()).getValue();
+            DepartmentService departmentService = (DepartmentService) JSFUtils.findBean("DepartmentService");
+            listAllBranchOfficeByCompany =  new Items(departmentService.getAllActiveDepartmentsByBranchOffice(idBranchOffice), Items.FIRST_ITEM_SELECT, "idDepartment","name").getItems();
+        }else{
+            listAllBranchOfficeByCompany =  new Items(null, Items.FIRST_ITEM_SELECT, "idDepartment","name").getItems();
+        }
+    }
 }

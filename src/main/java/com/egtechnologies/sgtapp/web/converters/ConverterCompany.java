@@ -38,12 +38,13 @@ public class ConverterCompany implements Converter {
         String label = "";
         try {
             HttpSession session = JSFUtils.getSession();
-            CommonMB listasSession = session.getAttribute("commonMB") != null ? (CommonMB) session.getAttribute("commonMB") : new CommonMB();
-            lista = listasSession.getListAllCompanies();
+            CommonMB commonMB = session.getAttribute("commonMB") != null ? (CommonMB) session.getAttribute("commonMB") : new CommonMB();
+            lista = commonMB.getListAllCompanies();
             for (int i = 0; i < lista.size(); i++) {
                 SelectItem item = (SelectItem) lista.get(i);
                 if (o.toString().equals(item.getValue().toString())) {
                     label = item.getLabel();
+                    break;
                 }
             }
             return label;

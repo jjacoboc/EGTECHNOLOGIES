@@ -308,7 +308,7 @@ public class PersonMB implements Serializable {
                         this.getSelectedItem().setModifiedBy(user.getIdUser());
                         personService.saveOrUpdate(this.getSelectedItem());
                         this.setListPersons(personService.getAllPersons());
-                        RequestContext.getCurrentInstance().execute("PF('dlg').hide();");
+                        RequestContext.getCurrentInstance().execute("PF('dlgEdit').hide();");
                     }
                 }
             }

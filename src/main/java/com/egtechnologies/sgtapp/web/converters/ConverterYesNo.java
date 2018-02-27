@@ -5,8 +5,6 @@
 
 package com.egtechnologies.sgtapp.web.converters;
 
-import java.math.BigDecimal;
-import java.util.List;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;

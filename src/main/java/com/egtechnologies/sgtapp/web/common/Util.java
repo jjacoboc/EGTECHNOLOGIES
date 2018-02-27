@@ -5,7 +5,10 @@
 
 package com.egtechnologies.sgtapp.web.common;
 
+import com.egtechnologies.sgtapp.domain.TBranchOffice;
 import com.egtechnologies.sgtapp.domain.TCompany;
+import com.egtechnologies.sgtapp.domain.TDepartment;
+import com.egtechnologies.sgtapp.domain.TEmployee;
 import com.egtechnologies.sgtapp.domain.TFacilities;
 import com.egtechnologies.sgtapp.domain.THardwareType;
 import com.egtechnologies.sgtapp.domain.TNetwork;
@@ -14,8 +17,12 @@ import com.egtechnologies.sgtapp.domain.TPerson;
 import com.egtechnologies.sgtapp.domain.TPosition;
 import com.egtechnologies.sgtapp.domain.TRights;
 import com.egtechnologies.sgtapp.domain.TRole;
+import com.egtechnologies.sgtapp.domain.TSoftware;
 import com.egtechnologies.sgtapp.domain.TUser;
+import com.egtechnologies.sgtapp.web.bean.BranchOffice;
 import com.egtechnologies.sgtapp.web.bean.Company;
+import com.egtechnologies.sgtapp.web.bean.Department;
+import com.egtechnologies.sgtapp.web.bean.Employee;
 import com.egtechnologies.sgtapp.web.bean.Facilities;
 import com.egtechnologies.sgtapp.web.bean.HardwareType;
 import com.egtechnologies.sgtapp.web.bean.Network;
@@ -24,6 +31,7 @@ import com.egtechnologies.sgtapp.web.bean.Person;
 import com.egtechnologies.sgtapp.web.bean.Position;
 import com.egtechnologies.sgtapp.web.bean.Rights;
 import com.egtechnologies.sgtapp.web.bean.Role;
+import com.egtechnologies.sgtapp.web.bean.Software;
 import com.egtechnologies.sgtapp.web.bean.User;
 import com.sun.mail.util.MailSSLSocketFactory;
 import java.io.UnsupportedEncodingException;
@@ -504,5 +512,185 @@ public class Util {
             tnetwork.setName(network.getName());
         }
         return tnetwork;
+    }
+    
+    public static Software parserSoftware(TSoftware tsoftware) {
+        Software software = null;
+        if(tsoftware != null) {
+            software = new Software();
+            software.setActive(tsoftware.getActive());
+            software.setBrand(tsoftware.getBrand());
+            software.setCreatedBy(tsoftware.getCreatedBy());
+            software.setCreatedDate(tsoftware.getCreatedDate());
+            software.setDescription(tsoftware.getDescription());
+            software.setIdCompany(tsoftware.getIdCompany());
+            software.setIdSoftware(tsoftware.getIdSoftware());
+            software.setLicenseCount(tsoftware.getLicenseCount());
+            software.setModifiedBy(tsoftware.getModifiedBy());
+            software.setModifiedDate(tsoftware.getModifiedDate());
+            software.setName(tsoftware.getName());
+            software.setSupportEmail(tsoftware.getSupportEmail());
+            software.setSupportPhone(tsoftware.getSupportPhone());
+        }
+        return software;
+    }
+    
+    public static TSoftware parserTSoftware(Software software) {
+        TSoftware tsoftware = null;
+        if(software != null) {
+            tsoftware = new TSoftware();
+            tsoftware.setActive(software.getActive());
+            tsoftware.setBrand(software.getBrand());
+            tsoftware.setCreatedBy(software.getCreatedBy());
+            tsoftware.setCreatedDate(software.getCreatedDate());
+            tsoftware.setDescription(software.getDescription());
+            tsoftware.setIdCompany(software.getIdCompany());
+            tsoftware.setIdSoftware(software.getIdSoftware());
+            tsoftware.setLicenseCount(software.getLicenseCount());
+            tsoftware.setModifiedBy(software.getModifiedBy());
+            tsoftware.setModifiedDate(software.getModifiedDate());
+            tsoftware.setName(software.getName());
+            tsoftware.setSupportEmail(software.getSupportEmail());
+            tsoftware.setSupportPhone(software.getSupportPhone());
+        }
+        return tsoftware;
+    }
+    
+    public static BranchOffice parserBranchOffice(TBranchOffice tbranchOffice) {
+        BranchOffice branchOffice = null;
+        if(tbranchOffice != null) {
+            branchOffice = new BranchOffice();
+            branchOffice.setActive(tbranchOffice.getActive());
+            branchOffice.setAddress(tbranchOffice.getAddress());
+            branchOffice.setCity(tbranchOffice.getCity());
+            branchOffice.setCountry(tbranchOffice.getCountry());
+            branchOffice.setCreatedBy(tbranchOffice.getCreatedBy());
+            branchOffice.setCreatedDate(tbranchOffice.getCreatedDate());
+            branchOffice.setIdBranchOffice(tbranchOffice.getIdBranchOffice());
+            branchOffice.setIdCompany(tbranchOffice.getIdCompany());
+            branchOffice.setModifiedBy(tbranchOffice.getModifiedBy());
+            branchOffice.setModifiedDate(tbranchOffice.getModifiedDate());
+            branchOffice.setName(tbranchOffice.getName());
+            branchOffice.setPhone(tbranchOffice.getPhone());
+            branchOffice.setState(tbranchOffice.getState());
+            branchOffice.setZipcode(tbranchOffice.getZipcode());
+        }
+        return branchOffice;
+    }
+    
+    public static TBranchOffice parserTBranchOffice(BranchOffice branchOffice) {
+        TBranchOffice tbranchOffice = null;
+        if(branchOffice != null) {
+            tbranchOffice = new TBranchOffice();
+            tbranchOffice.setActive(branchOffice.getActive());
+            tbranchOffice.setAddress(branchOffice.getAddress());
+            tbranchOffice.setCity(branchOffice.getCity());
+            tbranchOffice.setCountry(branchOffice.getCountry());
+            tbranchOffice.setCreatedBy(branchOffice.getCreatedBy());
+            tbranchOffice.setCreatedDate(branchOffice.getCreatedDate());
+            tbranchOffice.setIdBranchOffice(branchOffice.getIdBranchOffice());
+            tbranchOffice.setIdCompany(branchOffice.getIdCompany());
+            tbranchOffice.setModifiedBy(branchOffice.getModifiedBy());
+            tbranchOffice.setModifiedDate(branchOffice.getModifiedDate());
+            tbranchOffice.setName(branchOffice.getName());
+            tbranchOffice.setPhone(branchOffice.getPhone());
+            tbranchOffice.setState(branchOffice.getState());
+            tbranchOffice.setZipcode(branchOffice.getZipcode());
+        }
+        return tbranchOffice;
+    }
+    
+    public static Department parserDepartment(TDepartment tdepartment) {
+        Department department = null;
+        if(tdepartment != null) {
+            department = new Department();
+            department.setActive(tdepartment.getActive());
+            department.setCreatedBy(tdepartment.getCreatedBy());
+            department.setCreatedDate(tdepartment.getCreatedDate());
+            department.setDescription(tdepartment.getDescription());
+            department.setIdBranchOffice(tdepartment.getIdBranchOffice());
+            department.setIdCompany(tdepartment.getIdCompany());
+            department.setIdDepartment(tdepartment.getIdDepartment());
+            department.setModifiedBy(tdepartment.getModifiedBy());
+            department.setModifiedDate(tdepartment.getModifiedDate());
+            department.setName(tdepartment.getName());
+        }
+        return department;
+    }
+    
+    public static TDepartment parserTDepartment(Department department) {
+        TDepartment tdepartment = null;
+        if(department != null) {
+            tdepartment = new TDepartment();
+            tdepartment.setActive(department.getActive());
+            tdepartment.setCreatedBy(department.getCreatedBy());
+            tdepartment.setCreatedDate(department.getCreatedDate());
+            tdepartment.setDescription(department.getDescription());
+            tdepartment.setIdBranchOffice(department.getIdBranchOffice());
+            tdepartment.setIdCompany(department.getIdCompany());
+            tdepartment.setIdDepartment(department.getIdDepartment());
+            tdepartment.setModifiedBy(department.getModifiedBy());
+            tdepartment.setModifiedDate(department.getModifiedDate());
+            tdepartment.setName(department.getName());
+        }
+        return tdepartment;
+    }
+    
+    public static Employee parserEmployee(TEmployee temployee) {
+        Employee employee = null;
+        if(temployee != null) {
+            employee = new Employee();
+            employee.setActive(temployee.getActive());
+            employee.setAddress(temployee.getAddress());
+            employee.setCellphone(temployee.getCellphone());
+            employee.setCity(temployee.getCity());
+            employee.setCountry(temployee.getCountry());
+            employee.setCreatedBy(temployee.getCreatedBy());
+            employee.setCreatedDate(temployee.getCreatedDate());
+            employee.setHomeemail(temployee.getHomeemail());
+            employee.setIdBranchOffice(temployee.getIdBranchOffice());
+            employee.setIdCompany(temployee.getIdCompany());
+            employee.setIdDepartment(temployee.getIdDepartment());
+            employee.setIdEmployee(temployee.getIdEmployee());
+            employee.setIdPosition(temployee.getIdPosition());
+            employee.setCode(temployee.getCode());
+            employee.setLastname(temployee.getLastname());
+            employee.setModifiedBy(temployee.getModifiedBy());
+            employee.setModifiedDate(temployee.getModifiedDate());
+            employee.setName(temployee.getName());
+            employee.setPhone(temployee.getPhone());
+            employee.setState(temployee.getState());
+            employee.setZipcode(temployee.getZipcode());
+        }
+        return employee;
+    }
+    
+    public static TEmployee parserTEmployee(Employee employee) {
+        TEmployee temployee = null;
+        if(employee != null) {
+            temployee = new TEmployee();
+            temployee.setActive(employee.getActive());
+            temployee.setAddress(employee.getAddress());
+            temployee.setCellphone(employee.getCellphone());
+            temployee.setCity(employee.getCity());
+            temployee.setCountry(employee.getCountry());
+            temployee.setCreatedBy(employee.getCreatedBy());
+            temployee.setCreatedDate(employee.getCreatedDate());
+            temployee.setHomeemail(employee.getHomeemail());
+            temployee.setIdBranchOffice(employee.getIdBranchOffice());
+            temployee.setIdCompany(employee.getIdCompany());
+            temployee.setIdDepartment(employee.getIdDepartment());
+            temployee.setIdEmployee(employee.getIdEmployee());
+            temployee.setIdPosition(employee.getIdPosition());
+            temployee.setCode(employee.getCode());
+            temployee.setLastname(employee.getLastname());
+            temployee.setModifiedBy(employee.getModifiedBy());
+            temployee.setModifiedDate(employee.getModifiedDate());
+            temployee.setName(employee.getName());
+            temployee.setPhone(employee.getPhone());
+            temployee.setState(employee.getState());
+            temployee.setZipcode(employee.getZipcode());
+        }
+        return temployee;
     }
 }

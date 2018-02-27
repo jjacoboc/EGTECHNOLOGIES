@@ -10,10 +10,12 @@ import java.util.Set;
  */
 public class TEmployee implements java.io.Serializable {
 
+    private Integer idCompany;
+    private Integer idBranchOffice;
     private Integer idEmployee;
     private Integer idDepartment;
     private Integer idPosition;
-    private String idnumber;
+    private String code;
     private String name;
     private String lastname;
     private String homeemail;
@@ -38,7 +40,7 @@ public class TEmployee implements java.io.Serializable {
     public TEmployee(Integer idDepartment, Integer idPosition, String idnumber, String name, String lastname, String homeemail, String phone, String cellphone, String address, String city, String state, String country, String zipcode, Boolean active, Integer createdBy, Date createdDate, Integer modifiedBy, Date modifiedDate, Set<TNetworkUser> TNetworkUsers, Set<TAssignation> TAssignations) {
         this.idDepartment = idDepartment;
         this.idPosition = idPosition;
-        this.idnumber = idnumber;
+        this.code = idnumber;
         this.name = name;
         this.lastname = lastname;
         this.homeemail = homeemail;
@@ -56,6 +58,22 @@ public class TEmployee implements java.io.Serializable {
         this.modifiedDate = modifiedDate;
         this.TNetworkUsers = TNetworkUsers;
         this.TAssignations = TAssignations;
+    }
+
+    public Integer getIdCompany() {
+        return idCompany;
+    }
+
+    public void setIdCompany(Integer idCompany) {
+        this.idCompany = idCompany;
+    }
+
+    public Integer getIdBranchOffice() {
+        return idBranchOffice;
+    }
+
+    public void setIdBranchOffice(Integer idBranchOffice) {
+        this.idBranchOffice = idBranchOffice;
     }
 
     public Integer getIdEmployee() {
@@ -82,12 +100,12 @@ public class TEmployee implements java.io.Serializable {
         this.idPosition = idPosition;
     }
 
-    public String getIdnumber() {
-        return this.idnumber;
+    public String getCode() {
+        return this.code;
     }
 
-    public void setIdnumber(String idnumber) {
-        this.idnumber = idnumber;
+    public void setCode(String code) {
+        this.code = code;
     }
 
     public String getName() {

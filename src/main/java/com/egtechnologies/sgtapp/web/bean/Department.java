@@ -16,11 +16,12 @@ import java.util.Set;
  */
 public class Department implements Serializable {
     
+    private Integer idCompany;
     private Integer idDepartment;
     private Integer idBranchOffice;
     private String name;
     private String description;
-    private String active;
+    private Boolean active;
     private Integer createdBy;
     private Date createdDate;
     private Integer modifiedBy;
@@ -28,6 +29,14 @@ public class Department implements Serializable {
     private Set<Employee> Employees = new HashSet<>(0);
 
     public Department() {
+    }
+
+    public Integer getIdCompany() {
+        return idCompany;
+    }
+
+    public void setIdCompany(Integer idCompany) {
+        this.idCompany = idCompany;
     }
 
     public Integer getIdDepartment() {
@@ -62,11 +71,11 @@ public class Department implements Serializable {
         this.description = description;
     }
 
-    public String getActive() {
+    public Boolean getActive() {
         return active;
     }
 
-    public void setActive(String active) {
+    public void setActive(Boolean active) {
         this.active = active;
     }
 

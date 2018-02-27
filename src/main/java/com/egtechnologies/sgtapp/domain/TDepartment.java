@@ -10,11 +10,12 @@ import java.util.Set;
  */
 public class TDepartment implements java.io.Serializable {
 
+    private Integer idCompany;
     private Integer idDepartment;
     private Integer idBranchOffice;
     private String name;
     private String description;
-    private String active;
+    private Boolean active;
     private Integer createdBy;
     private Date createdDate;
     private Integer modifiedBy;
@@ -24,7 +25,7 @@ public class TDepartment implements java.io.Serializable {
     public TDepartment() {
     }
 
-    public TDepartment(Integer idBranchOffice, String name, String description, String active, Integer createdBy, Date createdDate, Integer modifiedBy, Date modifiedDate, Set<TEmployee> TEmployees) {
+    public TDepartment(Integer idBranchOffice, String name, String description, Boolean active, Integer createdBy, Date createdDate, Integer modifiedBy, Date modifiedDate, Set<TEmployee> TEmployees) {
         this.idBranchOffice = idBranchOffice;
         this.name = name;
         this.description = description;
@@ -34,6 +35,14 @@ public class TDepartment implements java.io.Serializable {
         this.modifiedBy = modifiedBy;
         this.modifiedDate = modifiedDate;
         this.TEmployees = TEmployees;
+    }
+
+    public Integer getIdCompany() {
+        return idCompany;
+    }
+
+    public void setIdCompany(Integer idCompany) {
+        this.idCompany = idCompany;
     }
 
     public Integer getIdDepartment() {
@@ -68,11 +77,11 @@ public class TDepartment implements java.io.Serializable {
         this.description = description;
     }
 
-    public String getActive() {
+    public Boolean getActive() {
         return this.active;
     }
 
-    public void setActive(String active) {
+    public void setActive(Boolean active) {
         this.active = active;
     }
 

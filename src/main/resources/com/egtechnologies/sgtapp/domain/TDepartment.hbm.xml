@@ -17,8 +17,8 @@
         <property name="description" type="string">
             <column name="description" />
         </property>
-        <property name="active" type="string">
-            <column name="active" length="45" />
+        <property name="active" type="java.lang.Boolean">
+            <column name="active" />
         </property>
         <property name="createdBy" type="java.lang.Integer">
             <column name="created_by" />
