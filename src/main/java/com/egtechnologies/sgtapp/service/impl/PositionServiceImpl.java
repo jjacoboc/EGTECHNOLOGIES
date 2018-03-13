@@ -59,6 +59,26 @@ public class PositionServiceImpl implements PositionService {
         }
         return result;
     }
+    
+    @Override
+    public List<Position> getAllPositionsByCompany(Integer idCompany) {
+        List<TPosition> list = positionDao.getAllPositionsByCompany(idCompany);
+        List<Position> result = new ArrayList<>();
+        for(TPosition item : list) {
+            result.add(Util.parserPosition(item));
+        }
+        return result;
+    }
+    
+    @Override
+    public List<Position> getAllActivePositionsByCompany(Integer idCompany) {
+        List<TPosition> list = positionDao.getAllActivePositionsByCompany(idCompany);
+        List<Position> result = new ArrayList<>();
+        for(TPosition item : list) {
+            result.add(Util.parserPosition(item));
+        }
+        return result;
+    }
 
     @Override
     public List<Position> search(Position position) {

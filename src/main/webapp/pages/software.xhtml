@@ -36,7 +36,7 @@ and open the template in the editor.
                                 <h:panelGrid columns="2" width="100%" columnClasses="columnLbl1, columnTxt1">
                                     <h:outputText value="Company: " styleClass="Etiqueta1" />
                                     <p:selectOneMenu value="#{softwareMB.searchCompany}" style="float: left;font-size: 11px"> 
-                                        <f:selectItems value="#{commonMB.listAllActiveCompanies}"/>
+                                        <f:selectItems value="#{commonMB.listAllCompanies}"/>
                                     </p:selectOneMenu>
                                 
                                     <h:outputText value="Name: " styleClass="Etiqueta1" />
@@ -57,7 +57,7 @@ and open the template in the editor.
                                 <legend style="font-size: 11px;font-weight: bold;">List of Softwares</legend>
                                 <p:messages id="tblMsgs" showSummary="true" showDetail="true"/>
                                 <p:dataTable id="tbl" var="row" value="#{softwareMB.listSoftwares}" rows="10" paginator="true" paginatorPosition="top" style="font-size: 11px;">
-                                    <p:column>
+                                    <p:column style="width: 25%;">
                                         <f:facet name="header">
                                             <h:outputText value="COMPANY" style="font-size: 11px;"/>
                                         </f:facet>
@@ -65,25 +65,25 @@ and open the template in the editor.
                                             <f:converter converterId="converterCompany"/>
                                         </h:outputText>
                                     </p:column>
-                                    <p:column>
+                                    <p:column style="width: 25%;">
                                         <f:facet name="header">
                                             <h:outputText value="NAME" style="font-size: 11px;"/>
                                         </f:facet>
                                         <h:outputText value="#{row.name}" style="font-size: 11px;font-weight: normal;"/>
                                     </p:column>
-                                    <p:column>
+                                    <p:column style="width: 20%;">
                                         <f:facet name="header">
                                             <h:outputText value="BRAND" style="font-size: 11px;"/>
                                         </f:facet>
                                         <h:outputText value="#{row.brand}" style="font-size: 11px;font-weight: normal;"/>
                                     </p:column>
-                                    <p:column>
+                                    <p:column style="text-align: center; width: 10%;">
                                         <f:facet name="header">
                                             <h:outputText value="LINCENSES" style="font-size: 11px;"/>
                                         </f:facet>
                                         <h:outputText value="#{row.licenseCount}" style="font-size: 11px;font-weight: normal;"/>
                                     </p:column>
-                                    <p:column style="text-align: center; width: 12%;">
+                                    <p:column style="text-align: center; width: 10%;">
                                         <f:facet name="header">
                                             <h:outputText value="CREATED DATE" style="font-size: 11px;"/>
                                         </f:facet>
@@ -91,7 +91,7 @@ and open the template in the editor.
                                             <f:convertDateTime type="both" locale="es" pattern="dd/MM/yyyy HH:mm:ss"/>
                                         </h:outputText>
                                     </p:column>
-                                    <p:column style="text-align: center; width: 6%;">
+                                    <p:column style="text-align: center; width: 5%;">
                                         <f:facet name="header">
                                             <h:outputText value="ACTIVE" style="font-size: 11px;"/>
                                         </f:facet>
@@ -99,7 +99,7 @@ and open the template in the editor.
                                             <f:converter converterId="converterYesNo"/>
                                         </h:outputText>
                                     </p:column>
-                                    <p:column style="text-align: center; width: 7%;">
+                                    <p:column style="text-align: center; width: 5%;">
                                         <f:facet name="header">
                                             <h:outputText value="ACTIONS" style="font-size: 11px;"/>
                                         </f:facet>

@@ -18,6 +18,8 @@ public interface PositionDao {
     TPosition getPositionByName(TPosition tposition);
     List<TPosition> getAllPositions();
     List<TPosition> getAllActivePositions();
+    List<TPosition> getAllPositionsByCompany(Integer idCompany);
+    List<TPosition> getAllActivePositionsByCompany(Integer idCompany);
     List<TPosition> search(TPosition tposition);
     void saveOrUpdate(TPosition tposition);
 }

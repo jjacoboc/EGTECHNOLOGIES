@@ -36,7 +36,7 @@ and open the template in the editor.
                                 <h:panelGrid columns="2" width="100%" columnClasses="columnLbl1, columnTxt1">
                                     <h:outputText value="Company: " styleClass="Etiqueta1" />
                                     <p:selectOneMenu value="#{employeeMB.searchCompany}" style="float: left;font-size: 11px"> 
-                                        <f:selectItems value="#{commonMB.listAllActiveCompanies}"/>
+                                        <f:selectItems value="#{commonMB.listAllCompanies}"/>
                                         <p:ajax event="change" listener="#{commonMB.getListBranchOfficeByCompany}" update=":f:sBranchOffice"/>
                                     </p:selectOneMenu>
                                     
@@ -71,8 +71,8 @@ and open the template in the editor.
                             <fieldset>
                                 <legend style="font-size: 11px;font-weight: bold;">List of Employees</legend>
                                 <p:messages id="tblMsgs" showSummary="true" showDetail="true"/>
-                                <p:dataTable id="tbl" var="row" value="#{employeeMB.listEmployees}" rows="10" paginator="true" paginatorPosition="top" style="font-size: 11px;">
-                                    <p:column>
+                                <p:dataTable id="tbl" var="row" value="#{employeeMB.listEmployees}" rowIndexVar="index" rows="10" paginator="true" paginatorPosition="top" style="font-size: 11px;">
+                                    <p:column style="width: 14%;">
                                         <f:facet name="header">
                                             <h:outputText value="COMPANY" style="font-size: 11px;"/>
                                         </f:facet>
@@ -80,7 +80,7 @@ and open the template in the editor.
                                             <f:converter converterId="converterCompany"/>
                                         </h:outputText>
                                     </p:column>
-                                    <p:column>
+                                    <p:column style="width: 14%;">
                                         <f:facet name="header">
                                             <h:outputText value="BRANCH OFFICE" style="font-size: 11px;"/>
                                         </f:facet>
@@ -88,7 +88,7 @@ and open the template in the editor.
                                             <f:converter converterId="converterBranchOffice"/>
                                         </h:outputText>
                                     </p:column>
-                                    <p:column>
+                                    <p:column style="width: 14%;">
                                         <f:facet name="header">
                                             <h:outputText value="DEPARTMENT" style="font-size: 11px;"/>
                                         </f:facet>
@@ -96,7 +96,7 @@ and open the template in the editor.
                                             <f:converter converterId="converterDepartment"/>
                                         </h:outputText>
                                     </p:column>
-                                    <p:column style="text-align: center; width: 7%;">
+                                    <p:column style="text-align: center; width: 5%;">
                                         <f:facet name="header">
                                             <h:outputText value="CODE" style="font-size: 11px;"/>
                                         </f:facet>
@@ -108,35 +108,25 @@ and open the template in the editor.
                                         </f:facet>
                                         <h:outputText value="#{row.name} #{row.lastname}" style="font-size: 11px;font-weight: normal;"/>
                                     </p:column>
-                                    <p:column style="width: 15%;">
-                                        <f:facet name="header">
-                                            <h:outputText value="ADDRESS" style="font-size: 11px;"/>
-                                        </f:facet>
-                                        <h:outputText value="#{row.address}" style="font-size: 11px;font-weight: normal;"/>
-                                    </p:column>
-                                    <p:column style="text-align: center; width: 10%;">
-                                        <f:facet name="header">
-                                            <h:outputText value="CITY" style="font-size: 11px;"/>
-                                        </f:facet>
-                                        <h:outputText value="#{row.city}" style="font-size: 11px;font-weight: normal;"/>
-                                    </p:column>
-                                    <p:column style="text-align: center; width: 10%;">
-                                        <f:facet name="header">
-                                            <h:outputText value="COUNTRY" style="font-size: 11px;"/>
-                                        </f:facet>
-                                        <h:outputText value="#{row.country}" style="font-size: 11px;font-weight: normal;"/>
-                                    </p:column>
-                                    <p:column style="text-align: center; width: 10%;">
+                                    <p:column style="text-align: center; width: 6%;">
                                         <f:facet name="header">
                                             <h:outputText value="MOBILE" style="font-size: 11px;"/>
                                         </f:facet>
                                         <h:outputText value="#{row.cellphone}" style="font-size: 11px;font-weight: normal;"/>
                                     </p:column>
-                                    <p:column style="width: 15%;">
+                                    <p:column style="width: 17%;">
                                         <f:facet name="header">
                                             <h:outputText value="EMAIL" style="font-size: 11px;"/>
                                         </f:facet>
                                         <h:outputText value="#{row.homeemail}" style="font-size: 11px;font-weight: normal;"/>
+                                    </p:column>
+                                    <p:column style="text-align: center; width: 10%;">
+                                        <f:facet name="header">
+                                            <h:outputText value="CREATED DATE" style="font-size: 11px;"/>
+                                        </f:facet>
+                                        <h:outputText value="#{row.createdDate}" style="font-size: 11px;font-weight: normal;">
+                                            <f:convertDateTime type="both" locale="es" pattern="dd/MM/yyyy HH:mm:ss"/>
+                                        </h:outputText>
                                     </p:column>
                                     <p:column style="text-align: center; width: 5%;">
                                         <f:facet name="header">
@@ -146,19 +136,12 @@ and open the template in the editor.
                                             <f:converter converterId="converterYesNo"/>
                                         </h:outputText>
                                     </p:column>
-                                    <p:column style="text-align: center; width: 12%;">
-                                        <f:facet name="header">
-                                            <h:outputText value="CREATED DATE" style="font-size: 11px;"/>
-                                        </f:facet>
-                                        <h:outputText value="#{row.createdDate}" style="font-size: 11px;font-weight: normal;">
-                                            <f:convertDateTime type="both" locale="es" pattern="dd/MM/yyyy HH:mm:ss"/>
-                                        </h:outputText>
-                                    </p:column>
-                                    <p:column style="text-align: center; width: 6%;">
+                                    <p:column style="text-align: center; width: 5%;">
                                         <f:facet name="header">
                                             <h:outputText value="ACTIONS" style="font-size: 11px;"/>
                                         </f:facet>
                                         <p:commandLink id="elink" actionListener="#{employeeMB.toEdit}" update=":dlgEditForm:gridEdit" oncomplete="PF('dlgEdit').show();">
+                                            <f:param name="index" value="#{index}"/>
                                             <f:setPropertyActionListener value="#{row}" target="#{employeeMB.selectedItem}"/>
                                             <h:graphicImage library="images" name="pencil.png" alt="edit employee" title="edit employee"/>
                                         </p:commandLink>
@@ -189,6 +172,7 @@ and open the template in the editor.
                                 <p:selectOneMenu value="#{employeeMB.idCompany}" style="float: left;font-size: 11px"> 
                                     <f:selectItems value="#{commonMB.listAllActiveCompanies}"/>
                                     <p:ajax event="change" listener="#{commonMB.getListActiveBranchOfficeByCompany}" update=":dlgForm:nBranchOffice"/>
+                                    <p:ajax event="change" listener="#{commonMB.getListActivePositionsByCompany}" update=":dlgForm:nPosition"/>
                                 </p:selectOneMenu>
                                 
                                 <h:outputText value="* Branch Ofice: " styleClass="Etiqueta1"/>
@@ -200,6 +184,11 @@ and open the template in the editor.
                                 <h:outputText value="* Department: " styleClass="Etiqueta1"/>
                                 <p:selectOneMenu id="nDepartment" value="#{employeeMB.idDepartment}" style="float: left;font-size: 11px"> 
                                     <f:selectItems value="#{commonMB.listAllActiveDepartmentByBranchOffice}"/>
+                                </p:selectOneMenu>
+                                
+                                <h:outputText value="* Position: " styleClass="Etiqueta1"/>
+                                <p:selectOneMenu id="nPosition" value="#{employeeMB.idPosition}" style="float: left;font-size: 11px"> 
+                                    <f:selectItems value="#{commonMB.listAllActivePositionsByCompany}"/>
                                 </p:selectOneMenu>
                                 
                                 <h:outputText value="* Code: " styleClass="Etiqueta1"/>
@@ -246,7 +235,7 @@ and open the template in the editor.
                         </h:form>
                     </p:dialog>
                     
-                    <p:confirmDialog id="confirmDlg" widgetVar="confirmDlg" header="Confirmation" message="It will proceed to save the role. Continue?" appendTo="@(body)" >
+                    <p:confirmDialog id="confirmDlg" widgetVar="confirmDlg" header="Confirmation" message="It will proceed to save the employee. Continue?" appendTo="@(body)" >
                         <h:form id="confirmDlgForm">
                             <p:commandButton id="btnSi" value="YES" update=":f:tbl, :dlgForm:dlgMsgs" actionListener="#{employeeMB.save}" oncomplete="PF('confirmDlg').hide();" style="font-size: 11px;height: 2em"/>
                             <p:commandButton id="btnNo" value="NO" oncomplete="PF('confirmDlg').hide();" style="font-size: 11px;height: 2em"/>
@@ -265,18 +254,24 @@ and open the template in the editor.
                                 <h:outputText value="* Company: " styleClass="Etiqueta1"/>
                                 <p:selectOneMenu value="#{employeeMB.selectedItem.idCompany}" style="float: left;font-size: 11px"> 
                                     <f:selectItems value="#{commonMB.listAllActiveCompanies}"/>
-                                    <p:ajax event="change" listener="#{commonMB.getListActiveBranchOfficeByCompany}" update=":dlgForm:nBranchOffice"/>
+                                    <p:ajax event="change" listener="#{commonMB.getListActiveBranchOfficeByCompany}" update=":dlgEditForm:eBranchOffice"/>
+                                    <p:ajax event="change" listener="#{commonMB.getListActivePositionsByCompany}" update=":dlgEditForm:ePosition"/>
                                 </p:selectOneMenu>
                                 
                                 <h:outputText value="* Branch Ofice: " styleClass="Etiqueta1"/>
-                                <p:selectOneMenu id="nBranchOffice" value="#{employeeMB.selectedItem.idBranchOffice}" style="float: left;font-size: 11px"> 
+                                <p:selectOneMenu id="eBranchOffice" value="#{employeeMB.selectedItem.idBranchOffice}" style="float: left;font-size: 11px"> 
                                     <f:selectItems value="#{commonMB.listAllActiveBranchOfficeByCompany}"/>
-                                    <p:ajax event="change" listener="#{commonMB.getListActiveDepartmentByBranchOffice}" update=":dlgForm:nDepartment"/>
+                                    <p:ajax event="change" listener="#{commonMB.getListActiveDepartmentByBranchOffice}" update=":dlgEditForm:eDepartment"/>
                                 </p:selectOneMenu>
                                 
                                 <h:outputText value="* Department: " styleClass="Etiqueta1"/>
-                                <p:selectOneMenu id="nDepartment" value="#{employeeMB.selectedItem.idDepartment}" style="float: left;font-size: 11px"> 
+                                <p:selectOneMenu id="eDepartment" value="#{employeeMB.selectedItem.idDepartment}" style="float: left;font-size: 11px"> 
                                     <f:selectItems value="#{commonMB.listAllActiveDepartmentByBranchOffice}"/>
+                                </p:selectOneMenu>
+                                
+                                <h:outputText value="* Position: " styleClass="Etiqueta1"/>
+                                <p:selectOneMenu id="ePosition" value="#{employeeMB.selectedItem.idPosition}" style="float: left;font-size: 11px"> 
+                                    <f:selectItems value="#{commonMB.listAllActivePositionsByCompany}"/>
                                 </p:selectOneMenu>
                                 
                                 <h:outputText value="* Code: " styleClass="Etiqueta1"/>
@@ -323,21 +318,21 @@ and open the template in the editor.
                         </h:form>
                     </p:dialog>
                     
-                    <p:confirmDialog id="confirmEditDlg" widgetVar="confirmEditDlg" header="Confirmation" message="It will proceed to edit the role. Continue?" appendTo="@(body)">
+                    <p:confirmDialog id="confirmEditDlg" widgetVar="confirmEditDlg" header="Confirmation" message="It will proceed to edit the employee. Continue?" appendTo="@(body)">
                         <h:form id="confirmEditDlgForm">
                             <p:commandButton id="btnSi_" value="YES" update=":dlgEditForm:dlgEditMsgs, :f:tbl" actionListener="#{employeeMB.edit}" oncomplete="PF('confirmEditDlg').hide();" style="font-size: 11px;height: 2em"/>
                             <p:commandButton id="btnNo_" value="NO" oncomplete="PF('confirmEditDlg').hide();" style="font-size: 11px;height: 2em"/>
                         </h:form>
                     </p:confirmDialog>
                     
-                    <p:confirmDialog id="cdlg" widgetVar="cdlg" header="Deactivation" message="The role will be deactivated. Continue?" appendTo="@(body)">
+                    <p:confirmDialog id="cdlg" widgetVar="cdlg" header="Deactivation" message="The employee will be deactivated. Continue?" appendTo="@(body)">
                         <h:form id="mpdForm">
                             <p:commandButton id="dbtnSI" value="YES" update=":f:tbl" actionListener="#{employeeMB.disable}" oncomplete="PF('cdlg').hide();" style="font-size: 11px;height: 2em"/>
                             <p:commandButton id="dbtnNO" value="NO" oncomplete="PF('cdlg').hide();" style="font-size: 11px;height: 2em"/>
                         </h:form>
                     </p:confirmDialog>
                     
-                    <p:confirmDialog id="cadlg" widgetVar="cadlg" header="Activation" message="The role will be activated. Continue?" appendTo="@(body)">
+                    <p:confirmDialog id="cadlg" widgetVar="cadlg" header="Activation" message="The employee will be activated. Continue?" appendTo="@(body)">
                         <h:form id="mpaForm">
                             <p:commandButton id="dbtnSI" value="YES" update=":f:tbl" actionListener="#{employeeMB.enable}" oncomplete="PF('cadlg').hide();" style="font-size: 11px;height: 2em"/>
                             <p:commandButton id="dbtnNO" value="NO" oncomplete="PF('cadlg').hide();" style="font-size: 11px;height: 2em"/>

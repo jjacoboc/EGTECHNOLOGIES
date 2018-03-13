@@ -32,9 +32,9 @@ public class Items<T> implements Serializable {
     private String value;
     private boolean effectIfJustSingleResult;
     public static final Integer NULL_VALUE = -1;
-    public static final String FIRST_ITEM_SELECT = "Seleccione";
-    public static final String FIRST_ITEM_ALL = "Todos";
-    public static final String FIRST_ITEM_ANY = "Cualquiera";
+    public static final String FIRST_ITEM_SELECT = "Select";
+    public static final String FIRST_ITEM_ALL = "All";
+    public static final String FIRST_ITEM_ANY = "Any";
     public static final String FIRST_ITEM_MARKS = "-------";
     public static final String FIRST_ITEM_BLANK = "";
 

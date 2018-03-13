@@ -9,6 +9,7 @@ import com.egtechnologies.sgtapp.service.BranchOfficeService;
 import com.egtechnologies.sgtapp.service.CompanyService;
 import com.egtechnologies.sgtapp.service.DepartmentService;
 import com.egtechnologies.sgtapp.service.FacilityService;
+import com.egtechnologies.sgtapp.service.PositionService;
 import com.egtechnologies.sgtapp.service.RoleService;
 import com.egtechnologies.sgtapp.util.JSFUtils;
 import com.egtechnologies.sgtapp.web.common.Items;
@@ -40,6 +41,10 @@ public class CommonMB implements Serializable {
     private List<SelectItem> listAllActiveDepartment;
     private List<SelectItem> listAllDepartmentByBranchOffice;
     private List<SelectItem> listAllActiveDepartmentByBranchOffice;
+    private List<SelectItem> listAllPositions;
+    private List<SelectItem> listAllActivePositions;
+    private List<SelectItem> listAllPositionsByCompany;
+    private List<SelectItem> listAllActivePositionsByCompany;
     
     /**
      * Creates a new instance of CommonMB
@@ -191,9 +196,9 @@ public class CommonMB implements Serializable {
         if(e!=null){
             Integer idBranchOffice = (Integer)((SelectOneMenu) e.getSource()).getValue();
             DepartmentService departmentService = (DepartmentService) JSFUtils.findBean("DepartmentService");
-            listAllBranchOfficeByCompany =  new Items(departmentService.getAllDepartmentsByBranchOffice(idBranchOffice), Items.FIRST_ITEM_SELECT, "idDepartment","name").getItems();
+            listAllDepartmentByBranchOffice =  new Items(departmentService.getAllDepartmentsByBranchOffice(idBranchOffice), Items.FIRST_ITEM_SELECT, "idDepartment","name").getItems();
         }else{
-            listAllBranchOfficeByCompany =  new Items(null, Items.FIRST_ITEM_SELECT, "idDepartment","name").getItems();
+            listAllDepartmentByBranchOffice =  new Items(null, Items.FIRST_ITEM_SELECT, "idDepartment","name").getItems();
         }
     }
 
@@ -209,9 +214,69 @@ public class CommonMB implements Serializable {
         if(e!=null){
             Integer idBranchOffice = (Integer)((SelectOneMenu) e.getSource()).getValue();
             DepartmentService departmentService = (DepartmentService) JSFUtils.findBean("DepartmentService");
-            listAllBranchOfficeByCompany =  new Items(departmentService.getAllActiveDepartmentsByBranchOffice(idBranchOffice), Items.FIRST_ITEM_SELECT, "idDepartment","name").getItems();
+            listAllActiveDepartmentByBranchOffice =  new Items(departmentService.getAllActiveDepartmentsByBranchOffice(idBranchOffice), Items.FIRST_ITEM_SELECT, "idDepartment","name").getItems();
         }else{
-            listAllBranchOfficeByCompany =  new Items(null, Items.FIRST_ITEM_SELECT, "idDepartment","name").getItems();
+            listAllActiveDepartmentByBranchOffice =  new Items(null, Items.FIRST_ITEM_SELECT, "idDepartment","name").getItems();
+        }
+    }
+
+    public List<SelectItem> getListAllPositions() {
+        if(this.listAllPositions == null){
+            PositionService positionService = (PositionService) JSFUtils.findBean("PositionService");
+            this.listAllPositions = new Items(positionService.getAllPositions(), Items.FIRST_ITEM_SELECT, "idPosition", "name").getItems();
+        }
+        return listAllPositions;
+    }
+
+    public void setListAllPositions(List<SelectItem> listAllPositions) {
+        this.listAllPositions = listAllPositions;
+    }
+
+    public List<SelectItem> getListAllActivePositions() {
+        if(this.listAllPositions == null){
+            PositionService positionService = (PositionService) JSFUtils.findBean("PositionService");
+            this.listAllPositions = new Items(positionService.getAllActivePositions(), Items.FIRST_ITEM_SELECT, "idPosition", "name").getItems();
+        }
+        return listAllActivePositions;
+    }
+
+    public void setListAllActivePositions(List<SelectItem> listAllActivePositions) {
+        this.listAllActivePositions = listAllActivePositions;
+    }
+
+    public List<SelectItem> getListAllPositionsByCompany() {
+        return listAllPositionsByCompany;
+    }
+
+    public void setListAllPositionsByCompany(List<SelectItem> listAllPositionsByCompany) {
+        this.listAllPositionsByCompany = listAllPositionsByCompany;
+    }
+    
+    public void getListPositionsByCompany(AjaxBehaviorEvent e) {
+        if(e!=null){
+            Integer idCompany = (Integer)((SelectOneMenu) e.getSource()).getValue();
+            PositionService positionService = (PositionService) JSFUtils.findBean("PositionService");
+            listAllPositionsByCompany =  new Items(positionService.getAllPositionsByCompany(idCompany), Items.FIRST_ITEM_SELECT, "idPosition","name").getItems();
+        }else{
+            listAllPositionsByCompany =  new Items(null, Items.FIRST_ITEM_SELECT, "idPosition","name").getItems();
+        }
+    }
+
+    public List<SelectItem> getListAllActivePositionsByCompany() {
+        return listAllActivePositionsByCompany;
+    }
+
+    public void setListAllActivePositionsByCompany(List<SelectItem> listAllActivePositionsByCompany) {
+        this.listAllActivePositionsByCompany = listAllActivePositionsByCompany;
+    }
+    
+    public void getListActivePositionsByCompany(AjaxBehaviorEvent e) {
+        if(e!=null){
+            Integer idCompany = (Integer)((SelectOneMenu) e.getSource()).getValue();
+            PositionService positionService = (PositionService) JSFUtils.findBean("PositionService");
+            listAllActivePositionsByCompany =  new Items(positionService.getAllActivePositionsByCompany(idCompany), Items.FIRST_ITEM_SELECT, "idPosition","name").getItems();
+        }else{
+            listAllActivePositionsByCompany =  new Items(null, Items.FIRST_ITEM_SELECT, "idPosition","name").getItems();
         }
     }
 }

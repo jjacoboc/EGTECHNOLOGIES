@@ -5,12 +5,13 @@
  */
 package com.egtechnologies.sgtapp.web.ui;
 
+import com.egtechnologies.sgtapp.service.BranchOfficeService;
 import com.egtechnologies.sgtapp.service.DepartmentService;
 import com.egtechnologies.sgtapp.util.JSFUtils;
 import com.egtechnologies.sgtapp.web.bean.Department;
 import com.egtechnologies.sgtapp.web.bean.User;
+import com.egtechnologies.sgtapp.web.common.Items;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -121,7 +122,8 @@ public class DepartmentMB implements Serializable {
     public void init() {
         try {
             CommonMB commonMB = (CommonMB)JSFUtils.getSessionAttribute("commonMB");
-            commonMB.setListAllBranchOfficeByCompany(new ArrayList());
+            commonMB = commonMB != null ? commonMB : new CommonMB();
+            commonMB.setListAllBranchOfficeByCompany(new Items(null, Items.FIRST_ITEM_SELECT, "idBranchOffice","name").getItems());
             JSFUtils.setSessionAttribute("commonMB", commonMB);
             DepartmentService departmentService = (DepartmentService) JSFUtils.findBean("DepartmentService");
             this.setListDepartments(departmentService.getAllDepartments());
@@ -145,12 +147,13 @@ public class DepartmentMB implements Serializable {
     
     public void toSave(ActionEvent actionEvent){
         try{
-            this.setIdCompany(null);
-            this.setIdBranchOffice(null);
+            this.setIdCompany(Items.NULL_VALUE);
+            this.setIdBranchOffice(Items.NULL_VALUE);
             this.setName(StringUtils.EMPTY);
             this.setDescription(StringUtils.EMPTY);
             CommonMB commonMB = (CommonMB)JSFUtils.getSessionAttribute("commonMB");
-            commonMB.setListAllActiveBranchOfficeByCompany(new ArrayList());
+            commonMB = commonMB != null ? commonMB : new CommonMB();
+            commonMB.setListAllActiveBranchOfficeByCompany(new Items(null, Items.FIRST_ITEM_SELECT, "idBranchOffice","name").getItems());
             JSFUtils.setSessionAttribute("commonMB", commonMB);
             Iterator<FacesMessage> iter= FacesContext.getCurrentInstance().getMessages();
             if(iter.hasNext() == true){
@@ -193,15 +196,20 @@ public class DepartmentMB implements Serializable {
     
     public void toEdit(ActionEvent actionEvent){
         try{
+            String index = JSFUtils.getRequestParameter("index");
+            this.setSelectedItem(this.getListDepartments().get(Integer.parseInt(index)));
+            Integer idCompany = this.getSelectedItem().getIdCompany();
+            BranchOfficeService branchOfficeService = (BranchOfficeService) JSFUtils.findBean("BranchOfficeService");
             CommonMB commonMB = (CommonMB)JSFUtils.getSessionAttribute("commonMB");
-            commonMB.setListAllActiveBranchOfficeByCompany(new ArrayList());
+            commonMB = commonMB != null ? commonMB : new CommonMB();
+            commonMB.setListAllActiveBranchOfficeByCompany(new Items(branchOfficeService.getAllActiveBranchOfficesByCompany(idCompany), Items.FIRST_ITEM_SELECT, "idBranchOffice","name").getItems());
             JSFUtils.setSessionAttribute("commonMB", commonMB);
             Iterator<FacesMessage> iter= FacesContext.getCurrentInstance().getMessages();
             if(iter.hasNext() == true){
                 iter.remove();
                 FacesContext.getCurrentInstance().renderResponse();
             }
-        }catch(Exception e){
+        }catch(NumberFormatException e){
             e.getMessage();
         }
     }
@@ -260,13 +268,13 @@ public class DepartmentMB implements Serializable {
         FacesMessage message;
         boolean error = false;
         try{
-            if(department.getIdCompany() != null){
+            if(department.getIdCompany().equals(Items.NULL_VALUE)){
                 message = new FacesMessage(FacesMessage.SEVERITY_ERROR,"ERROR.", "Select company.");
                 FacesContext.getCurrentInstance().addMessage(null,message);
                 error = true;
                 return error;
             }
-            if(department.getIdBranchOffice() != null){
+            if(department.getIdBranchOffice().equals(Items.NULL_VALUE)){
                 message = new FacesMessage(FacesMessage.SEVERITY_ERROR,"ERROR.", "Select branch office.");
                 FacesContext.getCurrentInstance().addMessage(null,message);
                 error = true;

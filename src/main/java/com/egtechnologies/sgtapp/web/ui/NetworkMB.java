@@ -9,6 +9,7 @@ import com.egtechnologies.sgtapp.service.NetworkService;
 import com.egtechnologies.sgtapp.util.JSFUtils;
 import com.egtechnologies.sgtapp.web.bean.Network;
 import com.egtechnologies.sgtapp.web.bean.User;
+import com.egtechnologies.sgtapp.web.common.Items;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Iterator;
@@ -131,7 +132,7 @@ public class NetworkMB implements Serializable {
     
     public void toSave(ActionEvent actionEvent){
         try{
-            this.setIdCompany(null);
+            this.setIdCompany(Items.NULL_VALUE);
             this.setName(StringUtils.EMPTY);
             this.setIpBegin(StringUtils.EMPTY);
             this.setIpEnd(StringUtils.EMPTY);
@@ -240,7 +241,7 @@ public class NetworkMB implements Serializable {
         FacesMessage message;
         boolean error = false;
         try{
-            if(network.getIdCompany() != null){
+            if(network.getIdCompany().equals(Items.NULL_VALUE)){
                 message = new FacesMessage(FacesMessage.SEVERITY_ERROR,"ERROR.", "Select company.");
                 FacesContext.getCurrentInstance().addMessage(null,message);
                 error = true;

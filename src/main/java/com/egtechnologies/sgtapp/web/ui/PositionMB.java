@@ -9,6 +9,7 @@ import com.egtechnologies.sgtapp.service.PositionService;
 import com.egtechnologies.sgtapp.util.JSFUtils;
 import com.egtechnologies.sgtapp.web.bean.Position;
 import com.egtechnologies.sgtapp.web.bean.User;
+import com.egtechnologies.sgtapp.web.common.Items;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Iterator;
@@ -123,7 +124,7 @@ public class PositionMB implements Serializable {
     
     public void toSave(ActionEvent actionEvent){
         try{
-            this.setIdCompany(null);
+            this.setIdCompany(Items.NULL_VALUE);
             this.setName(StringUtils.EMPTY);
             this.setDescription(StringUtils.EMPTY);
             Iterator<FacesMessage> iter= FacesContext.getCurrentInstance().getMessages();
@@ -229,7 +230,7 @@ public class PositionMB implements Serializable {
         FacesMessage message;
         boolean error = false;
         try{
-            if(position.getIdCompany() != null){
+            if(position.getIdCompany().equals(Items.NULL_VALUE)){
                 message = new FacesMessage(FacesMessage.SEVERITY_ERROR,"ERROR.", "Select company.");
                 FacesContext.getCurrentInstance().addMessage(null,message);
                 error = true;

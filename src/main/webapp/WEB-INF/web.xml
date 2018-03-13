@@ -16,7 +16,7 @@
     </context-param>
     <context-param>
         <param-name>primefaces.THEME</param-name>
-        <param-value>redmond</param-value>
+        <param-value>spark-blue</param-value>
     </context-param>
     <context-param>
         <param-name>javax.faces.PARTIAL_STATE_SAVING</param-name>

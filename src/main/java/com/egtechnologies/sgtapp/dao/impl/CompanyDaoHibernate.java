@@ -54,6 +54,7 @@ public class CompanyDaoHibernate extends HibernateDaoSupport implements CompanyD
     @Override
     public List<TCompany> getAllCompanies() {
         Criteria criteria = this.getSessionFactory().openSession().createCriteria(TCompany.class);
+        criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
         criteria.addOrder(Order.asc("name"));
         return (List<TCompany>) criteria.list();
     }
@@ -61,6 +62,7 @@ public class CompanyDaoHibernate extends HibernateDaoSupport implements CompanyD
     @Override
     public List<TCompany> getAllActiveCompanies() {
         Criteria criteria = this.getSessionFactory().openSession().createCriteria(TCompany.class);
+        criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
         criteria.add(Restrictions.eq("active", Boolean.TRUE));
         criteria.addOrder(Order.asc("name"));
         return (List<TCompany>) criteria.list();
@@ -69,6 +71,7 @@ public class CompanyDaoHibernate extends HibernateDaoSupport implements CompanyD
     @Override
     public List<TCompany> search(TCompany tcompany) {
         Criteria criteria = this.getSessionFactory().openSession().createCriteria(TCompany.class);
+        criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
         if(StringUtils.isNotBlank(tcompany.getName())) {
             criteria.add(Restrictions.like("name", tcompany.getName(), MatchMode.ANYWHERE));
         }

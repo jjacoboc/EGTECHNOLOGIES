@@ -7,16 +7,15 @@ package com.egtechnologies.sgtapp.dao.impl;
 
 import com.egtechnologies.sgtapp.dao.EmployeeDao;
 import com.egtechnologies.sgtapp.domain.TEmployee;
+import com.egtechnologies.sgtapp.web.common.Items;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import org.apache.commons.lang3.StringUtils;
-import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.DetachedCriteria;
-import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.support.DataAccessUtils;
@@ -59,39 +58,127 @@ public class EmployeeDaoHibernate extends HibernateDaoSupport implements Employe
 
     @Override
     public List<TEmployee> getAllEmployees() {
-        Criteria criteria = this.getSessionFactory().openSession().createCriteria(TEmployee.class);
-        criteria.addOrder(Order.asc("idDepartment"));
-        criteria.addOrder(Order.asc("name"));
-        return (List<TEmployee>) criteria.list();
+        final StringBuilder sql = new StringBuilder();
+        sql.append("    SELECT b.id_company, d.id_branch_office, e.id_department, e.id_employee, ");
+        sql.append("           e.id_position, e.code, e.name, e.lastname, e.homeemail, e.phone, ");
+        sql.append("           e.cellphone, e.address, e.city, e.state, e.country, e.zipcode, e.active, ");
+        sql.append("           e.created_by, e.created_date, e.modified_by, e.modified_date ");
+        sql.append("      FROM t_employee e ");
+        sql.append("INNER JOIN t_department d ON e.id_department = d.id_department ");
+        sql.append("INNER JOIN t_branch_office b ON d.id_branch_office = b.id_branch_office ");
+        sql.append("  ORDER BY b.id_company, d.id_branch_office, e.id_department, e.id_employee, e.name, e.lastname ");
+        
+        List resultSet = (List)getHibernateTemplate().execute(
+            new HibernateCallback() {
+                @Override
+                public Object doInHibernate(Session session) throws HibernateException {
+                    return session.createSQLQuery(sql.toString()).list();
+                }
+            });
+        
+        List<TEmployee> result = new ArrayList<>();
+        if (!CollectionUtils.isEmpty(resultSet)) {
+            for(Object obj : resultSet){
+                Object[] objeto = (Object[]) obj;
+                TEmployee te = new TEmployee();
+                te.setIdCompany((Integer)objeto[0]);
+                te.setIdBranchOffice((Integer)objeto[1]);
+                te.setIdDepartment((Integer)objeto[2]);
+                te.setIdEmployee((Integer)objeto[3]);
+                te.setIdPosition((Integer)objeto[4]);
+                te.setCode((String)objeto[5]);
+                te.setName((String)objeto[6]);
+                te.setLastname((String)objeto[7]);
+                te.setHomeemail((String)objeto[8]);
+                te.setPhone((String)objeto[9]);
+                te.setCellphone((String)objeto[10]);
+                te.setAddress((String)objeto[11]);
+                te.setCity((String)objeto[12]);
+                te.setState((String)objeto[13]);
+                te.setCountry((String)objeto[14]);
+                te.setZipcode((String)objeto[15]);
+                te.setActive((Boolean)objeto[16]);
+                te.setCreatedBy((Integer)objeto[17]);
+                te.setCreatedDate((Date)objeto[18]);
+                te.setModifiedBy((Integer)objeto[19]);
+                te.setModifiedDate((Date)objeto[20]);
+                result.add(te);
+            }
+        }
+        return result;
     }
 
     @Override
     public List<TEmployee> getAllActiveEmployees() {
-        Criteria criteria = this.getSessionFactory().openSession().createCriteria(TEmployee.class);
-        criteria.add(Restrictions.eq("active", Boolean.TRUE));
-        criteria.addOrder(Order.asc("idDepartment"));
-        criteria.addOrder(Order.asc("name"));
-        return (List<TEmployee>) criteria.list();
+        final StringBuilder sql = new StringBuilder();
+        sql.append("    SELECT b.id_company, d.id_branch_office, e.id_department, e.id_employee, ");
+        sql.append("           e.id_position, e.code, e.name, e.lastname, e.homeemail, e.phone, ");
+        sql.append("           e.cellphone, e.address, e.city, e.state, e.country, e.zipcode, e.active, ");
+        sql.append("           e.created_by, e.created_date, e.modified_by, e.modified_date ");
+        sql.append("      FROM t_employee e ");
+        sql.append("INNER JOIN t_department d ON e.id_department = d.id_department ");
+        sql.append("INNER JOIN t_branch_office b ON d.id_branch_office = b.id_branch_office ");
+        sql.append("     WHERE e.active = 1 ");
+        sql.append("  ORDER BY b.id_company, d.id_branch_office, e.id_department, e.id_employee, e.name, e.lastname ");
+        
+        List resultSet = (List)getHibernateTemplate().execute(
+            new HibernateCallback() {
+                @Override
+                public Object doInHibernate(Session session) throws HibernateException {
+                    return session.createSQLQuery(sql.toString()).list();
+                }
+            });
+        
+        List<TEmployee> result = new ArrayList<>();
+        if (!CollectionUtils.isEmpty(resultSet)) {
+            for(Object obj : resultSet){
+                Object[] objeto = (Object[]) obj;
+                TEmployee te = new TEmployee();
+                te.setIdCompany((Integer)objeto[0]);
+                te.setIdBranchOffice((Integer)objeto[1]);
+                te.setIdDepartment((Integer)objeto[2]);
+                te.setIdEmployee((Integer)objeto[3]);
+                te.setIdPosition((Integer)objeto[4]);
+                te.setCode((String)objeto[5]);
+                te.setName((String)objeto[6]);
+                te.setLastname((String)objeto[7]);
+                te.setHomeemail((String)objeto[8]);
+                te.setPhone((String)objeto[9]);
+                te.setCellphone((String)objeto[10]);
+                te.setAddress((String)objeto[11]);
+                te.setCity((String)objeto[12]);
+                te.setState((String)objeto[13]);
+                te.setCountry((String)objeto[14]);
+                te.setZipcode((String)objeto[15]);
+                te.setActive((Boolean)objeto[16]);
+                te.setCreatedBy((Integer)objeto[17]);
+                te.setCreatedDate((Date)objeto[18]);
+                te.setModifiedBy((Integer)objeto[19]);
+                te.setModifiedDate((Date)objeto[20]);
+                result.add(te);
+            }
+        }
+        return result;
     }
 
     @Override
     public List<TEmployee> search(TEmployee temployee) {
         final StringBuilder sql = new StringBuilder();
         sql.append("    SELECT b.id_company, d.id_branch_office, e.id_department, e.id_employee, ");
-        sql.append("           e.id_position, e.codigo, e.name, e.lastname, e.homeemail, e.phone, ");
+        sql.append("           e.id_position, e.code, e.name, e.lastname, e.homeemail, e.phone, ");
         sql.append("           e.cellphone, e.address, e.city, e.state, e.country, e.zipcode, e.active, ");
         sql.append("           e.created_by, e.created_date, e.modified_by, e.modified_date ");
         sql.append("      FROM t_employee e ");
         sql.append("INNER JOIN t_department d ON e.id_department = d.id_department ");
         sql.append("INNER JOIN t_branch_office b ON d.id_branch_office = b.id_branch_office ");
         sql.append("     WHERE 1=1 ");
-        if(temployee.getIdCompany() != null) {
+        if(temployee.getIdCompany() != null && !temployee.getIdCompany().equals(Items.NULL_VALUE)) {
             sql.append("       AND b.id_company = ").append(temployee.getIdCompany());
         }
-        if(temployee.getIdBranchOffice() != null) {
+        if(temployee.getIdBranchOffice() != null && !temployee.getIdBranchOffice().equals(Items.NULL_VALUE)) {
             sql.append("       AND b.id_branch_office = ").append(temployee.getIdBranchOffice());
         }
-        if(temployee.getIdDepartment() != null) {
+        if(temployee.getIdDepartment() != null && !temployee.getIdDepartment().equals(Items.NULL_VALUE)) {
             sql.append("       AND b.id_department = ").append(temployee.getIdDepartment());
         }
         if(StringUtils.isNotBlank(temployee.getName())) {

@@ -7,6 +7,7 @@ package com.egtechnologies.sgtapp.dao.impl;
 
 import com.egtechnologies.sgtapp.dao.DepartmentDao;
 import com.egtechnologies.sgtapp.domain.TDepartment;
+import com.egtechnologies.sgtapp.web.common.Items;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -59,19 +60,79 @@ public class DepartmentDaoHibernate extends HibernateDaoSupport implements Depar
 
     @Override
     public List<TDepartment> getAllDepartments() {
-        Criteria criteria = this.getSessionFactory().openSession().createCriteria(TDepartment.class);
-        criteria.addOrder(Order.asc("idBranchOffice"));
-        criteria.addOrder(Order.asc("name"));
-        return (List<TDepartment>) criteria.list();
+        final StringBuilder sql = new StringBuilder();
+        sql.append("    SELECT b.id_company, t.id_branch_office, t.id_department, t.name, t.description, ");
+        sql.append("           t.active, t.created_by, t.created_date, t.modified_by, t.modified_date ");
+        sql.append("      FROM t_department t ");
+        sql.append("INNER JOIN t_branch_office b ON t.id_branch_office = b.id_branch_office ");
+        sql.append("  ORDER BY b.id_company, t.id_branch_office, t.id_department, t.name ");
+        
+        List resultSet = (List)getHibernateTemplate().execute(
+            new HibernateCallback() {
+                @Override
+                public Object doInHibernate(Session session) throws HibernateException {
+                    return session.createSQLQuery(sql.toString()).list();
+                }
+            });
+        
+        List<TDepartment> result = new ArrayList<>();
+        if (!CollectionUtils.isEmpty(resultSet)) {
+            for(Object obj : resultSet){
+                Object[] objeto = (Object[]) obj;
+                TDepartment td = new TDepartment();
+                td.setIdCompany((Integer)objeto[0]);
+                td.setIdBranchOffice((Integer)objeto[1]);
+                td.setIdDepartment((Integer)objeto[2]);
+                td.setName((String)objeto[3]);
+                td.setDescription((String)objeto[4]);
+                td.setActive((Boolean)objeto[5]);
+                td.setCreatedBy((Integer)objeto[6]);
+                td.setCreatedDate((Date)objeto[7]);
+                td.setModifiedBy((Integer)objeto[8]);
+                td.setModifiedDate((Date)objeto[9]);
+                result.add(td);
+            }
+        }
+        return result;
     }
 
     @Override
     public List<TDepartment> getAllActiveDepartments() {
-        Criteria criteria = this.getSessionFactory().openSession().createCriteria(TDepartment.class);
-        criteria.add(Restrictions.eq("active", Boolean.TRUE));
-        criteria.addOrder(Order.asc("idBranchOffice"));
-        criteria.addOrder(Order.asc("name"));
-        return (List<TDepartment>) criteria.list();
+        final StringBuilder sql = new StringBuilder();
+        sql.append("    SELECT b.id_company, t.id_branch_office, t.id_department, t.name, t.description, ");
+        sql.append("           t.active, t.created_by, t.created_date, t.modified_by, t.modified_date ");
+        sql.append("      FROM t_department t ");
+        sql.append("INNER JOIN t_branch_office b ON t.id_branch_office = b.id_branch_office ");
+        sql.append("     WHERE t.active = 1 ");
+        sql.append("  ORDER BY b.id_company, t.id_branch_office, t.id_department, t.name ");
+        
+        List resultSet = (List)getHibernateTemplate().execute(
+            new HibernateCallback() {
+                @Override
+                public Object doInHibernate(Session session) throws HibernateException {
+                    return session.createSQLQuery(sql.toString()).list();
+                }
+            });
+        
+        List<TDepartment> result = new ArrayList<>();
+        if (!CollectionUtils.isEmpty(resultSet)) {
+            for(Object obj : resultSet){
+                Object[] objeto = (Object[]) obj;
+                TDepartment td = new TDepartment();
+                td.setIdCompany((Integer)objeto[0]);
+                td.setIdBranchOffice((Integer)objeto[1]);
+                td.setIdDepartment((Integer)objeto[2]);
+                td.setName((String)objeto[3]);
+                td.setDescription((String)objeto[4]);
+                td.setActive((Boolean)objeto[5]);
+                td.setCreatedBy((Integer)objeto[6]);
+                td.setCreatedDate((Date)objeto[7]);
+                td.setModifiedBy((Integer)objeto[8]);
+                td.setModifiedDate((Date)objeto[9]);
+                result.add(td);
+            }
+        }
+        return result;
     }
     
     @Override
@@ -99,10 +160,10 @@ public class DepartmentDaoHibernate extends HibernateDaoSupport implements Depar
         sql.append("      FROM t_department t ");
         sql.append("INNER JOIN t_branch_office b ON t.id_branch_office = b.id_branch_office ");
         sql.append("     WHERE 1=1 ");
-        if(tdepartment.getIdCompany() != null) {
+        if(tdepartment.getIdCompany() != null && !tdepartment.getIdCompany().equals(Items.NULL_VALUE)) {
             sql.append("       AND b.id_company = ").append(tdepartment.getIdCompany());
         }
-        if(tdepartment.getIdBranchOffice() != null) {
+        if(tdepartment.getIdBranchOffice() != null && !tdepartment.getIdBranchOffice().equals(Items.NULL_VALUE)) {
             sql.append("       AND t.id_branch_office LIKE '%").append(tdepartment.getIdBranchOffice()).append("%' ");
         }
         if(StringUtils.isNotBlank(tdepartment.getName())) {
@@ -129,10 +190,10 @@ public class DepartmentDaoHibernate extends HibernateDaoSupport implements Depar
                 td.setName((String)objeto[3]);
                 td.setDescription((String)objeto[4]);
                 td.setActive((Boolean)objeto[5]);
-                td.setCreatedBy((Integer)objeto[11]);
-                td.setCreatedDate((Date)objeto[12]);
-                td.setModifiedBy((Integer)objeto[13]);
-                td.setModifiedDate((Date)objeto[14]);
+                td.setCreatedBy((Integer)objeto[6]);
+                td.setCreatedDate((Date)objeto[7]);
+                td.setModifiedBy((Integer)objeto[8]);
+                td.setModifiedDate((Date)objeto[9]);
                 result.add(td);
             }
         }

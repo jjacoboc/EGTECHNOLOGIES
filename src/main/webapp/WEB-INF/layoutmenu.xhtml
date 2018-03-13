@@ -1,0 +1,40 @@
+<ui:composition 
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ps="http://primefaces.org/spark"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui">
+    <h:form>
+        <ps:menu>
+            <f:facet name="options">
+                <p:commandButton icon="fa fa-search Fs18 white" title="búsqueda" styleClass="Fright" />
+                <p:inputText value="" placeholder="Buscar" styleClass="Fs14 Fright" style="width: 300px;">
+                    <p:ajax event="change" immediate="true" global="false" />
+                </p:inputText>
+            </f:facet>
+
+            <p:submenu label="#{msgs.submenu1}" icon="fa fa-wrench">
+                <p:menuitem value="#{msgs.menuitem11}" rendered="#{loginMB.mapObjetos['menu01']}" outcome="/pages/person.xhtml"/>
+                <p:menuitem value="#{msgs.menuitem12}" rendered="#{loginMB.mapObjetos['menu02']}" outcome="/pages/user.xhtml"/>
+                <p:menuitem value="#{msgs.menuitem13}" rendered="#{loginMB.mapObjetos['menu03']}" outcome="/pages/role.xhtml"/>
+                <p:menuitem value="#{msgs.menuitem14}" rendered="#{loginMB.mapObjetos['menu04']}" outcome="/pages/assignPermissions.xhtml"/>
+                <p:menuitem value="#{msgs.menuitem15}" action="#{loginMB.closeSession}" ajax="false" />
+            </p:submenu>
+            
+            <p:separator style="color: white !important"/>
+            
+            <p:submenu label="#{msgs.submenu2}" icon="fa fa-cog">
+                <p:menuitem value="#{msgs.menuitem21}" rendered="#{loginMB.mapObjetos['menu05']}" outcome="/pages/company.xhtml"/>
+                <p:menuitem value="#{msgs.menuitem22}" rendered="#{loginMB.mapObjetos['menu06']}" outcome="/pages/hardwareType.xhtml"/>
+                <p:menuitem value="#{msgs.menuitem23}" rendered="#{loginMB.mapObjetos['menu07']}" outcome="/pages/position.xhtml"/>
+                <p:menuitem value="#{msgs.menuitem24}" rendered="#{loginMB.mapObjetos['menu08']}" outcome="/pages/network.xhtml"/>
+                <p:menuitem value="#{msgs.menuitem25}" rendered="#{loginMB.mapObjetos['menu09']}" outcome="/pages/software.xhtml"/>
+                <p:menuitem value="#{msgs.menuitem26}" rendered="#{loginMB.mapObjetos['menu10']}" outcome="/pages/branchOffice.xhtml"/>
+                <p:menuitem value="#{msgs.menuitem27}" rendered="#{loginMB.mapObjetos['menu11']}" outcome="/pages/department.xhtml"/>
+                <p:menuitem value="#{msgs.menuitem28}" rendered="#{loginMB.mapObjetos['menu12']}" outcome="/pages/employee.xhtml"/>
+            </p:submenu>
+        </ps:menu>
+    </h:form>
+
+</ui:composition>

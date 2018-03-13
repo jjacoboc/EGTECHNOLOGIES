@@ -18,6 +18,8 @@ public interface PositionService {
     Position getPositionByName(Position position);
     List<Position> getAllPositions();
     List<Position> getAllActivePositions();
+    List<Position> getAllPositionsByCompany(Integer idCompany);
+    List<Position> getAllActivePositionsByCompany(Integer idCompany);
     List<Position> search(Position position);
     void saveOrUpdate(Position position);
 }

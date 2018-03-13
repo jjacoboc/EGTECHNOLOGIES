@@ -16,7 +16,10 @@ import java.util.regex.Pattern;
 public class Validate implements Serializable {
     
     private static final Pattern emailPattern = Pattern.compile("^([0-9a-zA-Z]([_.w]*[0-9a-zA-Z])*@([0-9a-zA-Z][-w]*[0-9a-zA-Z]{2,9}.)+([a-zA-Z]{2,9}.)+([a-zA-Z]{2,3}))$");
-    private static final Pattern phonePattern = Pattern.compile("^(\\+\\d{1,3}\\s)?\\(?\\d{3}\\)?[\\s.-]\\d{3}[\\s.-]\\d{4}$");
+    private static final Pattern phonePattern = Pattern.compile("^\\+(9[976]\\d|8[987530]\\d|6[987]\\d|5[90]\\d|42\\d|3[875]\\d|\n" +
+                                                                "2[98654321]\\d|9[8543210]|8[6421]|6[6543210]|5[87654321]|\n" +
+                                                                "4[987654310]|3[9643210]|2[70]|7|1)\n" +
+                                                                "\\W*\\d\\W*\\d\\W*\\d\\W*\\d\\W*\\d\\W*\\d\\W*\\d\\W*\\d\\W*(\\d{1,2})$");
     
     public static boolean isEmail(String email) {
         Matcher mat;

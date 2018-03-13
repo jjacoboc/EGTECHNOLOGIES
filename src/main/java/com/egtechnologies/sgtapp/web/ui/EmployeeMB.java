@@ -5,11 +5,15 @@
  */
 package com.egtechnologies.sgtapp.web.ui;
 
+import com.egtechnologies.sgtapp.service.BranchOfficeService;
+import com.egtechnologies.sgtapp.service.DepartmentService;
 import com.egtechnologies.sgtapp.service.EmployeeService;
+import com.egtechnologies.sgtapp.service.PositionService;
 import com.egtechnologies.sgtapp.util.JSFUtils;
 import com.egtechnologies.sgtapp.util.Validate;
 import com.egtechnologies.sgtapp.web.bean.Employee;
 import com.egtechnologies.sgtapp.web.bean.User;
+import com.egtechnologies.sgtapp.web.common.Items;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Iterator;
@@ -56,6 +60,7 @@ public class EmployeeMB implements Serializable {
     private Employee selectedItem;
 
     public EmployeeMB() {
+        selectedItem = new Employee();
     }
 
     public Integer getSearchCompany() {
@@ -245,6 +250,11 @@ public class EmployeeMB implements Serializable {
     @PostConstruct
     public void init() {
         try {
+            CommonMB commonMB = (CommonMB)JSFUtils.getSessionAttribute("commonMB");
+            commonMB = commonMB != null ? commonMB : new CommonMB();
+            commonMB.setListAllBranchOfficeByCompany(new Items(null, Items.FIRST_ITEM_SELECT, "idBranchOffice","name").getItems());
+            commonMB.setListAllDepartmentByBranchOffice(new Items(null, Items.FIRST_ITEM_SELECT, "idDepartment","name").getItems());
+            JSFUtils.setSessionAttribute("commonMB", commonMB);
             EmployeeService employeeService = (EmployeeService) JSFUtils.findBean("EmployeeService");
             this.setListEmployees(employeeService.getAllEmployees());
         } catch (Exception e) {
@@ -270,10 +280,10 @@ public class EmployeeMB implements Serializable {
 
     public void toSave(ActionEvent actionEvent) {
         try {
-            this.setIdCompany(null);
-            this.setIdBranchOffice(null);
-            this.setIdDepartment(null);
-            this.setIdPosition(null);
+            this.setIdCompany(Items.NULL_VALUE);
+            this.setIdBranchOffice(Items.NULL_VALUE);
+            this.setIdDepartment(Items.NULL_VALUE);
+            this.setIdPosition(Items.NULL_VALUE);
             this.setCode(StringUtils.EMPTY);
             this.setName(StringUtils.EMPTY);
             this.setLastname(StringUtils.EMPTY);
@@ -285,6 +295,11 @@ public class EmployeeMB implements Serializable {
             this.setPhone(StringUtils.EMPTY);
             this.setCellphone(StringUtils.EMPTY);
             this.setHomeemail(StringUtils.EMPTY);
+            CommonMB commonMB = (CommonMB)JSFUtils.getSessionAttribute("commonMB");
+            commonMB = commonMB != null ? commonMB : new CommonMB();
+            commonMB.setListAllBranchOfficeByCompany(new Items(null, Items.FIRST_ITEM_SELECT, "idBranchOffice","name").getItems());
+            commonMB.setListAllDepartmentByBranchOffice(new Items(null, Items.FIRST_ITEM_SELECT, "idDepartment","name").getItems());
+            JSFUtils.setSessionAttribute("commonMB", commonMB);
             Iterator<FacesMessage> iter = FacesContext.getCurrentInstance().getMessages();
             if (iter.hasNext() == true) {
                 iter.remove();
@@ -338,6 +353,19 @@ public class EmployeeMB implements Serializable {
 
     public void toEdit(ActionEvent actionEvent) {
         try {
+            String index = JSFUtils.getRequestParameter("index");
+            this.setSelectedItem(this.getListEmployees().get(Integer.parseInt(index)));
+            Integer idCompany = this.getSelectedItem().getIdCompany();
+            Integer idBranchOffice = this.getSelectedItem().getIdBranchOffice();
+            BranchOfficeService branchOfficeService = (BranchOfficeService) JSFUtils.findBean("BranchOfficeService");
+            DepartmentService departmentService = (DepartmentService) JSFUtils.findBean("DepartmentService");
+            PositionService positionService = (PositionService) JSFUtils.findBean("PositionService");
+            CommonMB commonMB = (CommonMB)JSFUtils.getSessionAttribute("commonMB");
+            commonMB = commonMB != null ? commonMB : new CommonMB();
+            commonMB.setListAllActiveBranchOfficeByCompany(new Items(branchOfficeService.getAllActiveBranchOfficesByCompany(idCompany), Items.FIRST_ITEM_SELECT, "idBranchOffice","name").getItems());
+            commonMB.setListAllActiveDepartmentByBranchOffice(new Items(departmentService.getAllActiveDepartmentsByBranchOffice(idBranchOffice), Items.FIRST_ITEM_SELECT, "idDepartment","name").getItems());
+            commonMB.setListAllActivePositionsByCompany(new Items(positionService.getAllActivePositionsByCompany(idCompany), Items.FIRST_ITEM_SELECT, "idPosition","name").getItems());
+            JSFUtils.setSessionAttribute("commonMB", commonMB);
             Iterator<FacesMessage> iter = FacesContext.getCurrentInstance().getMessages();
             if (iter.hasNext() == true) {
                 iter.remove();
@@ -413,25 +441,25 @@ public class EmployeeMB implements Serializable {
         FacesMessage message;
         boolean error = false;
         try {
-            if (employee.getIdCompany() != null) {
+            if (employee.getIdCompany().equals(Items.NULL_VALUE)) {
                 message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR.", "Select company.");
                 FacesContext.getCurrentInstance().addMessage(null, message);
                 error = true;
                 return error;
             }
-            if (employee.getIdBranchOffice() != null) {
+            if (employee.getIdBranchOffice().equals(Items.NULL_VALUE)) {
                 message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR.", "Select branch office.");
                 FacesContext.getCurrentInstance().addMessage(null, message);
                 error = true;
                 return error;
             }
-            if (employee.getIdDepartment() != null) {
+            if (employee.getIdDepartment().equals(Items.NULL_VALUE)) {
                 message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR.", "Select department.");
                 FacesContext.getCurrentInstance().addMessage(null, message);
                 error = true;
                 return error;
             }
-            if (employee.getIdPosition() != null) {
+            if (employee.getIdPosition().equals(Items.NULL_VALUE)) {
                 message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR.", "Select position.");
                 FacesContext.getCurrentInstance().addMessage(null, message);
                 error = true;
@@ -484,12 +512,13 @@ public class EmployeeMB implements Serializable {
                 FacesContext.getCurrentInstance().addMessage(null, message);
                 error = true;
                 return error;
-            } else if (!Validate.isPhone(employee.getCellphone())) {
-                message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR.", "Incorrect mobile format.");
-                FacesContext.getCurrentInstance().addMessage(null, message);
-                error = true;
-                return error;
             }
+//            } else if (!Validate.isPhone(employee.getCellphone())) {
+//                message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR.", "Incorrect mobile format.");
+//                FacesContext.getCurrentInstance().addMessage(null, message);
+//                error = true;
+//                return error;
+//            }
             if (StringUtils.isBlank(employee.getHomeemail())) {
                 message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR.", "Enter employee's email.");
                 FacesContext.getCurrentInstance().addMessage(null, message);
