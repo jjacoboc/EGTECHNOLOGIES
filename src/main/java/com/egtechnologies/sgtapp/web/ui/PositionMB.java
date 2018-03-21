@@ -114,7 +114,7 @@ public class PositionMB implements Serializable {
         try {
             Position position = new Position();
             position.setIdCompany(this.getSearchCompany() != null ? this.getSearchCompany() : null);
-            position.setName(this.getSearchName() != null ? this.getSearchName().toUpperCase().trim() : null);
+            position.setName(this.getSearchName() != null ? this.getSearchName().trim() : null);
             PositionService positionService = (PositionService) JSFUtils.findBean("PositionService");
             this.setListPositions(positionService.search(position));
         } catch (Exception e) {
@@ -143,8 +143,8 @@ public class PositionMB implements Serializable {
             User user = (User)JSFUtils.getSessionAttribute("usuario");
             Position newPosition = new Position();
             newPosition.setIdCompany(this.getIdCompany() != null ? this.getIdCompany() : null);
-            newPosition.setName(this.getName() != null ? this.getName().toUpperCase().trim() : null);
-            newPosition.setDescription(this.getDescription()!= null ? this.getDescription().toUpperCase().trim() : null);
+            newPosition.setName(this.getName() != null ? this.getName().trim() : null);
+            newPosition.setDescription(this.getDescription()!= null ? this.getDescription().trim() : null);
             if(!errorValidation(newPosition)){
                 PositionService positionService = (PositionService) JSFUtils.findBean("PositionService");
                 Position position = positionService.getPositionByName(newPosition);
@@ -183,8 +183,8 @@ public class PositionMB implements Serializable {
             User user = (User)JSFUtils.getSessionAttribute("usuario");
             Position selectedPosition = this.getSelectedItem();
             selectedPosition.setIdCompany(selectedPosition.getIdCompany() != null ? selectedPosition.getIdCompany() : null);
-            selectedPosition.setName(selectedPosition.getName() != null ? selectedPosition.getName().toUpperCase().trim() : null);
-            selectedPosition.setDescription(selectedPosition.getDescription()!= null ? selectedPosition.getDescription().toUpperCase().trim() : null);
+            selectedPosition.setName(selectedPosition.getName() != null ? selectedPosition.getName().trim() : null);
+            selectedPosition.setDescription(selectedPosition.getDescription()!= null ? selectedPosition.getDescription().trim() : null);
             if(!errorValidation(selectedPosition)){
                 PositionService positionService = (PositionService) JSFUtils.findBean("PositionService");
                 Position position = positionService.getPositionByName(selectedPosition);

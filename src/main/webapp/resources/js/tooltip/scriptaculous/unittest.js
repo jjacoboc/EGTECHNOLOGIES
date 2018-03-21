@@ -392,7 +392,7 @@ Test.Unit.Assertions.prototype = {
     var message = arguments[2] || 'assertReturnsTrue';
     try {
       var m = obj[method];
-      if(!m) m = obj['is'+method.charAt(0).toUpperCase()+method.slice(1)];
+      if(!m) m = obj['is'+method.charAt(0)+method.slice(1)];
       m() ? this.pass() : 
       this.fail(message + ": method returned false"); }
     catch(e) { this.error(e); }
@@ -401,7 +401,7 @@ Test.Unit.Assertions.prototype = {
     var message = arguments[2] || 'assertReturnsFalse';
     try {
       var m = obj[method];
-      if(!m) m = obj['is'+method.charAt(0).toUpperCase()+method.slice(1)];
+      if(!m) m = obj['is'+method.charAt(0)+method.slice(1)];
       !m() ? this.pass() : 
       this.fail(message + ": method returned true"); }
     catch(e) { this.error(e); }

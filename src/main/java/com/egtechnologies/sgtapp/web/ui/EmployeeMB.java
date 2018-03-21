@@ -319,7 +319,7 @@ public class EmployeeMB implements Serializable {
             newEmployee.setIdBranchOffice(this.getIdBranchOffice() != null ? this.getIdBranchOffice() : null);
             newEmployee.setIdDepartment(this.getIdDepartment() != null ? this.getIdDepartment() : null);
             newEmployee.setIdPosition(this.getIdPosition() != null ? this.getIdPosition() : null);
-            newEmployee.setCode(this.getCode() != null ? this.getCode().toUpperCase().trim() : null);
+            newEmployee.setCode(this.getCode() != null ? this.getCode().trim() : null);
             newEmployee.setName(this.getName() != null ? this.getName().trim() : null);
             newEmployee.setLastname(this.getLastname() != null ? this.getLastname().trim() : null);
             newEmployee.setAddress(this.getAddress() != null ? this.getAddress().trim() : null);
@@ -384,7 +384,7 @@ public class EmployeeMB implements Serializable {
             this.getSelectedItem().setIdBranchOffice(this.getIdBranchOffice() != null ? this.getIdBranchOffice() : null);
             this.getSelectedItem().setIdDepartment(this.getIdDepartment() != null ? this.getIdDepartment() : null);
             this.getSelectedItem().setIdPosition(this.getIdPosition() != null ? this.getIdPosition() : null);
-            this.getSelectedItem().setCode(this.getSelectedItem().getCode() != null ? this.getSelectedItem().getCode().toUpperCase().trim() : null);
+            this.getSelectedItem().setCode(this.getSelectedItem().getCode() != null ? this.getSelectedItem().getCode().trim() : null);
             this.getSelectedItem().setName(this.getSelectedItem().getName() != null ? this.getSelectedItem().getName().trim() : null);
             this.getSelectedItem().setLastname(this.getSelectedItem().getLastname() != null ? this.getSelectedItem().getLastname().trim() : null);
             this.getSelectedItem().setAddress(this.getSelectedItem().getAddress() != null ? this.getSelectedItem().getAddress().trim() : null);

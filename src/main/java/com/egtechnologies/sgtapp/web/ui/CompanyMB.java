@@ -183,10 +183,10 @@ public class CompanyMB implements Serializable {
     public void search(ActionEvent actionEvent) {
         try {
             Company company = new Company();
-            company.setName(this.getSearchName() != null ? this.getSearchName().toUpperCase().trim() : null);
-            company.setCity(this.getSearchCity() != null ? this.getSearchCity().toUpperCase().trim() : null);
-            company.setState(this.getSearchState() != null ? this.getSearchState().toUpperCase().trim() : null);
-            company.setCountry(this.getSearchCountry() != null ? this.getSearchCountry().toUpperCase().trim() : null);
+            company.setName(this.getSearchName() != null ? this.getSearchName().trim() : null);
+            company.setCity(this.getSearchCity() != null ? this.getSearchCity().trim() : null);
+            company.setState(this.getSearchState() != null ? this.getSearchState().trim() : null);
+            company.setCountry(this.getSearchCountry() != null ? this.getSearchCountry().trim() : null);
             CompanyService companyService = (CompanyService) JSFUtils.findBean("CompanyService");
             this.setListCompanies(companyService.search(company));
         } catch (Exception e) {
@@ -220,15 +220,15 @@ public class CompanyMB implements Serializable {
         try {
             User user = (User)JSFUtils.getSessionAttribute("usuario");
             Company newCompany = new Company();
-            newCompany.setAddress(this.getAddress() != null ? this.getAddress().toUpperCase().trim() : null);
-            newCompany.setCity(this.getCity()!= null ? this.getCity().toUpperCase().trim() : null);
-            newCompany.setCountry(this.getCountry()!= null ? this.getCountry().toUpperCase().trim() : null);
-            newCompany.setEmail(this.getEmail()!= null ? this.getEmail().toUpperCase().trim() : null);
-            newCompany.setName(this.getName() != null ? this.getName().toUpperCase().trim() : null);
-            newCompany.setPhone(this.getPhone()!= null ? this.getPhone().toUpperCase().trim() : null);
-            newCompany.setState(this.getState()!= null ? this.getState().toUpperCase().trim() : null);
-            newCompany.setWebsite(this.getWebsite()!= null ? this.getWebsite().toUpperCase().trim() : null);
-            newCompany.setZipcode(this.getZipcode()!= null ? this.getZipcode().toUpperCase().trim() : null);
+            newCompany.setAddress(this.getAddress() != null ? this.getAddress().trim() : null);
+            newCompany.setCity(this.getCity()!= null ? this.getCity().trim() : null);
+            newCompany.setCountry(this.getCountry()!= null ? this.getCountry().trim() : null);
+            newCompany.setEmail(this.getEmail()!= null ? this.getEmail().trim() : null);
+            newCompany.setName(this.getName() != null ? this.getName().trim() : null);
+            newCompany.setPhone(this.getPhone()!= null ? this.getPhone().trim() : null);
+            newCompany.setState(this.getState()!= null ? this.getState().trim() : null);
+            newCompany.setWebsite(this.getWebsite()!= null ? this.getWebsite().trim() : null);
+            newCompany.setZipcode(this.getZipcode()!= null ? this.getZipcode().trim() : null);
             if(!errorValidation(newCompany)){
                 CompanyService companyService = (CompanyService) JSFUtils.findBean("CompanyService");
                 Company company = companyService.getCompanyByName(newCompany);
@@ -266,15 +266,15 @@ public class CompanyMB implements Serializable {
         try {
             User user = (User)JSFUtils.getSessionAttribute("usuario");
             Company selectedCompany = this.getSelectedItem();
-            selectedCompany.setAddress(selectedCompany.getAddress() != null ? selectedCompany.getAddress().toUpperCase().trim() : null);
-            selectedCompany.setCity(selectedCompany.getCity()!= null ? selectedCompany.getCity().toUpperCase().trim() : null);
-            selectedCompany.setCountry(selectedCompany.getCountry()!= null ? selectedCompany.getCountry().toUpperCase().trim() : null);
-            selectedCompany.setEmail(selectedCompany.getEmail()!= null ? selectedCompany.getEmail().toUpperCase().trim() : null);
-            selectedCompany.setName(selectedCompany.getName() != null ? selectedCompany.getName().toUpperCase().trim() : null);
-            selectedCompany.setPhone(selectedCompany.getPhone()!= null ? selectedCompany.getPhone().toUpperCase().trim() : null);
-            selectedCompany.setState(selectedCompany.getState()!= null ? selectedCompany.getState().toUpperCase().trim() : null);
-            selectedCompany.setWebsite(selectedCompany.getWebsite()!= null ? selectedCompany.getWebsite().toUpperCase().trim() : null);
-            selectedCompany.setZipcode(selectedCompany.getZipcode()!= null ? selectedCompany.getZipcode().toUpperCase().trim() : null);
+            selectedCompany.setAddress(selectedCompany.getAddress() != null ? selectedCompany.getAddress().trim() : null);
+            selectedCompany.setCity(selectedCompany.getCity()!= null ? selectedCompany.getCity().trim() : null);
+            selectedCompany.setCountry(selectedCompany.getCountry()!= null ? selectedCompany.getCountry().trim() : null);
+            selectedCompany.setEmail(selectedCompany.getEmail()!= null ? selectedCompany.getEmail().trim() : null);
+            selectedCompany.setName(selectedCompany.getName() != null ? selectedCompany.getName().trim() : null);
+            selectedCompany.setPhone(selectedCompany.getPhone()!= null ? selectedCompany.getPhone().trim() : null);
+            selectedCompany.setState(selectedCompany.getState()!= null ? selectedCompany.getState().trim() : null);
+            selectedCompany.setWebsite(selectedCompany.getWebsite()!= null ? selectedCompany.getWebsite().trim() : null);
+            selectedCompany.setZipcode(selectedCompany.getZipcode()!= null ? selectedCompany.getZipcode().trim() : null);
             if(!errorValidation(selectedCompany)){
                 CompanyService companyService = (CompanyService) JSFUtils.findBean("CompanyService");
                 Company company = companyService.getCompanyByName(selectedCompany);

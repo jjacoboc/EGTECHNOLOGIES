@@ -1093,7 +1093,7 @@ Effect.Methods = {
   },
   visualEffect: function(element, effect, options) {
     element = $(element)
-    var s = effect.dasherize().camelize(), klass = s.charAt(0).toUpperCase() + s.substring(1);
+    var s = effect.dasherize().camelize(), klass = s.charAt(0) + s.substring(1);
     new Effect[klass](element, options);
     return element;
   },
@@ -1109,7 +1109,7 @@ $w('fade appear grow shrink fold blindUp blindDown slideUp slideDown '+
   function(effect) { 
     Effect.Methods[effect] = function(element, options){
       element = $(element);
-      Effect[effect.charAt(0).toUpperCase() + effect.substring(1)](element, options);
+      Effect[effect.charAt(0) + effect.substring(1)](element, options);
       return element;
     }
   }

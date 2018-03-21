@@ -9,6 +9,7 @@ import com.egtechnologies.sgtapp.service.SoftwareService;
 import com.egtechnologies.sgtapp.util.JSFUtils;
 import com.egtechnologies.sgtapp.web.bean.Software;
 import com.egtechnologies.sgtapp.web.bean.User;
+import com.egtechnologies.sgtapp.web.common.Items;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -158,8 +159,8 @@ public class SoftwareMB implements Serializable {
         try {
             Software software = new Software();
             software.setIdCompany(this.getSearchCompany() != null ? this.getSearchCompany() : null);
-            software.setName(this.getSearchName() != null ? this.getSearchName().toUpperCase().trim() : null);
-            software.setBrand(this.getSearchBrand()!= null ? this.getSearchBrand().toUpperCase().trim() : null);
+            software.setName(this.getSearchName() != null ? this.getSearchName().trim() : null);
+            software.setBrand(this.getSearchBrand()!= null ? this.getSearchBrand().trim() : null);
             SoftwareService softwareService = (SoftwareService) JSFUtils.findBean("SoftwareService");
             this.setListSoftwares(softwareService.search(software));
         } catch (Exception e) {
@@ -190,9 +191,9 @@ public class SoftwareMB implements Serializable {
             User user = (User)JSFUtils.getSessionAttribute("usuario");
             Software newSoftware = new Software();
             newSoftware.setIdCompany(this.getIdCompany() != null ? this.getIdCompany() : null);
-            newSoftware.setName(this.getName() != null ? this.getName().toUpperCase().trim() : null);
-            newSoftware.setDescription(this.getDescription()!= null ? this.getDescription().toUpperCase().trim() : null);
-            newSoftware.setBrand(this.getBrand()!= null ? this.getBrand().toUpperCase().trim() : null);
+            newSoftware.setName(this.getName() != null ? this.getName().trim() : null);
+            newSoftware.setDescription(this.getDescription()!= null ? this.getDescription().trim() : null);
+            newSoftware.setBrand(this.getBrand()!= null ? this.getBrand().trim() : null);
             newSoftware.setLicenseCount(this.getLicenseCount()!= null ? this.getLicenseCount() : null);
             if(!errorValidation(newSoftware)){
                 SoftwareService softwareService = (SoftwareService) JSFUtils.findBean("SoftwareService");
@@ -232,9 +233,9 @@ public class SoftwareMB implements Serializable {
             User user = (User)JSFUtils.getSessionAttribute("usuario");
             Software selectedSoftware = this.getSelectedItem();
             selectedSoftware.setIdCompany(selectedSoftware.getIdCompany() != null ? selectedSoftware.getIdCompany() : null);
-            selectedSoftware.setName(selectedSoftware.getName() != null ? selectedSoftware.getName().toUpperCase().trim() : null);
-            selectedSoftware.setDescription(selectedSoftware.getDescription()!= null ? selectedSoftware.getDescription().toUpperCase().trim() : null);
-            selectedSoftware.setBrand(selectedSoftware.getBrand()!= null ? selectedSoftware.getBrand().toUpperCase().trim() : null);
+            selectedSoftware.setName(selectedSoftware.getName() != null ? selectedSoftware.getName().trim() : null);
+            selectedSoftware.setDescription(selectedSoftware.getDescription()!= null ? selectedSoftware.getDescription().trim() : null);
+            selectedSoftware.setBrand(selectedSoftware.getBrand()!= null ? selectedSoftware.getBrand().trim() : null);
             selectedSoftware.setLicenseCount(selectedSoftware.getLicenseCount()!= null ? selectedSoftware.getLicenseCount() : null);
             if(!errorValidation(selectedSoftware)){
                 SoftwareService softwareService = (SoftwareService) JSFUtils.findBean("SoftwareService");
@@ -281,7 +282,7 @@ public class SoftwareMB implements Serializable {
         FacesMessage message;
         boolean error = false;
         try{
-            if(software.getIdCompany() == null){
+            if(software.getIdCompany().equals(Items.NULL_VALUE)){
                 message = new FacesMessage(FacesMessage.SEVERITY_ERROR,"ERROR.", "Select company.");
                 FacesContext.getCurrentInstance().addMessage(null,message);
                 error = true;

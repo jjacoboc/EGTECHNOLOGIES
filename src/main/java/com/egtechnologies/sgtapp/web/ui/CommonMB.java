@@ -9,6 +9,7 @@ import com.egtechnologies.sgtapp.service.BranchOfficeService;
 import com.egtechnologies.sgtapp.service.CompanyService;
 import com.egtechnologies.sgtapp.service.DepartmentService;
 import com.egtechnologies.sgtapp.service.FacilityService;
+import com.egtechnologies.sgtapp.service.HardwareTypeService;
 import com.egtechnologies.sgtapp.service.PositionService;
 import com.egtechnologies.sgtapp.service.RoleService;
 import com.egtechnologies.sgtapp.util.JSFUtils;
@@ -45,6 +46,8 @@ public class CommonMB implements Serializable {
     private List<SelectItem> listAllActivePositions;
     private List<SelectItem> listAllPositionsByCompany;
     private List<SelectItem> listAllActivePositionsByCompany;
+    private List<SelectItem> listAllHardwareTypes;
+    private List<SelectItem> listAllActiveHardwareTypes;
     
     /**
      * Creates a new instance of CommonMB
@@ -278,5 +281,29 @@ public class CommonMB implements Serializable {
         }else{
             listAllActivePositionsByCompany =  new Items(null, Items.FIRST_ITEM_SELECT, "idPosition","name").getItems();
         }
+    }
+
+    public List<SelectItem> getListAllHardwareTypes() {
+        if(this.listAllHardwareTypes == null){
+            HardwareTypeService hardwareTypeService = (HardwareTypeService) JSFUtils.findBean("HardwareTypeService");
+            this.listAllHardwareTypes = new Items(hardwareTypeService.getAllHardwareTypes(), Items.FIRST_ITEM_SELECT, "idHardwareType", "name").getItems();
+        }
+        return listAllHardwareTypes;
+    }
+
+    public void setListAllHardwareTypes(List<SelectItem> listAllHardwareTypes) {
+        this.listAllHardwareTypes = listAllHardwareTypes;
+    }
+
+    public List<SelectItem> getListAllActiveHardwareTypes() {
+        if(this.listAllActiveHardwareTypes == null){
+            HardwareTypeService hardwareTypeService = (HardwareTypeService) JSFUtils.findBean("HardwareTypeService");
+            this.listAllActiveHardwareTypes = new Items(hardwareTypeService.getAllActiveHardwareTypes(), Items.FIRST_ITEM_SELECT, "idHardwareType", "name").getItems();
+        }
+        return listAllActiveHardwareTypes;
+    }
+
+    public void setListAllActiveHardwareTypes(List<SelectItem> listAllActiveHardwareTypes) {
+        this.listAllActiveHardwareTypes = listAllActiveHardwareTypes;
     }
 }

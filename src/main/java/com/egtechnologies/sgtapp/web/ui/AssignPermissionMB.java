@@ -90,7 +90,7 @@ public class AssignPermissionMB implements Serializable {
     public void search(ActionEvent actionEvent) {
         try {
             Role role = new Role();
-            role.setName(this.getSearchName() != null ? this.getSearchName().toUpperCase().trim() : null);
+            role.setName(this.getSearchName() != null ? this.getSearchName().trim() : null);
             RoleService roleService = (RoleService) JSFUtils.findBean("RoleService");
             this.setListRoles(roleService.search(role));
         } catch (Exception e) {

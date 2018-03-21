@@ -122,7 +122,7 @@ public class NetworkMB implements Serializable {
         try {
             Network network = new Network();
             network.setIdCompany(this.getSearchCompany() != null ? this.getSearchCompany() : null);
-            network.setName(this.getSearchName() != null ? this.getSearchName().toUpperCase().trim() : null);
+            network.setName(this.getSearchName() != null ? this.getSearchName().trim() : null);
             NetworkService networkService = (NetworkService) JSFUtils.findBean("NetworkService");
             this.setListNetworks(networkService.search(network));
         } catch (Exception e) {
@@ -152,9 +152,9 @@ public class NetworkMB implements Serializable {
             User user = (User)JSFUtils.getSessionAttribute("usuario");
             Network newNetwork = new Network();
             newNetwork.setIdCompany(this.getIdCompany() != null ? this.getIdCompany() : null);
-            newNetwork.setName(this.getName() != null ? this.getName().toUpperCase().trim() : null);
-            newNetwork.setIpBegin(this.getIpBegin()!= null ? this.getIpBegin().toUpperCase().trim() : null);
-            newNetwork.setIpEnd(this.getIpEnd()!= null ? this.getIpEnd().toUpperCase().trim() : null);
+            newNetwork.setName(this.getName() != null ? this.getName().trim() : null);
+            newNetwork.setIpBegin(this.getIpBegin()!= null ? this.getIpBegin().trim() : null);
+            newNetwork.setIpEnd(this.getIpEnd()!= null ? this.getIpEnd().trim() : null);
             if(!errorValidation(newNetwork)){
                 NetworkService networkService = (NetworkService) JSFUtils.findBean("NetworkService");
                 Network network = networkService.getNetworkByName(newNetwork);
@@ -193,9 +193,9 @@ public class NetworkMB implements Serializable {
             User user = (User)JSFUtils.getSessionAttribute("usuario");
             Network selectedNetwork = this.getSelectedItem();
             selectedNetwork.setIdCompany(selectedNetwork.getIdCompany() != null ? selectedNetwork.getIdCompany() : null);
-            selectedNetwork.setName(selectedNetwork.getName() != null ? selectedNetwork.getName().toUpperCase().trim() : null);
-            selectedNetwork.setIpBegin(selectedNetwork.getIpBegin()!= null ? selectedNetwork.getIpBegin().toUpperCase().trim() : null);
-            selectedNetwork.setIpEnd(selectedNetwork.getIpEnd()!= null ? selectedNetwork.getIpEnd().toUpperCase().trim() : null);
+            selectedNetwork.setName(selectedNetwork.getName() != null ? selectedNetwork.getName().trim() : null);
+            selectedNetwork.setIpBegin(selectedNetwork.getIpBegin()!= null ? selectedNetwork.getIpBegin().trim() : null);
+            selectedNetwork.setIpEnd(selectedNetwork.getIpEnd()!= null ? selectedNetwork.getIpEnd().trim() : null);
             if(!errorValidation(selectedNetwork)){
                 NetworkService networkService = (NetworkService) JSFUtils.findBean("NetworkService");
                 Network network = networkService.getNetworkByName(selectedNetwork);

@@ -84,7 +84,7 @@ public class HardwareTypeMB implements Serializable {
     public void search(ActionEvent actionEvent) {
         try {
             HardwareType hardwareType = new HardwareType();
-            hardwareType.setName(this.getSearchName() != null ? this.getSearchName().toUpperCase().trim() : null);
+            hardwareType.setName(this.getSearchName() != null ? this.getSearchName().trim() : null);
             HardwareTypeService hardwareTypeService = (HardwareTypeService) JSFUtils.findBean("HardwareTypeService");
             this.setListHardwareTypes(hardwareTypeService.search(hardwareType));
         } catch (Exception e) {
@@ -110,7 +110,7 @@ public class HardwareTypeMB implements Serializable {
         try {
             User user = (User)JSFUtils.getSessionAttribute("usuario");
             HardwareType newHardwareType = new HardwareType();
-            newHardwareType.setName(this.getName() != null ? this.getName().toUpperCase().trim() : null);
+            newHardwareType.setName(this.getName() != null ? this.getName().trim() : null);
             if(!errorValidation(newHardwareType)){
                 HardwareTypeService hardwareTypeService = (HardwareTypeService) JSFUtils.findBean("HardwareTypeService");
                 HardwareType hardwareType = hardwareTypeService.getHardwareTypeByName(newHardwareType);
@@ -148,7 +148,7 @@ public class HardwareTypeMB implements Serializable {
         try {
             User user = (User)JSFUtils.getSessionAttribute("usuario");
             HardwareType selectedHardwareType = this.getSelectedItem();
-            selectedHardwareType.setName(selectedHardwareType.getName() != null ? selectedHardwareType.getName().toUpperCase().trim() : null);
+            selectedHardwareType.setName(selectedHardwareType.getName() != null ? selectedHardwareType.getName().trim() : null);
             if(!errorValidation(selectedHardwareType)){
                 HardwareTypeService hardwareTypeService = (HardwareTypeService) JSFUtils.findBean("HardwareTypeService");
                 HardwareType hardwareType = hardwareTypeService.getHardwareTypeByName(selectedHardwareType);

@@ -83,7 +83,7 @@ public class RoleMB implements Serializable{
     public void search(ActionEvent actionEvent) {
         try {
             Role role = new Role();
-            role.setName(this.getSearchName() != null ? this.getSearchName().toUpperCase().trim() : null);
+            role.setName(this.getSearchName() != null ? this.getSearchName().trim() : null);
             RoleService roleService = (RoleService) JSFUtils.findBean("RoleService");
             this.setListRoles(roleService.search(role));
         } catch (Exception e) {
@@ -121,7 +121,7 @@ public class RoleMB implements Serializable{
         try {
             User user = (User)JSFUtils.getSessionAttribute("usuario");
             Role newRole = new Role();
-            newRole.setName(this.getName() != null ? this.getName().toUpperCase().trim() : null);
+            newRole.setName(this.getName() != null ? this.getName().trim() : null);
             if(!errorValidation(newRole)){
                 RoleService roleService = (RoleService) JSFUtils.findBean("RoleService"); //validando si existe un cargo con la misma descripción
                 Role role = roleService.getRoleByName(newRole);
@@ -147,7 +147,7 @@ public class RoleMB implements Serializable{
         try {
             User user = (User)JSFUtils.getSessionAttribute("usuario");
             Role selectedRole = this.getSelectedItem();
-            selectedRole.setName(selectedRole.getName() != null ? selectedRole.getName().toUpperCase().trim() : null);
+            selectedRole.setName(selectedRole.getName() != null ? selectedRole.getName().trim() : null);
             if(!errorValidation(selectedRole)){
                 RoleService roleService = (RoleService) JSFUtils.findBean("RoleService");
                 Role role = roleService.getRoleByName(selectedRole); //validando si existe un cargo con la misma descripción

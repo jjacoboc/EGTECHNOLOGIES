@@ -137,7 +137,7 @@ public class DepartmentMB implements Serializable {
             Department department = new Department();
             department.setIdCompany(this.getSearchCompany() != null ? this.getSearchCompany() : null);
             department.setIdBranchOffice(this.getSearchBranchOffice()!= null ? this.getSearchBranchOffice() : null);
-            department.setName(this.getSearchName() != null ? this.getSearchName().toUpperCase().trim() : null);
+            department.setName(this.getSearchName() != null ? this.getSearchName().trim() : null);
             DepartmentService departmentService = (DepartmentService) JSFUtils.findBean("DepartmentService");
             this.setListDepartments(departmentService.search(department));
         } catch (Exception e) {
@@ -172,8 +172,8 @@ public class DepartmentMB implements Serializable {
             Department newDepartment = new Department();
             newDepartment.setIdCompany(this.getIdCompany() != null ? this.getIdCompany() : null);
             newDepartment.setIdBranchOffice(this.getIdBranchOffice()!= null ? this.getIdBranchOffice(): null);
-            newDepartment.setName(this.getName() != null ? this.getName().toUpperCase().trim() : null);
-            newDepartment.setDescription(this.getDescription()!= null ? this.getDescription().toUpperCase().trim() : null);
+            newDepartment.setName(this.getName() != null ? this.getName().trim() : null);
+            newDepartment.setDescription(this.getDescription()!= null ? this.getDescription().trim() : null);
             if(!errorValidation(newDepartment)){
                 DepartmentService departmentService = (DepartmentService) JSFUtils.findBean("DepartmentService");
                 Department department = departmentService.getDepartmentByName(newDepartment);
@@ -221,8 +221,8 @@ public class DepartmentMB implements Serializable {
             Department selectedDepartment = this.getSelectedItem();
             selectedDepartment.setIdCompany(selectedDepartment.getIdCompany() != null ? selectedDepartment.getIdCompany() : null);
             selectedDepartment.setIdBranchOffice(selectedDepartment.getIdBranchOffice()!= null ? selectedDepartment.getIdBranchOffice(): null);
-            selectedDepartment.setName(selectedDepartment.getName() != null ? selectedDepartment.getName().toUpperCase().trim() : null);
-            selectedDepartment.setDescription(selectedDepartment.getDescription()!= null ? selectedDepartment.getDescription().toUpperCase().trim() : null);
+            selectedDepartment.setName(selectedDepartment.getName() != null ? selectedDepartment.getName().trim() : null);
+            selectedDepartment.setDescription(selectedDepartment.getDescription()!= null ? selectedDepartment.getDescription().trim() : null);
             if(!errorValidation(selectedDepartment)){
                 DepartmentService departmentService = (DepartmentService) JSFUtils.findBean("DepartmentService");
                 Department department = departmentService.getDepartmentByName(selectedDepartment);

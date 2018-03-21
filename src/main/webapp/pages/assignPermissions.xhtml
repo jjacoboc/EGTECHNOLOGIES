@@ -1,69 +1,49 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
-    <h:head>
-        <title>SGSWEB - Asignación de Permisos al Perfil</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-        <h:outputStylesheet library="css" name="mycss.css" />
-        <h:outputScript library="js" name="general.js"/>
-    </h:head>
-    <h:body>
-        <f:view>
-            <p:layout fullPage="true">
-                <p:layoutUnit position="north" size="82" closable="true" collapsible="true" visible="true" >
-                    <ui:include src="../commons/header.xhtml" />
-                </p:layoutUnit>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
 
-                <p:layoutUnit position="south" size="50" closable="true" collapsible="true">
-                    <ui:include src="../commons/footer.xhtml" />
-                </p:layoutUnit>
-
-                <p:layoutUnit position="center" style="font-size: 12px;">
+    <ui:define name="content">
+        <div class="layout-portlets-box">
+            <div class="Container100">
+                <div class="ContainerIndent">
                     <h:form id="f">
-                        <p:spacer height="15"/>
                         <p:panel header="ASSIGN PERMISSIONS" style="font-size: 13px;">
                             <fieldset>
-                                <legend style="font-size: 11px;font-weight: bold;">Criterios de Búsqueda</legend>
+                                <legend class="Fs12">Search Filters</legend>
                                 <h:panelGrid columns="2" width="100%" columnClasses="columnLbl1, columnTxt1">
-                                    
-                                    <h:outputText value="Name: " styleClass="Etiqueta1" />
-                                    <p:inputText value="#{assignPermissionMB.searchName}" size="50" maxlength="50" style="float: left;font-size: 11px;text-transform: uppercase;" />
+
+                                    <h:outputText value="Name: " styleClass="FontBold Fs13" />
+                                    <p:inputText value="#{assignPermissionMB.searchName}" size="50" maxlength="50" styleClass="Fs12" />
                                 </h:panelGrid>
                                 <h:panelGrid columns="1">
-                                    <p:commandButton id="btnBuscar" value="Buscar" actionListener="#{assignPermissionMB.search}" update=":f:tbl" style="font-size: 11px;height: 2em"/>
+                                    <p:commandButton id="btnBuscar" value="Buscar" actionListener="#{assignPermissionMB.search}" update=":f:tbl" />
                                 </h:panelGrid>
                             </fieldset>
 
                             <fieldset>
-                                <legend style="font-size: 11px;font-weight: bold;">List of Roles</legend>
+                                <legend class="Fs12">List of Roles</legend>
                                 <p:messages id="tblMsgs" showSummary="true" showDetail="true"/>
-                                <p:dataTable id="tbl" var="row" value="#{assignPermissionMB.listRoles}" rows="10" rowIndexVar="rowIndex" paginator="true" paginatorPosition="top" style="font-size: 11px;">
+                                <p:dataTable id="tbl" var="row" value="#{assignPermissionMB.listRoles}" rows="10" rowIndexVar="rowIndex" paginator="true" paginatorPosition="top" styleClass="Fs11">
                                     <p:column>
                                         <f:facet name="header">
-                                            <h:outputText value="NAME" style="font-size: 11px;"/>
+                                            <h:outputText value="NAME"/>
                                         </f:facet>
-                                        <h:outputText value="#{row.name}" style="font-size: 11px;font-weight: normal;"/>
+                                        <h:outputText value="#{row.name}" styleClass="Fs13"/>
                                     </p:column>                    
                                     <p:column style="text-align: center; width: 10%;">
                                         <f:facet name="header">
-                                            <h:outputText value="ACTIVE" style="font-size: 11px;"/>
+                                            <h:outputText value="ACTIVE"/>
                                         </f:facet>
-                                        <h:outputText value="#{row.active}" style="font-size: 11px;font-weight: normal;">
+                                        <h:outputText value="#{row.active}" styleClass="Fs13">
                                             <f:converter converterId="converterYesNo"/>
                                         </h:outputText>
                                     </p:column>
                                     <p:column style="text-align: center; width: 7%;">
                                         <f:facet name="header">
-                                            <h:outputText value="ASSIGN" style="font-size: 11px;"/>
+                                            <h:outputText value="ASSIGN"/>
                                         </f:facet>
                                         <p:commandLink actionListener="#{assignPermissionMB.handleSelectedRole}" oncomplete="PF('dlg').show();" update=":dlgForm:hd, :dlgForm:pg">
                                             <f:param name="rowkey" value="#{rowIndex}"/>
@@ -77,11 +57,11 @@ and open the template in the editor.
 
                     <p:dialog id="dlg" widgetVar="dlg" resizable="false" maximizable="false" minimizable="false" modal="true" appendTo="@(body)" >
                         <f:facet id="header" name="header">
-                            <h:outputText value="ASSIGNATION OF PERMISSIONS" style="font-size: 11px;font-weight: bold;"></h:outputText>
+                            <h:outputText value="ASSIGNATION OF PERMISSIONS" ></h:outputText>
                         </f:facet>
                         <h:form id="dlgForm">
                             <h:panelGrid id="hd" columns="1">
-                                <h:outputText value="ROLE: #{assignPermissionMB.selectedRole.name}" style="font-size: 11px;font-weight: bold;"></h:outputText>
+                                <h:outputText value="ROLE: #{assignPermissionMB.selectedRole.name}" ></h:outputText>
                             </h:panelGrid>
                             <h:panelGrid id="pg" columns="1">
                                 <p:pickList id="pickList" value="#{assignPermissionMB.dualListFacilities}" var="fac" effect="bounce"
@@ -95,11 +75,11 @@ and open the template in the editor.
                                     </p:column>
                                 </p:pickList>
                             </h:panelGrid>
-                            <p:commandButton value="Assign" actionListener="#{assignPermissionMB.save}" oncomplete="PF('dlg').hide();" style="font-size: 11px;height: 2em"/>
+                            <p:commandButton value="Assign" actionListener="#{assignPermissionMB.save}" oncomplete="PF('dlg').hide();"/>
                         </h:form>
                     </p:dialog>
-                </p:layoutUnit>
-            </p:layout>
-        </f:view>
-    </h:body>
-</html>
+                </div>
+            </div>
+        </div>
+    </ui:define>
+</ui:composition>

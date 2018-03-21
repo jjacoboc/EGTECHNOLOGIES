@@ -9,7 +9,7 @@
         <ps:menu>
             <f:facet name="options">
                 <p:commandButton icon="fa fa-search Fs18 white" title="búsqueda" styleClass="Fright" />
-                <p:inputText value="" placeholder="Buscar" styleClass="Fs14 Fright" style="width: 300px;">
+                <p:inputText  placeholder="Buscar" styleClass="Fs14 Fright" style="width: 300px;">
                     <p:ajax event="change" immediate="true" global="false" />
                 </p:inputText>
             </f:facet>
@@ -33,6 +33,7 @@
                 <p:menuitem value="#{msgs.menuitem26}" rendered="#{loginMB.mapObjetos['menu10']}" outcome="/pages/branchOffice.xhtml"/>
                 <p:menuitem value="#{msgs.menuitem27}" rendered="#{loginMB.mapObjetos['menu11']}" outcome="/pages/department.xhtml"/>
                 <p:menuitem value="#{msgs.menuitem28}" rendered="#{loginMB.mapObjetos['menu12']}" outcome="/pages/employee.xhtml"/>
+                <p:menuitem value="#{msgs.menuitem29}" rendered="#{loginMB.mapObjetos['menu13']}" outcome="/pages/hardware.xhtml"/>
             </p:submenu>
         </ps:menu>
     </h:form>

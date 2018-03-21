@@ -173,10 +173,10 @@ public class UserMB implements Serializable {
     public void search(ActionEvent actionEvent) {
         try {
             PersonUser personUser = new PersonUser();
-            personUser.setIdnumber(this.getSearchIdNumber() != null ? this.getSearchIdNumber().toUpperCase().trim() : null);
-            personUser.setName(this.getSearchName() != null ? this.getSearchName().toUpperCase().trim() : null);
-            personUser.setLastname(this.getSearchLastName() != null ? this.getSearchLastName().toUpperCase().trim() : null);
-            personUser.setUsername(this.getSearchUserName() != null ? this.getSearchUserName().toUpperCase().trim() : null);
+            personUser.setIdnumber(this.getSearchIdNumber() != null ? this.getSearchIdNumber().trim() : null);
+            personUser.setName(this.getSearchName() != null ? this.getSearchName().trim() : null);
+            personUser.setLastname(this.getSearchLastName() != null ? this.getSearchLastName().trim() : null);
+            personUser.setUsername(this.getSearchUserName() != null ? this.getSearchUserName().trim() : null);
             UserService userService = (UserService) JSFUtils.findBean("UserService");
             this.setList(userService.search(personUser));
         } catch (Exception e) {
@@ -211,7 +211,7 @@ public class UserMB implements Serializable {
             User userSession = (User)JSFUtils.getSessionAttribute("usuario");
             User newUser = new User();
             newUser.setIdPerson(this.getEmployee());
-            newUser.setUsername(this.getUsername() != null ? this.getUsername().toUpperCase().trim() : null);
+            newUser.setUsername(this.getUsername() != null ? this.getUsername().trim() : null);
             newUser.setWorkemail(this.getWorkemail() != null ? this.getWorkemail().trim() : null);
             newUser.setIdRole(this.getRole());
             if(!errorValidation(newUser)){

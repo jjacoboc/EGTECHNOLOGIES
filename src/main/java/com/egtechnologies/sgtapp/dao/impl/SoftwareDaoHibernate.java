@@ -7,6 +7,7 @@ package com.egtechnologies.sgtapp.dao.impl;
 
 import com.egtechnologies.sgtapp.dao.SoftwareDao;
 import com.egtechnologies.sgtapp.domain.TSoftware;
+import com.egtechnologies.sgtapp.web.common.Items;
 import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Criteria;
@@ -80,7 +81,7 @@ public class SoftwareDaoHibernate extends HibernateDaoSupport implements Softwar
     @Override
     public List<TSoftware> search(TSoftware tsoftware) {
         Criteria criteria = this.getSessionFactory().openSession().createCriteria(TSoftware.class);
-        if(tsoftware.getIdCompany() != null) {
+        if(tsoftware.getIdCompany() != null && !tsoftware.getIdCompany().equals(Items.NULL_VALUE)) {
             criteria.add(Restrictions.eq("idCompany", tsoftware.getIdCompany()));
         }
         if(StringUtils.isNotBlank(tsoftware.getName())) {

@@ -229,7 +229,7 @@ public class PersonMB implements Serializable {
         try {
             User user = (User)JSFUtils.getSessionAttribute("usuario");
             Person newPerson = new Person();
-            newPerson.setIdnumber(this.getIdnumber() != null ? this.getIdnumber().toUpperCase().trim() : null);
+            newPerson.setIdnumber(this.getIdnumber() != null ? this.getIdnumber().trim() : null);
             newPerson.setName(this.getName() != null ? this.getName().trim() : null);
             newPerson.setLastname(this.getLastname() != null ? this.getLastname().trim() : null);
             newPerson.setAddress(this.getAddress() != null ? this.getAddress().trim() : null);
@@ -281,7 +281,7 @@ public class PersonMB implements Serializable {
         FacesMessage message;
         try {
             User user = (User)JSFUtils.getSessionAttribute("usuario");
-            this.getSelectedItem().setIdnumber(this.getSelectedItem().getIdnumber() != null ? this.getSelectedItem().getIdnumber().toUpperCase().trim() : null);
+            this.getSelectedItem().setIdnumber(this.getSelectedItem().getIdnumber() != null ? this.getSelectedItem().getIdnumber().trim() : null);
             this.getSelectedItem().setName(this.getSelectedItem().getName() != null ? this.getSelectedItem().getName().trim() : null);
             this.getSelectedItem().setLastname(this.getSelectedItem().getLastname() != null ? this.getSelectedItem().getLastname().trim() : null);
             this.getSelectedItem().setAddress(this.getSelectedItem().getAddress() != null ? this.getSelectedItem().getAddress().trim() : null);

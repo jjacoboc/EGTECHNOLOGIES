@@ -1,144 +1,124 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
-    <h:head>
-        <title>SGTWEB - Employees</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-        <h:outputStylesheet library="css" name="mycss.css" />
-        <h:outputScript library="js" name="general.js"/>
-    </h:head>
-    <h:body>
-        <f:view>
-            <p:layout fullPage="true">
-                <p:layoutUnit position="north" size="82" closable="true" collapsible="true" visible="true" >
-                    <ui:include src="../commons/header.xhtml" />
-                </p:layoutUnit>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
 
-                <p:layoutUnit position="south" size="50" closable="true" collapsible="true">
-                    <ui:include src="../commons/footer.xhtml" />
-                </p:layoutUnit>
-
-                <p:layoutUnit position="center">
+    <ui:define name="content">
+        <div class="layout-portlets-box">
+            <div class="Container100">
+                <div class="ContainerIndent">
                     <h:form id="f">
-                        <p:spacer height="15"/>
-                        <p:panel header="EMPLOYEES" style="font-size: 13px;">
+                        <p:panel header="EMPLOYEES">
                             <fieldset>
-                                <legend style="font-size: 11px;font-weight: bold;">Search Filters</legend>
+                                <legend class="Fs12">Search Filters</legend>
                                 <h:panelGrid columns="2" width="100%" columnClasses="columnLbl1, columnTxt1">
-                                    <h:outputText value="Company: " styleClass="Etiqueta1" />
-                                    <p:selectOneMenu value="#{employeeMB.searchCompany}" style="float: left;font-size: 11px"> 
+                                    <h:outputText value="Company: " styleClass="FontBold Fs13" />
+                                    <p:selectOneMenu value="#{employeeMB.searchCompany}" styleClass="Fs12"> 
                                         <f:selectItems value="#{commonMB.listAllCompanies}"/>
                                         <p:ajax event="change" listener="#{commonMB.getListBranchOfficeByCompany}" update=":f:sBranchOffice"/>
                                     </p:selectOneMenu>
                                     
-                                    <h:outputText value="Branch Office: " styleClass="Etiqueta1" />
-                                    <p:selectOneMenu id="sBranchOffice" value="#{employeeMB.searchBranchOffice}" style="float: left;font-size: 11px"> 
+                                    <h:outputText value="Branch Office: " styleClass="FontBold Fs13" />
+                                    <p:selectOneMenu id="sBranchOffice" value="#{employeeMB.searchBranchOffice}" styleClass="Fs12"> 
                                         <f:selectItems value="#{commonMB.listAllBranchOfficeByCompany}"/>
                                         <p:ajax event="change" listener="#{commonMB.getListDepartmentByBranchOffice}" update=":f:sDepartment"/>
                                     </p:selectOneMenu>
                                     
-                                    <h:outputText value="Department: " styleClass="Etiqueta1" />
-                                    <p:selectOneMenu id="sDepartment" value="#{employeeMB.searchDepartment}" style="float: left;font-size: 11px"> 
+                                    <h:outputText value="Department: " styleClass="FontBold Fs13" />
+                                    <p:selectOneMenu id="sDepartment" value="#{employeeMB.searchDepartment}" styleClass="Fs12"> 
                                         <f:selectItems value="#{commonMB.listAllDepartmentByBranchOffice}"/>
                                     </p:selectOneMenu>
                                     
-                                    <h:outputText value="Code: " styleClass="Etiqueta1" />
-                                    <p:inputText value="#{employeeMB.searchCode}" size="15" maxlength="15" style="float: left;font-size: 11px;text-transform: uppercase;" />
+                                    <h:outputText value="Code: " styleClass="FontBold Fs13" />
+                                    <p:inputText value="#{employeeMB.searchCode}" size="15" maxlength="15" styleClass="Fs12"/>
 
-                                    <h:outputText value="Name: " styleClass="Etiqueta1" />
-                                    <p:inputText value="#{employeeMB.searchName}" size="50" maxlength="50" style="float: left;font-size: 11px;text-transform: uppercase;" />
+                                    <h:outputText value="Name: " styleClass="FontBold Fs13" />
+                                    <p:inputText value="#{employeeMB.searchName}" size="50" maxlength="50" styleClass="Fs12"/>
 
-                                    <h:outputText value="Last Name: " styleClass="Etiqueta1" />
-                                    <p:inputText value="#{employeeMB.searchLastName}" size="50" maxlength="50" style="float: left;font-size: 11px;text-transform: uppercase;" />
+                                    <h:outputText value="Last Name: " styleClass="FontBold Fs13" />
+                                    <p:inputText value="#{employeeMB.searchLastName}" size="50" maxlength="50" styleClass="Fs12"/>
                                 </h:panelGrid>
                                 <h:panelGrid columns="1">
                                     <h:panelGroup>
-                                        <p:commandButton id="btnBuscar" value="Search" actionListener="#{employeeMB.search}" update=":f:tbl" style="font-size: 11px;height: 2em"/>
-                                        <p:commandButton id="btnNuevo" value="New" actionListener="#{employeeMB.toSave}" oncomplete="PF('dlg').show();" update=":dlgForm:dlgMsgs :dlgForm:pg" style="font-size: 11px;height: 2em"/>
+                                        <p:commandButton id="btnBuscar" value="Search" actionListener="#{employeeMB.search}" update=":f:tbl" />
+                                        <p:commandButton id="btnNuevo" value="New" actionListener="#{employeeMB.toSave}" oncomplete="PF('dlg').show();" update=":dlgForm:dlgMsgs :dlgForm:pg" />
                                     </h:panelGroup>
                                 </h:panelGrid>
                             </fieldset>
 
                             <fieldset>
-                                <legend style="font-size: 11px;font-weight: bold;">List of Employees</legend>
+                                <legend class="Fs12">List of Employees</legend>
                                 <p:messages id="tblMsgs" showSummary="true" showDetail="true"/>
-                                <p:dataTable id="tbl" var="row" value="#{employeeMB.listEmployees}" rowIndexVar="index" rows="10" paginator="true" paginatorPosition="top" style="font-size: 11px;">
+                                <p:dataTable id="tbl" var="row" value="#{employeeMB.listEmployees}" rowIndexVar="index" rows="10" paginator="true" paginatorPosition="top" >
                                     <p:column style="width: 14%;">
                                         <f:facet name="header">
-                                            <h:outputText value="COMPANY" style="font-size: 11px;"/>
+                                            <h:outputText value="COMPANY" />
                                         </f:facet>
-                                        <h:outputText value="#{row.idCompany}" style="font-size: 11px;font-weight: normal;">
+                                        <h:outputText value="#{row.idCompany}" styleClass="Fs13">
                                             <f:converter converterId="converterCompany"/>
                                         </h:outputText>
                                     </p:column>
                                     <p:column style="width: 14%;">
                                         <f:facet name="header">
-                                            <h:outputText value="BRANCH OFFICE" style="font-size: 11px;"/>
+                                            <h:outputText value="BRANCH OFFICE" />
                                         </f:facet>
-                                        <h:outputText value="#{row.idBranchOffice}" style="font-size: 11px;font-weight: normal;">
+                                        <h:outputText value="#{row.idBranchOffice}" styleClass="Fs13">
                                             <f:converter converterId="converterBranchOffice"/>
                                         </h:outputText>
                                     </p:column>
                                     <p:column style="width: 14%;">
                                         <f:facet name="header">
-                                            <h:outputText value="DEPARTMENT" style="font-size: 11px;"/>
+                                            <h:outputText value="DEPARTMENT" />
                                         </f:facet>
-                                        <h:outputText value="#{row.idDepartment}" style="font-size: 11px;font-weight: normal;">
+                                        <h:outputText value="#{row.idDepartment}" styleClass="Fs13">
                                             <f:converter converterId="converterDepartment"/>
                                         </h:outputText>
                                     </p:column>
                                     <p:column style="text-align: center; width: 5%;">
                                         <f:facet name="header">
-                                            <h:outputText value="CODE" style="font-size: 11px;"/>
+                                            <h:outputText value="CODE" />
                                         </f:facet>
-                                        <h:outputText value="#{row.code}" style="font-size: 11px;font-weight: normal;"/>
+                                        <h:outputText value="#{row.code}" styleClass="Fs13"/>
                                     </p:column>
                                     <p:column style="width: 10%;">
                                         <f:facet name="header">
-                                            <h:outputText value="NAME" style="font-size: 11px;"/>
+                                            <h:outputText value="NAME" />
                                         </f:facet>
-                                        <h:outputText value="#{row.name} #{row.lastname}" style="font-size: 11px;font-weight: normal;"/>
+                                        <h:outputText value="#{row.name} #{row.lastname}" styleClass="Fs13"/>
                                     </p:column>
                                     <p:column style="text-align: center; width: 6%;">
                                         <f:facet name="header">
-                                            <h:outputText value="MOBILE" style="font-size: 11px;"/>
+                                            <h:outputText value="MOBILE" />
                                         </f:facet>
-                                        <h:outputText value="#{row.cellphone}" style="font-size: 11px;font-weight: normal;"/>
+                                        <h:outputText value="#{row.cellphone}" styleClass="Fs13"/>
                                     </p:column>
                                     <p:column style="width: 17%;">
                                         <f:facet name="header">
-                                            <h:outputText value="EMAIL" style="font-size: 11px;"/>
+                                            <h:outputText value="EMAIL" />
                                         </f:facet>
-                                        <h:outputText value="#{row.homeemail}" style="font-size: 11px;font-weight: normal;"/>
+                                        <h:outputText value="#{row.homeemail}" styleClass="Fs13"/>
                                     </p:column>
                                     <p:column style="text-align: center; width: 10%;">
                                         <f:facet name="header">
-                                            <h:outputText value="CREATED DATE" style="font-size: 11px;"/>
+                                            <h:outputText value="CREATED DATE" />
                                         </f:facet>
-                                        <h:outputText value="#{row.createdDate}" style="font-size: 11px;font-weight: normal;">
+                                        <h:outputText value="#{row.createdDate}" styleClass="Fs13">
                                             <f:convertDateTime type="both" locale="es" pattern="dd/MM/yyyy HH:mm:ss"/>
                                         </h:outputText>
                                     </p:column>
                                     <p:column style="text-align: center; width: 5%;">
                                         <f:facet name="header">
-                                            <h:outputText value="ACTIVE" style="font-size: 11px;"/>
+                                            <h:outputText value="ACTIVE" />
                                         </f:facet>
-                                        <h:outputText value="#{row.active}" style="font-size: 11px;font-weight: normal;">
+                                        <h:outputText value="#{row.active}" styleClass="Fs13">
                                             <f:converter converterId="converterYesNo"/>
                                         </h:outputText>
                                     </p:column>
                                     <p:column style="text-align: center; width: 5%;">
                                         <f:facet name="header">
-                                            <h:outputText value="ACTIONS" style="font-size: 11px;"/>
+                                            <h:outputText value="ACTIONS" />
                                         </f:facet>
                                         <p:commandLink id="elink" actionListener="#{employeeMB.toEdit}" update=":dlgEditForm:gridEdit" oncomplete="PF('dlgEdit').show();">
                                             <f:param name="index" value="#{index}"/>
@@ -168,77 +148,77 @@ and open the template in the editor.
                         <h:form id="dlgForm">
                             <p:messages id="dlgMsgs" showDetail="true" autoUpdate="true" closable="true" />
                             <h:panelGrid id="pg" columns="2" style="margin-bottom:10px">
-                                <h:outputText value="* Company: " styleClass="Etiqueta1"/>
-                                <p:selectOneMenu value="#{employeeMB.idCompany}" style="float: left;font-size: 11px"> 
+                                <h:outputText value="* Company: " styleClass="FontBold Fs13"/>
+                                <p:selectOneMenu value="#{employeeMB.idCompany}" styleClass="Fs12"> 
                                     <f:selectItems value="#{commonMB.listAllActiveCompanies}"/>
                                     <p:ajax event="change" listener="#{commonMB.getListActiveBranchOfficeByCompany}" update=":dlgForm:nBranchOffice"/>
                                     <p:ajax event="change" listener="#{commonMB.getListActivePositionsByCompany}" update=":dlgForm:nPosition"/>
                                 </p:selectOneMenu>
                                 
-                                <h:outputText value="* Branch Ofice: " styleClass="Etiqueta1"/>
-                                <p:selectOneMenu id="nBranchOffice" value="#{employeeMB.idBranchOffice}" style="float: left;font-size: 11px"> 
+                                <h:outputText value="* Branch Ofice: " styleClass="FontBold Fs13"/>
+                                <p:selectOneMenu id="nBranchOffice" value="#{employeeMB.idBranchOffice}" styleClass="Fs12"> 
                                     <f:selectItems value="#{commonMB.listAllActiveBranchOfficeByCompany}"/>
                                     <p:ajax event="change" listener="#{commonMB.getListActiveDepartmentByBranchOffice}" update=":dlgForm:nDepartment"/>
                                 </p:selectOneMenu>
                                 
-                                <h:outputText value="* Department: " styleClass="Etiqueta1"/>
-                                <p:selectOneMenu id="nDepartment" value="#{employeeMB.idDepartment}" style="float: left;font-size: 11px"> 
+                                <h:outputText value="* Department: " styleClass="FontBold Fs13"/>
+                                <p:selectOneMenu id="nDepartment" value="#{employeeMB.idDepartment}" styleClass="Fs12"> 
                                     <f:selectItems value="#{commonMB.listAllActiveDepartmentByBranchOffice}"/>
                                 </p:selectOneMenu>
                                 
-                                <h:outputText value="* Position: " styleClass="Etiqueta1"/>
-                                <p:selectOneMenu id="nPosition" value="#{employeeMB.idPosition}" style="float: left;font-size: 11px"> 
+                                <h:outputText value="* Position: " styleClass="FontBold Fs13"/>
+                                <p:selectOneMenu id="nPosition" value="#{employeeMB.idPosition}" styleClass="Fs12"> 
                                     <f:selectItems value="#{commonMB.listAllActivePositionsByCompany}"/>
                                 </p:selectOneMenu>
                                 
-                                <h:outputText value="* Code: " styleClass="Etiqueta1"/>
-                                <p:inputText value="#{employeeMB.code}" size="20" maxlength="20"  style="text-transform: uppercase;" />
+                                <h:outputText value="* Code: " styleClass="FontBold Fs13"/>
+                                <p:inputText value="#{employeeMB.code}" size="20" maxlength="20" styleClass="Fs12"/>
                                 
-                                <h:outputText value="* Name: " styleClass="Etiqueta1"/>
-                                <p:inputText value="#{employeeMB.name}" size="50" maxlength="50" style="font-size: 11px;text-transform: uppercase;" />
+                                <h:outputText value="* Name: " styleClass="FontBold Fs13"/>
+                                <p:inputText value="#{employeeMB.name}" size="50" maxlength="50" styleClass="Fs12"/>
                                 
-                                <h:outputText value="* Last Name: " styleClass="Etiqueta1"/>
-                                <p:inputText value="#{employeeMB.lastname}" size="50" maxlength="50" style="font-size: 11px;text-transform: uppercase;" />
+                                <h:outputText value="* Last Name: " styleClass="FontBold Fs13"/>
+                                <p:inputText value="#{employeeMB.lastname}" size="50" maxlength="50" styleClass="Fs12"/>
                                 
-                                <h:outputText value="* Email: " styleClass="Etiqueta1"/>
-                                <p:inputText value="#{employeeMB.homeemail}" size="50" maxlength="50" style="font-size: 11px;" />
+                                <h:outputText value="* Email: " styleClass="FontBold Fs13"/>
+                                <p:inputText value="#{employeeMB.homeemail}" size="50" maxlength="50" styleClass="Fs12"/>
                                 
-                                <h:outputText value="Phone: " styleClass="Etiqueta1"/>
-                                <p:inputText value="#{employeeMB.phone}" size="15" maxlength="15" style="font-size: 11px;text-transform: uppercase;" />
+                                <h:outputText value="Phone: " styleClass="FontBold Fs13"/>
+                                <p:inputText value="#{employeeMB.phone}" size="15" maxlength="15" styleClass="Fs12"/>
                                 
-                                <h:outputText value="* Mobile: " styleClass="Etiqueta1"/>
-                                <p:inputText value="#{employeeMB.cellphone}" size="15" maxlength="15" style="font-size: 11px;text-transform: uppercase;" />
+                                <h:outputText value="* Mobile: " styleClass="FontBold Fs13"/>
+                                <p:inputText value="#{employeeMB.cellphone}" size="15" maxlength="15" styleClass="Fs12"/>
                                 
-                                <h:outputText value="* Address: " styleClass="Etiqueta1"/>
-                                <p:inputText value="#{employeeMB.address}" size="100" maxlength="100" style="font-size: 11px;text-transform: uppercase;" />
+                                <h:outputText value="* Address: " styleClass="FontBold Fs13"/>
+                                <p:inputText value="#{employeeMB.address}" size="100" maxlength="100" styleClass="Fs12"/>
                                 
-                                <h:outputText value="* City: " styleClass="Etiqueta1"/>
-                                <p:inputText value="#{employeeMB.city}" size="45" maxlength="45" style="font-size: 11px;text-transform: uppercase;" />
+                                <h:outputText value="* City: " styleClass="FontBold Fs13"/>
+                                <p:inputText value="#{employeeMB.city}" size="45" maxlength="45" styleClass="Fs12"/>
                                 
-                                <h:outputText value="* State: " styleClass="Etiqueta1"/>
-                                <p:inputText value="#{employeeMB.state}" size="45" maxlength="45" style="font-size: 11px;text-transform: uppercase;" />
+                                <h:outputText value="* State: " styleClass="FontBold Fs13"/>
+                                <p:inputText value="#{employeeMB.state}" size="45" maxlength="45" styleClass="Fs12"/>
                                 
-                                <h:outputText value="* Country: " styleClass="Etiqueta1"/>
-                                <p:inputText value="#{employeeMB.country}" size="50" maxlength="50" style="font-size: 11px;text-transform: uppercase;" />
+                                <h:outputText value="* Country: " styleClass="FontBold Fs13"/>
+                                <p:inputText value="#{employeeMB.country}" size="50" maxlength="50" styleClass="Fs12"/>
                                 
-                                <h:outputText value="Zip Code: " styleClass="Etiqueta1"/>
-                                <p:inputText value="#{employeeMB.zipcode}" size="10" maxlength="10" style="font-size: 11px;text-transform: uppercase;" />
+                                <h:outputText value="Zip Code: " styleClass="FontBold Fs13"/>
+                                <p:inputText value="#{employeeMB.zipcode}" size="10" maxlength="10" styleClass="Fs12"/>
                                 
                                 <p:spacer/>
-                                <h:outputText value="(*) required" style="font-size: 10px; float: right;"/>
+                                <h:outputText value="(*) required" styleClass="Fs11 Fright"/>
                             </h:panelGrid>
 
                             <h:panelGroup>
-                                <p:commandButton value="Save" oncomplete="PF('confirmDlg').show();" style="font-size: 11px;height: 2em"/>
-                                <p:commandButton value="Cancel" oncomplete="PF('dlg').hide();" style="font-size: 11px;height: 2em"/>
+                                <p:commandButton value="Save" oncomplete="PF('confirmDlg').show();" />
+                                <p:commandButton value="Cancel" oncomplete="PF('dlg').hide();" />
                             </h:panelGroup>
                         </h:form>
                     </p:dialog>
                     
                     <p:confirmDialog id="confirmDlg" widgetVar="confirmDlg" header="Confirmation" message="It will proceed to save the employee. Continue?" appendTo="@(body)" >
                         <h:form id="confirmDlgForm">
-                            <p:commandButton id="btnSi" value="YES" update=":f:tbl, :dlgForm:dlgMsgs" actionListener="#{employeeMB.save}" oncomplete="PF('confirmDlg').hide();" style="font-size: 11px;height: 2em"/>
-                            <p:commandButton id="btnNo" value="NO" oncomplete="PF('confirmDlg').hide();" style="font-size: 11px;height: 2em"/>
+                            <p:commandButton id="btnSi" value="YES" update=":f:tbl, :dlgForm:dlgMsgs" actionListener="#{employeeMB.save}" oncomplete="PF('confirmDlg').hide();" />
+                            <p:commandButton id="btnNo" value="NO" oncomplete="PF('confirmDlg').hide();" />
                         </h:form>
                     </p:confirmDialog>
                     
@@ -251,95 +231,95 @@ and open the template in the editor.
                         <h:form id="dlgEditForm">
                             <p:messages id="dlgEditMsgs" showDetail="true" autoUpdate="true" closable="true" />
                             <h:panelGrid id="gridEdit" columns="2" style="margin-bottom:10px">
-                                <h:outputText value="* Company: " styleClass="Etiqueta1"/>
-                                <p:selectOneMenu value="#{employeeMB.selectedItem.idCompany}" style="float: left;font-size: 11px"> 
+                                <h:outputText value="* Company: " styleClass="FontBold Fs13"/>
+                                <p:selectOneMenu value="#{employeeMB.selectedItem.idCompany}" styleClass="Fs12"> 
                                     <f:selectItems value="#{commonMB.listAllActiveCompanies}"/>
                                     <p:ajax event="change" listener="#{commonMB.getListActiveBranchOfficeByCompany}" update=":dlgEditForm:eBranchOffice"/>
                                     <p:ajax event="change" listener="#{commonMB.getListActivePositionsByCompany}" update=":dlgEditForm:ePosition"/>
                                 </p:selectOneMenu>
                                 
-                                <h:outputText value="* Branch Ofice: " styleClass="Etiqueta1"/>
-                                <p:selectOneMenu id="eBranchOffice" value="#{employeeMB.selectedItem.idBranchOffice}" style="float: left;font-size: 11px"> 
+                                <h:outputText value="* Branch Ofice: " styleClass="FontBold Fs13"/>
+                                <p:selectOneMenu id="eBranchOffice" value="#{employeeMB.selectedItem.idBranchOffice}" styleClass="Fs12"> 
                                     <f:selectItems value="#{commonMB.listAllActiveBranchOfficeByCompany}"/>
                                     <p:ajax event="change" listener="#{commonMB.getListActiveDepartmentByBranchOffice}" update=":dlgEditForm:eDepartment"/>
                                 </p:selectOneMenu>
                                 
-                                <h:outputText value="* Department: " styleClass="Etiqueta1"/>
-                                <p:selectOneMenu id="eDepartment" value="#{employeeMB.selectedItem.idDepartment}" style="float: left;font-size: 11px"> 
+                                <h:outputText value="* Department: " styleClass="FontBold Fs13"/>
+                                <p:selectOneMenu id="eDepartment" value="#{employeeMB.selectedItem.idDepartment}" styleClass="Fs12"> 
                                     <f:selectItems value="#{commonMB.listAllActiveDepartmentByBranchOffice}"/>
                                 </p:selectOneMenu>
                                 
-                                <h:outputText value="* Position: " styleClass="Etiqueta1"/>
-                                <p:selectOneMenu id="ePosition" value="#{employeeMB.selectedItem.idPosition}" style="float: left;font-size: 11px"> 
+                                <h:outputText value="* Position: " styleClass="FontBold Fs13"/>
+                                <p:selectOneMenu id="ePosition" value="#{employeeMB.selectedItem.idPosition}" styleClass="Fs12"> 
                                     <f:selectItems value="#{commonMB.listAllActivePositionsByCompany}"/>
                                 </p:selectOneMenu>
                                 
-                                <h:outputText value="* Code: " styleClass="Etiqueta1"/>
-                                <p:inputText value="#{employeeMB.selectedItem.code}" size="20" maxlength="20" style="font-size: 11px;text-transform: uppercase;" />
+                                <h:outputText value="* Code: " styleClass="FontBold Fs13"/>
+                                <p:inputText value="#{employeeMB.selectedItem.code}" size="20" maxlength="20" styleClass="Fs12"/>
                                 
-                                <h:outputText value="* Name: " styleClass="Etiqueta1"/>
-                                <p:inputText value="#{employeeMB.selectedItem.name}" size="50" maxlength="50" style="font-size: 11px;text-transform: uppercase;" />
+                                <h:outputText value="* Name: " styleClass="FontBold Fs13"/>
+                                <p:inputText value="#{employeeMB.selectedItem.name}" size="50" maxlength="50" styleClass="Fs12"/>
                                 
-                                <h:outputText value="* Last Name: " styleClass="Etiqueta1"/>
-                                <p:inputText value="#{employeeMB.selectedItem.lastname}" size="50" maxlength="50" style="font-size: 11px;text-transform: uppercase;" />
+                                <h:outputText value="* Last Name: " styleClass="FontBold Fs13"/>
+                                <p:inputText value="#{employeeMB.selectedItem.lastname}" size="50" maxlength="50" styleClass="Fs12"/>
                                 
-                                <h:outputText value="* Email: " styleClass="Etiqueta1"/>
-                                <p:inputText value="#{employeeMB.selectedItem.homeemail}" size="50" maxlength="50" style="font-size: 11px;" />
+                                <h:outputText value="* Email: " styleClass="FontBold Fs13"/>
+                                <p:inputText value="#{employeeMB.selectedItem.homeemail}" size="50" maxlength="50" styleClass="Fs12"/>
                                 
-                                <h:outputText value="Phone: " styleClass="Etiqueta1"/>
-                                <p:inputText value="#{employeeMB.selectedItem.phone}" size="15" maxlength="15" style="font-size: 11px;text-transform: uppercase;" />
+                                <h:outputText value="Phone: " styleClass="FontBold Fs13"/>
+                                <p:inputText value="#{employeeMB.selectedItem.phone}" size="15" maxlength="15" styleClass="Fs12"/>
                                 
-                                <h:outputText value="* Mobile: " styleClass="Etiqueta1"/>
-                                <p:inputText value="#{employeeMB.selectedItem.cellphone}" size="15" maxlength="15" style="font-size: 11px;text-transform: uppercase;" />
+                                <h:outputText value="* Mobile: " styleClass="FontBold Fs13"/>
+                                <p:inputText value="#{employeeMB.selectedItem.cellphone}" size="15" maxlength="15" styleClass="Fs12"/>
                                 
-                                <h:outputText value="* Address: " styleClass="Etiqueta1"/>
-                                <p:inputText value="#{employeeMB.selectedItem.address}" size="100" maxlength="100" style="font-size: 11px;text-transform: uppercase;" />
+                                <h:outputText value="* Address: " styleClass="FontBold Fs13"/>
+                                <p:inputText value="#{employeeMB.selectedItem.address}" size="100" maxlength="100" styleClass="Fs12"/>
                                 
-                                <h:outputText value="* City: " styleClass="Etiqueta1"/>
-                                <p:inputText value="#{employeeMB.selectedItem.city}" size="45" maxlength="45" style="font-size: 11px;text-transform: uppercase;" />
+                                <h:outputText value="* City: " styleClass="FontBold Fs13"/>
+                                <p:inputText value="#{employeeMB.selectedItem.city}" size="45" maxlength="45" styleClass="Fs12"/>
                                 
-                                <h:outputText value="* State: " styleClass="Etiqueta1"/>
-                                <p:inputText value="#{employeeMB.selectedItem.state}" size="45" maxlength="45" style="font-size: 11px;text-transform: uppercase;" />
+                                <h:outputText value="* State: " styleClass="FontBold Fs13"/>
+                                <p:inputText value="#{employeeMB.selectedItem.state}" size="45" maxlength="45" styleClass="Fs12"/>
                                 
-                                <h:outputText value="* Country: " styleClass="Etiqueta1"/>
-                                <p:inputText value="#{employeeMB.selectedItem.country}" size="50" maxlength="50" style="font-size: 11px;text-transform: uppercase;" />
+                                <h:outputText value="* Country: " styleClass="FontBold Fs13"/>
+                                <p:inputText value="#{employeeMB.selectedItem.country}" size="50" maxlength="50" styleClass="Fs12"/>
                                 
-                                <h:outputText value="Zip Code: " styleClass="Etiqueta1"/>
-                                <p:inputText value="#{employeeMB.selectedItem.zipcode}" size="10" maxlength="10" style="font-size: 11px;text-transform: uppercase;" />
+                                <h:outputText value="Zip Code: " styleClass="FontBold Fs13"/>
+                                <p:inputText value="#{employeeMB.selectedItem.zipcode}" size="10" maxlength="10" styleClass="Fs12"/>
                                 
                                 <p:spacer/>
-                                <h:outputText value="(*) required" style="font-size: 10px; float: right;"/>
+                                <h:outputText value="(*) required" styleClass="Fs11 Fright"/>
                             </h:panelGrid>
 
                             <h:panelGroup>
-                                <p:commandButton id="btnGrabar_" value="Edit" oncomplete="PF('confirmEditDlg').show();" style="font-size: 11px;height: 2em"/>
-                                <p:commandButton id="btnCancelar_" value="Cancel" oncomplete="PF('dlgEdit').hide();" style="font-size: 11px;height: 2em"/>
+                                <p:commandButton id="btnGrabar_" value="Edit" oncomplete="PF('confirmEditDlg').show();" />
+                                <p:commandButton id="btnCancelar_" value="Cancel" oncomplete="PF('dlgEdit').hide();" />
                             </h:panelGroup>
                         </h:form>
                     </p:dialog>
                     
                     <p:confirmDialog id="confirmEditDlg" widgetVar="confirmEditDlg" header="Confirmation" message="It will proceed to edit the employee. Continue?" appendTo="@(body)">
                         <h:form id="confirmEditDlgForm">
-                            <p:commandButton id="btnSi_" value="YES" update=":dlgEditForm:dlgEditMsgs, :f:tbl" actionListener="#{employeeMB.edit}" oncomplete="PF('confirmEditDlg').hide();" style="font-size: 11px;height: 2em"/>
-                            <p:commandButton id="btnNo_" value="NO" oncomplete="PF('confirmEditDlg').hide();" style="font-size: 11px;height: 2em"/>
+                            <p:commandButton id="btnSi_" value="YES" update=":dlgEditForm:dlgEditMsgs, :f:tbl" actionListener="#{employeeMB.edit}" oncomplete="PF('confirmEditDlg').hide();" />
+                            <p:commandButton id="btnNo_" value="NO" oncomplete="PF('confirmEditDlg').hide();" />
                         </h:form>
                     </p:confirmDialog>
                     
                     <p:confirmDialog id="cdlg" widgetVar="cdlg" header="Deactivation" message="The employee will be deactivated. Continue?" appendTo="@(body)">
                         <h:form id="mpdForm">
-                            <p:commandButton id="dbtnSI" value="YES" update=":f:tbl" actionListener="#{employeeMB.disable}" oncomplete="PF('cdlg').hide();" style="font-size: 11px;height: 2em"/>
-                            <p:commandButton id="dbtnNO" value="NO" oncomplete="PF('cdlg').hide();" style="font-size: 11px;height: 2em"/>
+                            <p:commandButton id="dbtnSI" value="YES" update=":f:tbl" actionListener="#{employeeMB.disable}" oncomplete="PF('cdlg').hide();" />
+                            <p:commandButton id="dbtnNO" value="NO" oncomplete="PF('cdlg').hide();" />
                         </h:form>
                     </p:confirmDialog>
                     
                     <p:confirmDialog id="cadlg" widgetVar="cadlg" header="Activation" message="The employee will be activated. Continue?" appendTo="@(body)">
                         <h:form id="mpaForm">
-                            <p:commandButton id="dbtnSI" value="YES" update=":f:tbl" actionListener="#{employeeMB.enable}" oncomplete="PF('cadlg').hide();" style="font-size: 11px;height: 2em"/>
-                            <p:commandButton id="dbtnNO" value="NO" oncomplete="PF('cadlg').hide();" style="font-size: 11px;height: 2em"/>
+                            <p:commandButton id="dbtnSI" value="YES" update=":f:tbl" actionListener="#{employeeMB.enable}" oncomplete="PF('cadlg').hide();" />
+                            <p:commandButton id="dbtnNO" value="NO" oncomplete="PF('cadlg').hide();" />
                         </h:form>
                     </p:confirmDialog>
-                </p:layoutUnit>
-            </p:layout>
-        </f:view>
-    </h:body>
-</html>
+                </div>
+            </div>
+        </div>
+    </ui:define>
+</ui:composition>

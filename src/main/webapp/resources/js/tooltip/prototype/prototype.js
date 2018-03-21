@@ -446,17 +446,17 @@ Object.extend(String.prototype, {
     if (len == 1) return parts[0];
 
     var camelized = this.charAt(0) == '-'
-      ? parts[0].charAt(0).toUpperCase() + parts[0].substring(1)
+      ? parts[0].charAt(0) + parts[0].substring(1)
       : parts[0];
 
     for (var i = 1; i < len; i++)
-      camelized += parts[i].charAt(0).toUpperCase() + parts[i].substring(1);
+      camelized += parts[i].charAt(0) + parts[i].substring(1);
 
     return camelized;
   },
 
   capitalize: function() {
-    return this.charAt(0).toUpperCase() + this.substring(1).toLowerCase();
+    return this.charAt(0) + this.substring(1).toLowerCase();
   },
 
   underscore: function() {
@@ -1211,7 +1211,7 @@ Ajax.Request = Class.create(Ajax.Base, {
       if (this.options.onCreate) this.options.onCreate(response);
       Ajax.Responders.dispatch('onCreate', this, response);
 
-      this.transport.open(this.method.toUpperCase(), this.url,
+      this.transport.open(this.method, this.url,
         this.options.asynchronous);
 
       if (this.options.asynchronous) this.respondToReadyState.bind(this).defer(1);
@@ -1636,7 +1636,7 @@ Element.Methods = {
       content = Object.toHTML(content);
 
       tagName = ((position == 'before' || position == 'after')
-        ? element.parentNode : element).tagName.toUpperCase();
+        ? element.parentNode : element).tagName;
 
       childNodes = Element._getContentFromAnonymousElement(tagName, content.stripScripts());
 
@@ -2428,7 +2428,7 @@ if (Prototype.Browser.IE || Prototype.Browser.Opera) {
     if (Object.isElement(content)) return element.update().insert(content);
 
     content = Object.toHTML(content);
-    var tagName = element.tagName.toUpperCase();
+    var tagName = element.tagName;
 
     if (tagName in Element._insertionTranslations.tags) {
       $A(element.childNodes).each(function(node) { element.removeChild(node) });
@@ -2453,7 +2453,7 @@ if ('outerHTML' in document.createElement('div')) {
     }
 
     content = Object.toHTML(content);
-    var parent = element.parentNode, tagName = parent.tagName.toUpperCase();
+    var parent = element.parentNode, tagName = parent.tagName;
 
     if (Element._insertionTranslations.tags[tagName]) {
       var nextSibling = element.next();
@@ -2606,7 +2606,7 @@ Element.addMethods = function(methods) {
   }
 
   function extend(tagName) {
-    tagName = tagName.toUpperCase();
+    tagName = tagName;
     if (!Element.Methods.ByTag[tagName])
       Element.Methods.ByTag[tagName] = { };
     Object.extend(Element.Methods.ByTag[tagName], methods);
@@ -2841,7 +2841,7 @@ Object.extend(Selector, {
     tagName:      function(m) {
       if (m[1] == '*') return '';
       return "[local-name()='" + m[1].toLowerCase() +
-             "' or local-name()='" + m[1].toUpperCase() + "']";
+             "' or local-name()='" + m[1] + "']";
     },
     className:    "[contains(concat(' ', @class, ' '), ' #{1} ')]",
     id:           "[@id='#{1}']",
@@ -2975,7 +2975,7 @@ Object.extend(Selector, {
   // for Selector.match and Element#match
   assertions: {
     tagName: function(element, matches) {
-      return matches[1].toUpperCase() == element.tagName.toUpperCase();
+      return matches[1] == element.tagName;
     },
 
     className: function(element, matches) {
@@ -3093,7 +3093,7 @@ Object.extend(Selector, {
 
     // TOKEN FUNCTIONS
     tagName: function(nodes, root, tagName, combinator) {
-      var uTagName = tagName.toUpperCase();
+      var uTagName = tagName;
       var results = [], h = Selector.handlers;
       if (nodes) {
         if (combinator) {
@@ -3106,7 +3106,7 @@ Object.extend(Selector, {
           if (tagName == "*") return nodes;
         }
         for (var i = 0, node; node = nodes[i]; i++)
-          if (node.tagName.toUpperCase() === uTagName) results.push(node);
+          if (node.tagName === uTagName) results.push(node);
         return results;
       } else return root.getElementsByTagName(tagName);
     },
@@ -3312,7 +3312,7 @@ Object.extend(Selector, {
     '$=': function(nv, v) { return nv.endsWith(v); },
     '*=': function(nv, v) { return nv.include(v); },
     '~=': function(nv, v) { return (' ' + nv + ' ').include(' ' + v + ' '); },
-    '|=': function(nv, v) { return ('-' + nv.toUpperCase() + '-').include('-' + v.toUpperCase() + '-'); }
+    '|=': function(nv, v) { return ('-' + nv + '-').include('-' + v + '-'); }
   },
 
   split: function(expression) {

@@ -184,10 +184,10 @@ public class BranchOfficeMB implements Serializable {
         try {
             BranchOffice branchOffice = new BranchOffice();
             branchOffice.setIdCompany(this.getSearchCompany() != null ? this.getSearchCompany() : null);
-            branchOffice.setName(this.getSearchName() != null ? this.getSearchName().toUpperCase().trim() : null);
-            branchOffice.setCity(this.getSearchCity() != null ? this.getSearchCity().toUpperCase().trim() : null);
-            branchOffice.setState(this.getSearchState() != null ? this.getSearchState().toUpperCase().trim() : null);
-            branchOffice.setCountry(this.getSearchCountry() != null ? this.getSearchCountry().toUpperCase().trim() : null);
+            branchOffice.setName(this.getSearchName() != null ? this.getSearchName().trim() : null);
+            branchOffice.setCity(this.getSearchCity() != null ? this.getSearchCity().trim() : null);
+            branchOffice.setState(this.getSearchState() != null ? this.getSearchState().trim() : null);
+            branchOffice.setCountry(this.getSearchCountry() != null ? this.getSearchCountry().trim() : null);
             BranchOfficeService branchOfficeService = (BranchOfficeService) JSFUtils.findBean("BranchOfficeService");
             this.setListBranchOffices(branchOfficeService.search(branchOffice));
         } catch (Exception e) {
@@ -221,13 +221,13 @@ public class BranchOfficeMB implements Serializable {
             User user = (User)JSFUtils.getSessionAttribute("usuario");
             BranchOffice newBranchOffice = new BranchOffice();
             newBranchOffice.setIdCompany(this.getIdCompany() != null ? this.getIdCompany() : null);
-            newBranchOffice.setAddress(this.getAddress() != null ? this.getAddress().toUpperCase().trim() : null);
-            newBranchOffice.setCity(this.getCity()!= null ? this.getCity().toUpperCase().trim() : null);
-            newBranchOffice.setCountry(this.getCountry()!= null ? this.getCountry().toUpperCase().trim() : null);
-            newBranchOffice.setName(this.getName() != null ? this.getName().toUpperCase().trim() : null);
-            newBranchOffice.setPhone(this.getPhone()!= null ? this.getPhone().toUpperCase().trim() : null);
-            newBranchOffice.setState(this.getState()!= null ? this.getState().toUpperCase().trim() : null);
-            newBranchOffice.setZipcode(this.getZipcode()!= null ? this.getZipcode().toUpperCase().trim() : null);
+            newBranchOffice.setAddress(this.getAddress() != null ? this.getAddress().trim() : null);
+            newBranchOffice.setCity(this.getCity()!= null ? this.getCity().trim() : null);
+            newBranchOffice.setCountry(this.getCountry()!= null ? this.getCountry().trim() : null);
+            newBranchOffice.setName(this.getName() != null ? this.getName().trim() : null);
+            newBranchOffice.setPhone(this.getPhone()!= null ? this.getPhone().trim() : null);
+            newBranchOffice.setState(this.getState()!= null ? this.getState().trim() : null);
+            newBranchOffice.setZipcode(this.getZipcode()!= null ? this.getZipcode().trim() : null);
             if(!errorValidation(newBranchOffice)){
                 BranchOfficeService branchOfficeService = (BranchOfficeService) JSFUtils.findBean("BranchOfficeService");
                 BranchOffice branchOffice = branchOfficeService.getBranchOfficeByName(newBranchOffice);
@@ -266,13 +266,13 @@ public class BranchOfficeMB implements Serializable {
             User user = (User)JSFUtils.getSessionAttribute("usuario");
             BranchOffice selectedBranchOffice = this.getSelectedItem();
             selectedBranchOffice.setIdCompany(selectedBranchOffice.getIdCompany() != null ? selectedBranchOffice.getIdCompany() : null);
-            selectedBranchOffice.setAddress(selectedBranchOffice.getAddress() != null ? selectedBranchOffice.getAddress().toUpperCase().trim() : null);
-            selectedBranchOffice.setCity(selectedBranchOffice.getCity()!= null ? selectedBranchOffice.getCity().toUpperCase().trim() : null);
-            selectedBranchOffice.setCountry(selectedBranchOffice.getCountry()!= null ? selectedBranchOffice.getCountry().toUpperCase().trim() : null);
-            selectedBranchOffice.setName(selectedBranchOffice.getName() != null ? selectedBranchOffice.getName().toUpperCase().trim() : null);
-            selectedBranchOffice.setPhone(selectedBranchOffice.getPhone()!= null ? selectedBranchOffice.getPhone().toUpperCase().trim() : null);
-            selectedBranchOffice.setState(selectedBranchOffice.getState()!= null ? selectedBranchOffice.getState().toUpperCase().trim() : null);
-            selectedBranchOffice.setZipcode(selectedBranchOffice.getZipcode()!= null ? selectedBranchOffice.getZipcode().toUpperCase().trim() : null);
+            selectedBranchOffice.setAddress(selectedBranchOffice.getAddress() != null ? selectedBranchOffice.getAddress().trim() : null);
+            selectedBranchOffice.setCity(selectedBranchOffice.getCity()!= null ? selectedBranchOffice.getCity().trim() : null);
+            selectedBranchOffice.setCountry(selectedBranchOffice.getCountry()!= null ? selectedBranchOffice.getCountry().trim() : null);
+            selectedBranchOffice.setName(selectedBranchOffice.getName() != null ? selectedBranchOffice.getName().trim() : null);
+            selectedBranchOffice.setPhone(selectedBranchOffice.getPhone()!= null ? selectedBranchOffice.getPhone().trim() : null);
+            selectedBranchOffice.setState(selectedBranchOffice.getState()!= null ? selectedBranchOffice.getState().trim() : null);
+            selectedBranchOffice.setZipcode(selectedBranchOffice.getZipcode()!= null ? selectedBranchOffice.getZipcode().trim() : null);
             if(!errorValidation(selectedBranchOffice)){
                 BranchOfficeService branchOfficeService = (BranchOfficeService) JSFUtils.findBean("BranchOfficeService");
                 BranchOffice branchOffice = branchOfficeService.getBranchOfficeByName(selectedBranchOffice);

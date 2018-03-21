@@ -305,7 +305,7 @@ var Draggable = Class.create({
     if(Event.isLeftClick(event)) {    
       // abort on form elements, fixes a Firefox issue
       var src = Event.element(event);
-      if((tag_name = src.tagName.toUpperCase()) && (
+      if((tag_name = src.tagName) && (
         tag_name=='INPUT' ||
         tag_name=='SELECT' ||
         tag_name=='OPTION' ||
@@ -597,7 +597,7 @@ var Sortable = {
   sortables: { },
   
   _findRootElement: function(element) {
-    while (element.tagName.toUpperCase() != "BODY") {  
+    while (element.tagName != "BODY") {  
       if(element.id && Sortable.sortables[element.id]) return element;
       element = element.parentNode;
     }
@@ -953,11 +953,11 @@ Element.isParent = function(child, element) {
 
 Element.findChildren = function(element, only, recursive, tagName) {   
   if(!element.hasChildNodes()) return null;
-  tagName = tagName.toUpperCase();
+  tagName = tagName;
   if(only) only = [only].flatten();
   var elements = [];
   $A(element.childNodes).each( function(e) {
-    if(e.tagName && e.tagName.toUpperCase()==tagName &&
+    if(e.tagName && e.tagName==tagName &&
       (!only || (Element.classNames(e).detect(function(v) { return only.include(v) }))))
         elements.push(e);
     if(recursive) {

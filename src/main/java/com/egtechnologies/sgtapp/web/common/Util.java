@@ -10,6 +10,7 @@ import com.egtechnologies.sgtapp.domain.TCompany;
 import com.egtechnologies.sgtapp.domain.TDepartment;
 import com.egtechnologies.sgtapp.domain.TEmployee;
 import com.egtechnologies.sgtapp.domain.TFacilities;
+import com.egtechnologies.sgtapp.domain.THardware;
 import com.egtechnologies.sgtapp.domain.THardwareType;
 import com.egtechnologies.sgtapp.domain.TNetwork;
 import com.egtechnologies.sgtapp.domain.TPassword;
@@ -24,6 +25,7 @@ import com.egtechnologies.sgtapp.web.bean.Company;
 import com.egtechnologies.sgtapp.web.bean.Department;
 import com.egtechnologies.sgtapp.web.bean.Employee;
 import com.egtechnologies.sgtapp.web.bean.Facilities;
+import com.egtechnologies.sgtapp.web.bean.Hardware;
 import com.egtechnologies.sgtapp.web.bean.HardwareType;
 import com.egtechnologies.sgtapp.web.bean.Network;
 import com.egtechnologies.sgtapp.web.bean.Password;
@@ -692,5 +694,43 @@ public class Util {
             temployee.setZipcode(employee.getZipcode());
         }
         return temployee;
+    }
+    
+    public static Hardware parserHardware(THardware thardware) {
+        Hardware hardware = null;
+        if(thardware != null) {
+            hardware = new Hardware();
+            hardware.setActive(thardware.getActive());
+            hardware.setBrand(thardware.getBrand());
+            hardware.setCreatedBy(thardware.getCreatedBy());
+            hardware.setCreatedDate(thardware.getCreatedDate());
+            hardware.setIdCompany(thardware.getIdCompany());
+            hardware.setIdHardware(thardware.getIdHardware());
+            hardware.setIdHardwareType(thardware.getIdHardwareType());
+            hardware.setModel(thardware.getModel());
+            hardware.setModifiedBy(thardware.getModifiedBy());
+            hardware.setModifiedDate(thardware.getModifiedDate());
+            hardware.setSerialNumber(thardware.getSerialNumber());
+        }
+        return hardware;
+    }
+    
+    public static THardware parserTHardware(Hardware hardware) {
+        THardware thardware = null;
+        if(hardware != null) {
+            thardware = new THardware();
+            thardware.setActive(hardware.getActive());
+            thardware.setBrand(hardware.getBrand());
+            thardware.setCreatedBy(hardware.getCreatedBy());
+            thardware.setCreatedDate(hardware.getCreatedDate());
+            thardware.setIdCompany(hardware.getIdCompany());
+            thardware.setIdHardware(hardware.getIdHardware());
+            thardware.setIdHardwareType(hardware.getIdHardwareType());
+            thardware.setModel(hardware.getModel());
+            thardware.setModifiedBy(hardware.getModifiedBy());
+            thardware.setModifiedDate(hardware.getModifiedDate());
+            thardware.setSerialNumber(hardware.getSerialNumber());
+        }
+        return thardware;
     }
 }
