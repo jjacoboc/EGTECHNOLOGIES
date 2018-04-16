@@ -5,6 +5,7 @@
  */
 package com.egtechnologies.sgtapp.dao;
 
+import com.egtechnologies.sgtapp.domain.TEmployee;
 import com.egtechnologies.sgtapp.domain.THardware;
 import java.util.List;
 
@@ -20,5 +21,7 @@ public interface HardwareDao {
     List<THardware> getAllHardwares();
     List<THardware> getAllActiveHardwares();
     List<THardware> search(THardware thardware);
+    List<THardware> getHardwaresNotAssigned(TEmployee temployee);
+    List<THardware> getHardwaresAssigned(TEmployee temployee);
     void saveOrUpdate(THardware thardware);
 }

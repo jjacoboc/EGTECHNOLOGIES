@@ -12,21 +12,21 @@
                     <h:form id="f">
                         <p:panel header="HARDWARES">
                             <fieldset>
-                                <legend class="Fs12">Search Filters</legend>
+                                <legend class="Fs14">Search Filters</legend>
                                 <h:panelGrid columns="2" width="100%" columnClasses="columnLbl1, columnTxt1">
                                     <h:outputText value="Company: " styleClass="FontBold Fs13" />
                                     <p:selectOneMenu value="#{hardwareMB.searchCompany}" styleClass="Fs12"> 
                                         <f:selectItems value="#{commonMB.listAllCompanies}"/>
                                     </p:selectOneMenu>
-                                    
+
                                     <h:outputText value="HardwareType: " styleClass="FontBold Fs13" />
                                     <p:selectOneMenu value="#{hardwareMB.searchHardwareType}" styleClass="Fs12"> 
                                         <f:selectItems value="#{commonMB.listAllHardwareTypes}"/>
                                     </p:selectOneMenu>
-                                    
+
                                     <h:outputText value="Brand: " styleClass="FontBold Fs13" />
                                     <p:inputText value="#{hardwareMB.searchBrand}" size="45" maxlength="45" styleClass="Fs12"/>
-                                
+
                                     <h:outputText value="Model: " styleClass="FontBold Fs13" />
                                     <p:inputText value="#{hardwareMB.searchModel}" size="45" maxlength="45" styleClass="Fs12"/>
                                 </h:panelGrid>
@@ -39,10 +39,10 @@
                             </fieldset>
 
                             <fieldset>
-                                <legend class="Fs12">List of Hardwares</legend>
+                                <legend class="Fs14">List of Hardwares</legend>
                                 <p:messages id="tblMsgs" showSummary="true" showDetail="true"/>
-                                <p:dataTable id="tbl" var="row" value="#{hardwareMB.listHardwares}" rows="10" paginator="true" paginatorPosition="top" >
-                                    <p:column style="width: 25%;">
+                                <p:dataTable id="tbl" var="row" value="#{hardwareMB.listHardwares}" rowIndexVar="index" rows="10" paginator="true" paginatorPosition="top" >
+                                    <p:column style="width: 20%;">
                                         <f:facet name="header">
                                             <h:outputText value="COMPANY" />
                                         </f:facet>
@@ -50,7 +50,7 @@
                                             <f:converter converterId="converterCompany"/>
                                         </h:outputText>
                                     </p:column>
-                                    <p:column style="width: 25%;">
+                                    <p:column style="width: 15%;">
                                         <f:facet name="header">
                                             <h:outputText value="HARDWARE TYPE" />
                                         </f:facet>
@@ -58,25 +58,25 @@
                                             <f:converter converterId="converterHardwareType"/>
                                         </h:outputText>
                                     </p:column>
-                                    <p:column style="width: 20%;">
+                                    <p:column style="width: 15%;">
                                         <f:facet name="header">
                                             <h:outputText value="BRAND" />
                                         </f:facet>
                                         <h:outputText value="#{row.brand}" styleClass="Fs13"/>
                                     </p:column>
-                                    <p:column style="width: 25%;">
+                                    <p:column style="width: 15%;">
                                         <f:facet name="header">
                                             <h:outputText value="MODEL" />
                                         </f:facet>
                                         <h:outputText value="#{row.model}" styleClass="Fs13"/>
                                     </p:column>
-                                    <p:column style="text-align: center; width: 10%;">
+                                    <p:column style="text-align: center; width: 12%;">
                                         <f:facet name="header">
                                             <h:outputText value="SERIAL NUMBER" />
                                         </f:facet>
                                         <h:outputText value="#{row.serialNumber}" styleClass="Fs13"/>
                                     </p:column>
-                                    <p:column style="text-align: center; width: 10%;">
+                                    <p:column style="text-align: center; width: 14%;">
                                         <f:facet name="header">
                                             <h:outputText value="CREATED DATE" />
                                         </f:facet>
@@ -84,7 +84,7 @@
                                             <f:convertDateTime type="both" locale="es" pattern="dd/MM/yyyy HH:mm:ss"/>
                                         </h:outputText>
                                     </p:column>
-                                    <p:column style="text-align: center; width: 5%;">
+                                    <p:column style="text-align: center; width: 7%;">
                                         <f:facet name="header">
                                             <h:outputText value="ACTIVE" />
                                         </f:facet>
@@ -92,22 +92,29 @@
                                             <f:converter converterId="converterYesNo"/>
                                         </h:outputText>
                                     </p:column>
-                                    <p:column style="text-align: center; width: 5%;">
+                                    <p:column style="text-align: center; width: 7%;">
                                         <f:facet name="header">
                                             <h:outputText value="ACTIONS" />
                                         </f:facet>
-                                        <p:commandLink id="elink" actionListener="#{hardwareMB.toEdit}" update=":dlgEditForm:gridEdit" oncomplete="PF('dlgEdit').show();">
+                                        <p:commandLink id="elink" actionListener="#{hardwareMB.toEdit}" update=":dlgEditForm:gridEdit" oncomplete="PF('dlgEdit').show();" title="edit hardware" styleClass="Animated05 Unselectable BoxbarLink">
+                                            <f:param name="index" value="#{index}"/>
                                             <f:setPropertyActionListener value="#{row}" target="#{hardwareMB.selectedItem}"/>
-                                            <h:graphicImage library="images" name="pencil.png" alt="edit hardware" title="edit hardware"/>
+                                            <i class="fa fa-edit gray Fs16"></i>
                                         </p:commandLink>
                                         <p:spacer width="5"/>
-                                        <p:commandLink id="dlink" rendered="#{row.active}" oncomplete="PF('cdlg').show();">
+                                        <p:commandLink id="rlink" actionListener="#{hardwareMB.handleSelectedHardware}" oncomplete="PF('dlgInstall').show();" update=":dlgInstallForm:pg" title="install software" styleClass="Animated05 Unselectable BoxbarLink">
+                                            <f:param name="index" value="#{index}"/>
                                             <f:setPropertyActionListener value="#{row}" target="#{hardwareMB.selectedItem}"/>
-                                            <h:graphicImage library="images" name="cross.png" alt="disable hardware" title="disable hardware"/>
+                                            <i class="fa fa-hdd-o gray Fs16"></i>
                                         </p:commandLink>
-                                        <p:commandLink id="alink" rendered="#{not row.active}" oncomplete="PF('cadlg').show();">
+                                        <p:spacer width="5"/>
+                                        <p:commandLink id="dlink" rendered="#{row.active}" oncomplete="PF('cdlg').show();" title="active hardware" styleClass="Animated05 Unselectable BoxbarLink">
                                             <f:setPropertyActionListener value="#{row}" target="#{hardwareMB.selectedItem}"/>
-                                            <h:graphicImage library="images" name="tick.png" alt="enable hardware" title="enable hardware"/>
+                                            <i class="fa fa-remove red Fs16"></i>
+                                        </p:commandLink>
+                                        <p:commandLink id="alink" rendered="#{not row.active}" oncomplete="PF('cadlg').show();" title="deactive hardware" styleClass="Animated05 Unselectable BoxbarLink">
+                                            <f:setPropertyActionListener value="#{row}" target="#{hardwareMB.selectedItem}"/>
+                                            <i class="fa fa-check-square-o green Fs16"></i>
                                         </p:commandLink>
                                     </p:column>
                                 </p:dataTable>
@@ -127,21 +134,21 @@
                                 <p:selectOneMenu value="#{hardwareMB.idCompany}" styleClass="Fs12"> 
                                     <f:selectItems value="#{commonMB.listAllActiveCompanies}"/>
                                 </p:selectOneMenu>
-                                
+
                                 <h:outputText value="* Hardware Type: " styleClass="FontBold Fs13"/>
                                 <p:selectOneMenu value="#{hardwareMB.idHardwareType}" styleClass="Fs12"> 
                                     <f:selectItems value="#{commonMB.listAllActiveHardwareTypes}"/>
                                 </p:selectOneMenu>
-                                
+
                                 <h:outputText value="* Brand: " styleClass="FontBold Fs13"/>
                                 <p:inputText value="#{hardwareMB.brand}" size="45" maxlength="45" styleClass="Fs12"/>
-                                
+
                                 <h:outputText value="* Model: " styleClass="FontBold Fs13"/>
                                 <p:inputText value="#{hardwareMB.model}" size="45" maxlength="45" styleClass="Fs12"/>
-                                
+
                                 <h:outputText value="* Serial Number: " styleClass="FontBold Fs13"/>
                                 <p:inputText value="#{hardwareMB.serialNumber}" size="45" maxlength="45" styleClass="Fs12"/>
-                                
+
                                 <p:spacer/>
                                 <h:outputText value="(*) required" styleClass="Fs11 Fright"/>
                             </h:panelGrid>
@@ -152,14 +159,14 @@
                             </h:panelGroup>
                         </h:form>
                     </p:dialog>
-                    
+
                     <p:confirmDialog id="confirmDlg" widgetVar="confirmDlg" header="Confirmation" message="It will proceed to save the hardware. Continue?" appendTo="@(body)" >
                         <h:form id="confirmDlgForm">
                             <p:commandButton id="btnSi" value="YES" update=":f:tbl, :dlgForm:dlgMsgs" actionListener="#{hardwareMB.save}" oncomplete="PF('confirmDlg').hide();" />
                             <p:commandButton id="btnNo" value="NO" oncomplete="PF('confirmDlg').hide();" />
                         </h:form>
                     </p:confirmDialog>
-                    
+
                     <p:dialog id="dlgEdit" widgetVar="dlgEdit" resizable="false" maximizable="false" minimizable="false" modal="true" appendTo="@(body)" >
                         <f:facet name="header">
                             <h:panelGroup>
@@ -173,21 +180,21 @@
                                 <p:selectOneMenu value="#{hardwareMB.selectedItem.idCompany}" styleClass="Fs12"> 
                                     <f:selectItems value="#{commonMB.listAllActiveCompanies}"/>
                                 </p:selectOneMenu>
-                                
+
                                 <h:outputText value="* Hardware Type: " styleClass="FontBold Fs13"/>
                                 <p:selectOneMenu value="#{hardwareMB.selectedItem.idHardwareType}" styleClass="Fs12"> 
                                     <f:selectItems value="#{commonMB.listAllActiveHardwareTypes}"/>
                                 </p:selectOneMenu>
-                                
+
                                 <h:outputText value="* Brand: " styleClass="FontBold Fs13"/>
                                 <p:inputText value="#{hardwareMB.selectedItem.brand}" size="45" maxlength="45" styleClass="Fs12"/>
-                                
+
                                 <h:outputText value="* Model: " styleClass="FontBold Fs13"/>
                                 <p:inputText value="#{hardwareMB.selectedItem.model}" size="45" maxlength="45" styleClass="Fs12"/>
-                                
+
                                 <h:outputText value="* Serial Number: " styleClass="FontBold Fs13"/>
                                 <p:inputText value="#{hardwareMB.selectedItem.serialNumber}" size="45" maxlength="45" styleClass="Fs12"/>
-                                
+
                                 <p:spacer/>
                                 <h:outputText value="(*) required" styleClass="Fs11 Fright"/>
                             </h:panelGrid>
@@ -198,21 +205,75 @@
                             </h:panelGroup>
                         </h:form>
                     </p:dialog>
-                    
+
                     <p:confirmDialog id="confirmEditDlg" widgetVar="confirmEditDlg" header="Confirmation" message="It will proceed to edit the hardware. Continue?" appendTo="@(body)">
                         <h:form id="confirmEditDlgForm">
                             <p:commandButton id="btnSi_" value="YES" update=":dlgEditForm:dlgEditMsgs, :f:tbl" actionListener="#{hardwareMB.edit}" oncomplete="PF('confirmEditDlg').hide();" />
                             <p:commandButton id="btnNo_" value="NO" oncomplete="PF('confirmEditDlg').hide();" />
                         </h:form>
                     </p:confirmDialog>
-                    
+
+                    <p:dialog id="dlgInstall" widgetVar="dlgInstall" resizable="false" maximizable="false" minimizable="false" modal="true" appendTo="@(body)">
+                        <f:facet id="header" name="header">
+                            <h:outputText value="INSTALL SOFTWARE" ></h:outputText>
+                        </f:facet>
+                        <h:form id="dlgInstallForm">
+                            <h:panelGrid id="pg" columns="1">
+                                <h:outputText value="Selected Hardware: #{hardwareMB.selectedItem.serialNumber} - #{hardwareMB.selectedItem.brand} #{hardwareMB.selectedItem.model}" ></h:outputText>
+                                <p:spacer/>
+                                <h:panelGrid columns="2">
+                                    <p:dataList value="#{hardwareMB.listSourceSoftwares}" var="s" rowIndexVar="index" type="unordered" itemType="none">
+                                        <f:facet name="header">
+                                            Available Softwares
+                                        </f:facet>
+                                        <p:commandLink id="ilink" actionListener="#{hardwareMB.toAddSoftware}" update=":dlgSelectForm:pg" oncomplete="PF('dlgSelect').show()" title="Select Software" styleClass="Animated05 Unselectable BoxbarLink">
+                                            <f:param name="index" value="#{index}"/>
+                                            <i class="fa fa-plus-square gray"></i>
+                                        </p:commandLink>
+                                        <h:outputText value="Brand: #{s.brand}, Software: #{s.name}, Licenses: #{s.licenseCount}" styleClass="Fs14"/>
+                                    </p:dataList>
+                                    <p:dataList value="#{hardwareMB.listTargetSoftwares}" var="t" rowIndexVar="index" type="unordered" itemType="none">
+                                        <f:facet name="header">
+                                            Selected Softwares
+                                        </f:facet>
+                                        <p:commandLink id="ilink" actionListener="#{hardwareMB.removeSoftware}" update=":dlgInstallForm:pg" title="Select Software" styleClass="Animated05 Unselectable BoxbarLink">
+                                            <f:param name="index" value="#{index}"/>
+                                            <i class="fa fa-minus-square gray"></i>
+                                        </p:commandLink>
+                                        <h:outputText value="Brand: #{t.brand}, Software: #{t.name}" styleClass="Fs14"/>
+                                    </p:dataList>
+                                </h:panelGrid>
+                                <p:commandButton value="Save" actionListener="#{hardwareMB.installSoftware}" update=":f:tbl" oncomplete="PF('dlgSelect').hide();"/>
+                            </h:panelGrid>
+                        </h:form>
+                    </p:dialog>
+
+                    <p:dialog id="dlgSelect" widgetVar="dlgSelect" header="Software Selected" modal="true" showEffect="blind" hideEffect="fade" resizable="false">
+                        <h:form id="dlgSelectForm">
+                            <h:panelGrid id="pg" columns="2">
+                                <h:outputText value="Name:" styleClass="FontBold Fs13"/>
+                                <h:outputText value="#{hardwareMB.selectedSourceSoftware.name}" />
+
+                                <h:outputText value="Brand:" styleClass="FontBold Fs13"/>
+                                <h:outputText value="#{hardwareMB.selectedSourceSoftware.brand}" />
+
+                                <h:outputText value="Licenses:" styleClass="FontBold Fs13"/>
+                                <h:outputText value="#{hardwareMB.selectedSourceSoftware.licenseCount}"/>
+
+                                <h:outputText value="License Number:" styleClass="FontBold Fs13"/>
+                                <p:inputText value="#{hardwareMB.licenseNumber}" size="45" maxlength="45" styleClass="Fs12"/>
+                            </h:panelGrid>
+                            <p:commandButton value="Install" actionListener="#{hardwareMB.addSoftware}" update=":dlgInstallForm:pg" oncomplete="PF('dlgSelect').hide();"/>
+                        </h:form>
+                    </p:dialog>
+
                     <p:confirmDialog id="cdlg" widgetVar="cdlg" header="Deactivation" message="The hardware will be deactivated. Continue?" appendTo="@(body)">
                         <h:form id="mpdForm">
                             <p:commandButton id="dbtnSI" value="YES" update=":f:tbl" actionListener="#{hardwareMB.disable}" oncomplete="PF('cdlg').hide();" />
                             <p:commandButton id="dbtnNO" value="NO" oncomplete="PF('cdlg').hide();" />
                         </h:form>
                     </p:confirmDialog>
-                    
+
                     <p:confirmDialog id="cadlg" widgetVar="cadlg" header="Activation" message="The hardware will be activated. Continue?" appendTo="@(body)">
                         <h:form id="mpaForm">
                             <p:commandButton id="dbtnSI" value="YES" update=":f:tbl" actionListener="#{hardwareMB.enable}" oncomplete="PF('cadlg').hide();" />

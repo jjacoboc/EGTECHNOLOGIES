@@ -6,6 +6,7 @@
 package com.egtechnologies.sgtapp.web.bean;
 
 import java.io.Serializable;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -14,7 +15,7 @@ import java.util.Set;
  *
  * @author Jonathan
  */
-public class Software implements Serializable {
+public class Software implements Serializable, Comparable<Software> {
     
     private Integer idSoftware;
     private Integer idCompany;
@@ -144,5 +145,34 @@ public class Software implements Serializable {
 
     public void setInstallations(Set<Installation> Installations) {
         this.Installations = Installations;
+    }
+
+    @Override
+    public int compareTo(Software o) {
+        return Comparators.IDSOFTWARE.compare(this, o);
+    }
+    
+    public static class Comparators {
+        
+        public static Comparator<Software> IDSOFTWARE = new Comparator<Software>() {
+            @Override
+            public int compare(Software o1, Software o2) {
+                return o1.getIdSoftware() - o2.getIdSoftware();
+            }
+        };
+        
+        public static Comparator<Software> NAME = new Comparator<Software>() {
+            @Override
+            public int compare(Software o1, Software o2) {
+                return o1.getName().compareTo(o2.getName());
+            }
+        };
+        
+        public static Comparator<Software> BRAND = new Comparator<Software>() {
+            @Override
+            public int compare(Software o1, Software o2) {
+                return o1.getBrand().compareTo(o2.getBrand());
+            }
+        };
     }
 }

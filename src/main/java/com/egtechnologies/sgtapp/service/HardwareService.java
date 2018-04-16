@@ -5,6 +5,7 @@
  */
 package com.egtechnologies.sgtapp.service;
 
+import com.egtechnologies.sgtapp.web.bean.Employee;
 import com.egtechnologies.sgtapp.web.bean.Hardware;
 import java.util.List;
 
@@ -20,5 +21,7 @@ public interface HardwareService {
     List<Hardware> getAllHardwares();
     List<Hardware> getAllActiveHardwares();
     List<Hardware> search(Hardware hardware);
+    List<Hardware> getHardwaresNotAssigned(Employee employee);
+    List<Hardware> getHardwaresAssigned(Employee employee);
     void saveOrUpdate(Hardware hardware);
 }

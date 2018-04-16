@@ -34,6 +34,7 @@
                         <div class="EmptyBox10"></div>
                         <h:graphicImage name="eg-tech-logo-2s.jpg" library="images" styleClass="Wid50 MarAuto MarTop20 MarBot10"/>
                         <div class="EmptyBox20"></div>
+                        <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
                         <p:inputText placeholder="Username" value="#{loginMB.username}" styleClass="Container80 Fnone MarAuto Fs18"/>
                         <div class="EmptyBox10"></div>
                         <p:password placeholder="Password" value="#{loginMB.key}" styleClass="Container80 Fnone MarAuto Fs18" feedback="false"/>
@@ -49,8 +50,9 @@
                 </div>
             </div>
         </h:form>
+        
         <p:dialog id="dlgPass" widgetVar="dlgPass" header="Forgot Password?" height="120" closable="true" resizable="false" draggable="false">
-            <h:form id="dlgPassForm">˙
+            <h:form id="dlgPassForm">
                 <h:panelGrid columns="1">
                     <h:outputText value="Your password will be reset and sent to your email." styleClass="Etiqueta1" />
                     <h:outputText value="Continue?" styleClass="Etiqueta1" />

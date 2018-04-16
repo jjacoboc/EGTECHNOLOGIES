@@ -8,6 +8,7 @@ package com.egtechnologies.sgtapp.service.impl;
 import com.egtechnologies.sgtapp.dao.HardwareDao;
 import com.egtechnologies.sgtapp.domain.THardware;
 import com.egtechnologies.sgtapp.service.HardwareService;
+import com.egtechnologies.sgtapp.web.bean.Employee;
 import com.egtechnologies.sgtapp.web.bean.Hardware;
 import com.egtechnologies.sgtapp.web.common.Util;
 import java.util.ArrayList;
@@ -69,6 +70,26 @@ public class HardwareServiceImpl implements HardwareService {
     @Override
     public List<Hardware> search(Hardware hardware) {
         List<THardware> list = hardwareDao.search(Util.parserTHardware(hardware));
+        List<Hardware> result = new ArrayList<>();
+        for(THardware item : list) {
+            result.add(Util.parserHardware(item));
+        }
+        return result;
+    }
+    
+    @Override
+    public List<Hardware> getHardwaresNotAssigned(Employee employee) {
+        List<THardware> list = hardwareDao.getHardwaresNotAssigned(Util.parserTEmployee(employee));
+        List<Hardware> result = new ArrayList<>();
+        for(THardware item : list) {
+            result.add(Util.parserHardware(item));
+        }
+        return result;
+    }
+    
+    @Override
+    public List<Hardware> getHardwaresAssigned(Employee employee) {
+        List<THardware> list = hardwareDao.getHardwaresAssigned(Util.parserTEmployee(employee));
         List<Hardware> result = new ArrayList<>();
         for(THardware item : list) {
             result.add(Util.parserHardware(item));

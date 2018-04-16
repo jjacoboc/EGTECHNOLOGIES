@@ -5,6 +5,7 @@
 
 package com.egtechnologies.sgtapp.web.common;
 
+import com.egtechnologies.sgtapp.domain.TAssignation;
 import com.egtechnologies.sgtapp.domain.TBranchOffice;
 import com.egtechnologies.sgtapp.domain.TCompany;
 import com.egtechnologies.sgtapp.domain.TDepartment;
@@ -12,6 +13,7 @@ import com.egtechnologies.sgtapp.domain.TEmployee;
 import com.egtechnologies.sgtapp.domain.TFacilities;
 import com.egtechnologies.sgtapp.domain.THardware;
 import com.egtechnologies.sgtapp.domain.THardwareType;
+import com.egtechnologies.sgtapp.domain.TInstallation;
 import com.egtechnologies.sgtapp.domain.TNetwork;
 import com.egtechnologies.sgtapp.domain.TPassword;
 import com.egtechnologies.sgtapp.domain.TPerson;
@@ -20,6 +22,7 @@ import com.egtechnologies.sgtapp.domain.TRights;
 import com.egtechnologies.sgtapp.domain.TRole;
 import com.egtechnologies.sgtapp.domain.TSoftware;
 import com.egtechnologies.sgtapp.domain.TUser;
+import com.egtechnologies.sgtapp.web.bean.Assignation;
 import com.egtechnologies.sgtapp.web.bean.BranchOffice;
 import com.egtechnologies.sgtapp.web.bean.Company;
 import com.egtechnologies.sgtapp.web.bean.Department;
@@ -27,6 +30,7 @@ import com.egtechnologies.sgtapp.web.bean.Employee;
 import com.egtechnologies.sgtapp.web.bean.Facilities;
 import com.egtechnologies.sgtapp.web.bean.Hardware;
 import com.egtechnologies.sgtapp.web.bean.HardwareType;
+import com.egtechnologies.sgtapp.web.bean.Installation;
 import com.egtechnologies.sgtapp.web.bean.Network;
 import com.egtechnologies.sgtapp.web.bean.Password;
 import com.egtechnologies.sgtapp.web.bean.Person;
@@ -711,6 +715,7 @@ public class Util {
             hardware.setModifiedBy(thardware.getModifiedBy());
             hardware.setModifiedDate(thardware.getModifiedDate());
             hardware.setSerialNumber(thardware.getSerialNumber());
+            hardware.setHardwareType(thardware.getHardwareType());
         }
         return hardware;
     }
@@ -730,7 +735,70 @@ public class Util {
             thardware.setModifiedBy(hardware.getModifiedBy());
             thardware.setModifiedDate(hardware.getModifiedDate());
             thardware.setSerialNumber(hardware.getSerialNumber());
+            thardware.setHardwareType(hardware.getHardwareType());
         }
         return thardware;
+    }
+    
+    public static Assignation parserAssignation(TAssignation tassignation) {
+        Assignation assignation = null;
+        if(tassignation != null) {
+            assignation = new Assignation();
+            assignation.setCreatedBy(tassignation.getCreatedBy());
+            assignation.setCreatedDate(tassignation.getCreatedDate());
+            assignation.setIdAssignation(tassignation.getIdAssignation());
+            assignation.setIdHardware(tassignation.getIdHardware());
+            assignation.setIdEmployee(tassignation.getIdEmployee());
+            assignation.setModifiedBy(tassignation.getModifiedBy());
+            assignation.setModifiedDate(tassignation.getModifiedDate());
+        }
+        return assignation;
+    }
+    
+    public static TAssignation parserTAssignation(Assignation assignation) {
+        TAssignation tassignation = null;
+        if(assignation != null) {
+            tassignation = new TAssignation();
+            tassignation.setCreatedBy(assignation.getCreatedBy());
+            tassignation.setCreatedDate(assignation.getCreatedDate());
+            tassignation.setIdAssignation(assignation.getIdAssignation());
+            tassignation.setIdHardware(assignation.getIdHardware());
+            tassignation.setIdEmployee(assignation.getIdEmployee());
+            tassignation.setModifiedBy(assignation.getModifiedBy());
+            tassignation.setModifiedDate(assignation.getModifiedDate());
+        }
+        return tassignation;
+    }
+    
+    public static Installation parserInstallation(TInstallation tinstallation) {
+        Installation installation = null;
+        if(tinstallation != null) {
+            installation = new Installation();
+            installation.setCreatedBy(tinstallation.getCreatedBy());
+            installation.setCreatedDate(tinstallation.getCreatedDate());
+            installation.setIdHardware(tinstallation.getIdHardware());
+            installation.setIdInstallation(tinstallation.getIdInstallation());
+            installation.setIdSoftware(tinstallation.getIdSoftware());
+            installation.setLicenseNumber(tinstallation.getLicenseNumber());
+            installation.setModifiedBy(tinstallation.getModifiedBy());
+            installation.setModifiedDate(tinstallation.getModifiedDate());
+        }
+        return installation;
+    }
+    
+    public static TInstallation parserTInstallation(Installation installation) {
+        TInstallation tinstallation = null;
+        if(installation != null) {
+            tinstallation = new TInstallation();
+            tinstallation.setCreatedBy(installation.getCreatedBy());
+            tinstallation.setCreatedDate(installation.getCreatedDate());
+            tinstallation.setIdHardware(installation.getIdHardware());
+            tinstallation.setIdInstallation(installation.getIdInstallation());
+            tinstallation.setIdSoftware(installation.getIdSoftware());
+            tinstallation.setLicenseNumber(installation.getLicenseNumber());
+            tinstallation.setModifiedBy(installation.getModifiedBy());
+            tinstallation.setModifiedDate(installation.getModifiedDate());
+        }
+        return tinstallation;
     }
 }

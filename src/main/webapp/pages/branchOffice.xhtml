@@ -12,7 +12,7 @@
                     <h:form id="f">
                         <p:panel header="BRANCH OFFICES">
                             <fieldset>
-                                <legend class="Fs12">Search Filters</legend>
+                                <legend class="Fs14">Search Filters</legend>
                                 <h:panelGrid columns="2" width="100%" columnClasses="columnLbl1, columnTxt1">
                                     <h:outputText value="Company: " styleClass="FontBold Fs13" />
                                     <p:selectOneMenu value="#{branchOfficeMB.searchCompany}" styleClass="Fs12"> 
@@ -41,7 +41,7 @@
                             </fieldset>
 
                             <fieldset>
-                                <legend class="Fs12">List of Branch Offices</legend>
+                                <legend class="Fs14">List of Branch Offices</legend>
                                 <p:messages id="tblMsgs" showSummary="true" showDetail="true"/>
                                 <p:dataTable id="tbl" var="row" value="#{branchOfficeMB.listBranchOffices}" rows="10" paginator="true" paginatorPosition="top" >
                                     <p:column style="width: 20%;">

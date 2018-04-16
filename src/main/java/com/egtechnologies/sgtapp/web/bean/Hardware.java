@@ -29,6 +29,7 @@ public class Hardware implements Serializable {
     private Date modifiedDate;
     private Set<Assignation> Assignations = new HashSet<>(0);
     private Set<Installation> Installations = new HashSet<>(0);
+    private String hardwareType;
 
     public Hardware() {
     }
@@ -135,5 +136,13 @@ public class Hardware implements Serializable {
 
     public void setInstallations(Set<Installation> Installations) {
         this.Installations = Installations;
+    }
+
+    public String getHardwareType() {
+        return hardwareType;
+    }
+
+    public void setHardwareType(String hardwareType) {
+        this.hardwareType = hardwareType;
     }
 }

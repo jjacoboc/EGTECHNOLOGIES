@@ -5,16 +5,22 @@
  */
 package com.egtechnologies.sgtapp.web.ui;
 
+import com.egtechnologies.sgtapp.service.AssignService;
 import com.egtechnologies.sgtapp.service.BranchOfficeService;
 import com.egtechnologies.sgtapp.service.DepartmentService;
 import com.egtechnologies.sgtapp.service.EmployeeService;
+import com.egtechnologies.sgtapp.service.HardwareService;
 import com.egtechnologies.sgtapp.service.PositionService;
 import com.egtechnologies.sgtapp.util.JSFUtils;
 import com.egtechnologies.sgtapp.util.Validate;
+import com.egtechnologies.sgtapp.web.bean.Assignation;
 import com.egtechnologies.sgtapp.web.bean.Employee;
+import com.egtechnologies.sgtapp.web.bean.Facilities;
+import com.egtechnologies.sgtapp.web.bean.Hardware;
 import com.egtechnologies.sgtapp.web.bean.User;
 import com.egtechnologies.sgtapp.web.common.Items;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -26,6 +32,8 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import org.apache.commons.lang3.StringUtils;
 import org.primefaces.context.RequestContext;
+import org.primefaces.model.DualListModel;
+import org.springframework.util.CollectionUtils;
 
 /**
  *
@@ -41,10 +49,10 @@ public class EmployeeMB implements Serializable {
     private String searchCode;
     private String searchName;
     private String searchLastName;
-    private Integer idCompany;
-    private Integer idBranchOffice;
-    private Integer idDepartment;
-    private Integer idPosition;
+    private Integer company;
+    private Integer branchOffice;
+    private Integer department;
+    private Integer position;
     private String code;
     private String name;
     private String lastname;
@@ -58,6 +66,7 @@ public class EmployeeMB implements Serializable {
     private String homeemail;
     private List<Employee> listEmployees;
     private Employee selectedItem;
+    private DualListModel<Hardware> dualListHardwares;
 
     public EmployeeMB() {
         selectedItem = new Employee();
@@ -111,36 +120,36 @@ public class EmployeeMB implements Serializable {
         this.searchLastName = searchLastName;
     }
 
-    public Integer getIdCompany() {
-        return idCompany;
+    public Integer getCompany() {
+        return company;
     }
 
-    public void setIdCompany(Integer idCompany) {
-        this.idCompany = idCompany;
+    public void setCompany(Integer company) {
+        this.company = company;
     }
 
-    public Integer getIdBranchOffice() {
-        return idBranchOffice;
+    public Integer getBranchOffice() {
+        return branchOffice;
     }
 
-    public void setIdBranchOffice(Integer idBranchOffice) {
-        this.idBranchOffice = idBranchOffice;
+    public void setBranchOffice(Integer branchOffice) {
+        this.branchOffice = branchOffice;
     }
 
-    public Integer getIdDepartment() {
-        return idDepartment;
+    public Integer getDepartment() {
+        return department;
     }
 
-    public void setIdDepartment(Integer idDepartment) {
-        this.idDepartment = idDepartment;
+    public void setDepartment(Integer department) {
+        this.department = department;
     }
 
-    public Integer getIdPosition() {
-        return idPosition;
+    public Integer getPosition() {
+        return position;
     }
 
-    public void setIdPosition(Integer idPosition) {
-        this.idPosition = idPosition;
+    public void setPosition(Integer position) {
+        this.position = position;
     }
 
     public String getCode() {
@@ -247,6 +256,14 @@ public class EmployeeMB implements Serializable {
         this.selectedItem = selectedItem;
     }
 
+    public DualListModel<Hardware> getDualListHardwares() {
+        return dualListHardwares;
+    }
+
+    public void setDualListHardwares(DualListModel<Hardware> dualListHardwares) {
+        this.dualListHardwares = dualListHardwares;
+    }
+
     @PostConstruct
     public void init() {
         try {
@@ -257,6 +274,7 @@ public class EmployeeMB implements Serializable {
             JSFUtils.setSessionAttribute("commonMB", commonMB);
             EmployeeService employeeService = (EmployeeService) JSFUtils.findBean("EmployeeService");
             this.setListEmployees(employeeService.getAllEmployees());
+            this.setDualListHardwares(new DualListModel<>(new ArrayList(), new ArrayList()));
         } catch (Exception e) {
             e.getMessage();
         }
@@ -280,10 +298,10 @@ public class EmployeeMB implements Serializable {
 
     public void toSave(ActionEvent actionEvent) {
         try {
-            this.setIdCompany(Items.NULL_VALUE);
-            this.setIdBranchOffice(Items.NULL_VALUE);
-            this.setIdDepartment(Items.NULL_VALUE);
-            this.setIdPosition(Items.NULL_VALUE);
+            this.setCompany(Items.NULL_VALUE);
+            this.setBranchOffice(Items.NULL_VALUE);
+            this.setDepartment(Items.NULL_VALUE);
+            this.setPosition(Items.NULL_VALUE);
             this.setCode(StringUtils.EMPTY);
             this.setName(StringUtils.EMPTY);
             this.setLastname(StringUtils.EMPTY);
@@ -315,10 +333,10 @@ public class EmployeeMB implements Serializable {
         try {
             User user = (User) JSFUtils.getSessionAttribute("usuario");
             Employee newEmployee = new Employee();
-            newEmployee.setIdCompany(this.getIdCompany() != null ? this.getIdCompany() : null);
-            newEmployee.setIdBranchOffice(this.getIdBranchOffice() != null ? this.getIdBranchOffice() : null);
-            newEmployee.setIdDepartment(this.getIdDepartment() != null ? this.getIdDepartment() : null);
-            newEmployee.setIdPosition(this.getIdPosition() != null ? this.getIdPosition() : null);
+            newEmployee.setIdCompany(this.getCompany() != null ? this.getCompany() : null);
+            newEmployee.setIdBranchOffice(this.getBranchOffice() != null ? this.getBranchOffice() : null);
+            newEmployee.setIdDepartment(this.getDepartment() != null ? this.getDepartment() : null);
+            newEmployee.setIdPosition(this.getPosition() != null ? this.getPosition() : null);
             newEmployee.setCode(this.getCode() != null ? this.getCode().trim() : null);
             newEmployee.setName(this.getName() != null ? this.getName().trim() : null);
             newEmployee.setLastname(this.getLastname() != null ? this.getLastname().trim() : null);
@@ -371,7 +389,7 @@ public class EmployeeMB implements Serializable {
                 iter.remove();
                 FacesContext.getCurrentInstance().renderResponse();
             }
-        } catch (Exception e) {
+        } catch (NumberFormatException e) {
             e.getMessage();
         }
     }
@@ -380,10 +398,10 @@ public class EmployeeMB implements Serializable {
         FacesMessage message;
         try {
             User user = (User) JSFUtils.getSessionAttribute("usuario");
-            this.getSelectedItem().setIdCompany(this.getIdCompany() != null ? this.getIdCompany() : null);
-            this.getSelectedItem().setIdBranchOffice(this.getIdBranchOffice() != null ? this.getIdBranchOffice() : null);
-            this.getSelectedItem().setIdDepartment(this.getIdDepartment() != null ? this.getIdDepartment() : null);
-            this.getSelectedItem().setIdPosition(this.getIdPosition() != null ? this.getIdPosition() : null);
+            this.getSelectedItem().setIdCompany(this.getCompany() != null ? this.getCompany() : null);
+            this.getSelectedItem().setIdBranchOffice(this.getBranchOffice() != null ? this.getBranchOffice() : null);
+            this.getSelectedItem().setIdDepartment(this.getDepartment() != null ? this.getDepartment() : null);
+            this.getSelectedItem().setIdPosition(this.getPosition() != null ? this.getPosition() : null);
             this.getSelectedItem().setCode(this.getSelectedItem().getCode() != null ? this.getSelectedItem().getCode().trim() : null);
             this.getSelectedItem().setName(this.getSelectedItem().getName() != null ? this.getSelectedItem().getName().trim() : null);
             this.getSelectedItem().setLastname(this.getSelectedItem().getLastname() != null ? this.getSelectedItem().getLastname().trim() : null);
@@ -411,6 +429,44 @@ public class EmployeeMB implements Serializable {
                 }
             }
         } catch (Exception e) {
+            e.getMessage();
+        }
+    }
+    
+    public void handleSelectedEmployee(ActionEvent event) {
+        try {
+            String index = JSFUtils.getRequestParameter("index");
+            Employee employee = this.getListEmployees().get(Integer.parseInt(index));
+            HardwareService hardwareService = (HardwareService) JSFUtils.findBean("HardwareService");
+            List<Hardware> notAssigned = hardwareService.getHardwaresNotAssigned(employee);
+            List<Hardware> assigned = hardwareService.getHardwaresAssigned(employee);
+            this.setSelectedItem(employee);
+            this.setDualListHardwares(new DualListModel<>(notAssigned, assigned));
+        } catch (NumberFormatException e) {
+            e.getMessage();
+        }
+    }
+    
+    public void assignHardware(ActionEvent event) {
+        try {
+            AssignService assignService = (AssignService) JSFUtils.findBean("AssignService");
+            assignService.deleteHardwaresByEmployee(this.getSelectedItem().getIdEmployee());
+            
+            List<Hardware> target = this.getDualListHardwares().getTarget();
+            
+            if(!CollectionUtils.isEmpty(target)) {
+                User user = (User) JSFUtils.getSessionAttribute("usuario");
+                for (int i = 0; i < target.size(); i++) {
+                    Hardware hardware = target.get(i);
+                    Assignation assignation = new Assignation();
+                    assignation.setCreatedBy(user.getIdUser());
+                    assignation.setCreatedDate(new Date());
+                    assignation.setIdEmployee(this.getSelectedItem().getIdEmployee());
+                    assignation.setIdHardware(hardware.getIdHardware());
+                    
+                }
+            }
+        } catch(Exception e) {
             e.getMessage();
         }
     }

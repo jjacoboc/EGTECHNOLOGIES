@@ -8,8 +8,24 @@ and open the template in the editor.
     Author     : Jonathan
 */
 
-.CommandLink {
-    text-decoration: none !important;
-    color: inherit !important;
-    margin-right: 0px !important;
+.commandlink {
+    color: #768d99 !important;
+}
+
+.commandlink:hover {
+    cursor: pointer;
+    color: #2eb0da;
+}
+
+.ui-picklist div {
+    float: none !important;
+}
+
+.ui-picklist .ui-picklist-list {
+    width: max-content !important;
+    min-width: 250px !important;
+}
+
+.ui-picklist .ui-picklist-list .ui-picklist-item table tbody tr td {
+    min-width: 150px !important;
 }

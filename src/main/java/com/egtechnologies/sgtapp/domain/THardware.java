@@ -23,6 +23,7 @@ public class THardware implements java.io.Serializable {
     private Date modifiedDate;
     private Set<TAssignation> TAssignations = new HashSet<>(0);
     private Set<TInstallation> TInstallations = new HashSet<>(0);
+    private String hardwareType;
 
     public THardware() {
     }
@@ -144,6 +145,14 @@ public class THardware implements java.io.Serializable {
 
     public void setTInstallations(Set<TInstallation> TInstallations) {
         this.TInstallations = TInstallations;
+    }
+
+    public String getHardwareType() {
+        return hardwareType;
+    }
+
+    public void setHardwareType(String hardwareType) {
+        this.hardwareType = hardwareType;
     }
 
 }

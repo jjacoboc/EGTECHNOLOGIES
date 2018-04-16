@@ -12,7 +12,7 @@
                     <h:form id="f">
                         <p:panel header="USERS">
                             <fieldset>
-                                <legend class="Fs12">Search Filters</legend>
+                                <legend class="Fs14">Search Filters</legend>
                                 <h:panelGrid columns="2" width="100%" columnClasses="columnLbl1, columnTxt1">
                                     <h:outputText value="Id Number: " styleClass="FontBold Fs13"/>
                                     <p:inputText value="#{userMB.searchIdNumber}" size="15" maxlength="15" styleClass="Fs12"/>
@@ -35,7 +35,7 @@
                             </fieldset>
 
                             <fieldset>
-                                <legend class="Fs12">List of Users</legend>
+                                <legend class="Fs14">List of Users</legend>
                                 <p:messages id="tblMsgs" showSummary="true" showDetail="true"/>
                                 <p:dataTable id="tbl" var="row" value="#{userMB.list}" rows="10" paginator="true" paginatorPosition="top" styleClass="Fs11">
                                     <p:column style="text-align: center; width: 8%;">
