@@ -14,7 +14,9 @@
                 </p:inputText>
             </f:facet>
 
-            <p:submenu label="#{msgs.submenu1}" icon="fa fa-wrench">
+            <p:submenu label="#{msgs.submenu1}" icon="fa fa-wrench" 
+                       rendered="#{loginMB.mapObjetos['menu01'] or loginMB.mapObjetos['menu02'] or 
+                                   loginMB.mapObjetos['menu03'] or loginMB.mapObjetos['menu04']}">
                 <p:menuitem value="#{msgs.menuitem11}" rendered="#{loginMB.mapObjetos['menu01']}" outcome="/pages/person.xhtml"/>
                 <p:menuitem value="#{msgs.menuitem12}" rendered="#{loginMB.mapObjetos['menu02']}" outcome="/pages/user.xhtml"/>
                 <p:menuitem value="#{msgs.menuitem13}" rendered="#{loginMB.mapObjetos['menu03']}" outcome="/pages/role.xhtml"/>
@@ -22,9 +24,16 @@
                 <p:menuitem value="#{msgs.menuitem15}" action="#{loginMB.closeSession}" ajax="false" />
             </p:submenu>
             
-            <p:separator style="color: white !important"/>
+            <p:separator style="color: white !important" 
+                         rendered="#{loginMB.mapObjetos['menu01'] or loginMB.mapObjetos['menu02'] or 
+                                     loginMB.mapObjetos['menu03'] or loginMB.mapObjetos['menu04']}"/>
             
-            <p:submenu label="#{msgs.submenu2}" icon="fa fa-cog">
+            <p:submenu label="#{msgs.submenu2}" icon="fa fa-cog" 
+                       rendered="#{loginMB.mapObjetos['menu05'] or loginMB.mapObjetos['menu06'] or
+                                   loginMB.mapObjetos['menu07'] or loginMB.mapObjetos['menu08'] or
+                                   loginMB.mapObjetos['menu09'] or loginMB.mapObjetos['menu10'] or
+                                   loginMB.mapObjetos['menu11'] or loginMB.mapObjetos['menu12'] or
+                                   loginMB.mapObjetos['menu13']}">
                 <p:menuitem value="#{msgs.menuitem21}" rendered="#{loginMB.mapObjetos['menu05']}" outcome="/pages/company.xhtml"/>
                 <p:menuitem value="#{msgs.menuitem22}" rendered="#{loginMB.mapObjetos['menu06']}" outcome="/pages/hardwareType.xhtml"/>
                 <p:menuitem value="#{msgs.menuitem23}" rendered="#{loginMB.mapObjetos['menu07']}" outcome="/pages/position.xhtml"/>

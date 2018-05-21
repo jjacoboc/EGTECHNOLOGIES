@@ -10,23 +10,22 @@
             <div class="Container100">
                 <div class="ContainerIndent">
                     <h:form id="f">
-                        <p:panel header="ASSIGN PERMISSIONS" style="font-size: 13px;">
+                        <p:panel header="HARDWARES">
                             <fieldset>
                                 <legend class="Fs14">Search Filters</legend>
                                 <h:panelGrid columns="2" width="100%" columnClasses="columnLbl1, columnTxt1">
-
                                     <h:outputText value="Name: " styleClass="FontBold Fs13" />
                                     <p:inputText value="#{assignPermissionMB.searchName}" size="50" maxlength="50" styleClass="Fs12" />
                                 </h:panelGrid>
                                 <h:panelGrid columns="1">
-                                    <p:commandButton id="btnBuscar" value="Buscar" actionListener="#{assignPermissionMB.search}" update=":f:tbl" />
+                                    <p:commandButton id="btnBuscar" value="Search" actionListener="#{assignPermissionMB.search}" update=":f:tbl" />
                                 </h:panelGrid>
                             </fieldset>
 
                             <fieldset>
                                 <legend class="Fs14">List of Roles</legend>
                                 <p:messages id="tblMsgs" showSummary="true" showDetail="true"/>
-                                <p:dataTable id="tbl" var="row" value="#{assignPermissionMB.listRoles}" rows="10" rowIndexVar="rowIndex" paginator="true" paginatorPosition="top" styleClass="Fs11">
+                                <p:dataTable id="tbl" var="row" value="#{assignPermissionMB.listRoles}" rowIndexVar="index" rows="10" paginator="true" paginatorPosition="top" >
                                     <p:column>
                                         <f:facet name="header">
                                             <h:outputText value="NAME"/>
@@ -45,8 +44,9 @@
                                         <f:facet name="header">
                                             <h:outputText value="ASSIGN"/>
                                         </f:facet>
-                                        <p:commandLink actionListener="#{assignPermissionMB.handleSelectedRole}" oncomplete="PF('dlg').show();" update=":dlgForm:hd, :dlgForm:pg">
-                                            <f:param name="rowkey" value="#{rowIndex}"/>
+                                        <p:commandLink id="pLink" actionListener="#{assignPermissionMB.handleSelectedRole}" oncomplete="PF('dlgInstall').show();" update=":dlgInstallForm:pg" title="assign permissions" styleClass="Animated05 Unselectable BoxbarLink">
+                                            <f:param name="index" value="#{index}"/>
+                                            <f:setPropertyActionListener value="#{row}" target="#{assignPermissionMB.selectedRole}"/>
                                             <h:graphicImage library="images" name="contact_new.png" alt="assign permissions" title="assign permissions"/>
                                         </p:commandLink>
                                     </p:column>
@@ -55,27 +55,24 @@
                         </p:panel>
                     </h:form>
 
-                    <p:dialog id="dlg" widgetVar="dlg" resizable="false" maximizable="false" minimizable="false" modal="true" appendTo="@(body)" >
-                        <f:facet id="header" name="header">
-                            <h:outputText value="ASSIGNATION OF PERMISSIONS" ></h:outputText>
+                    <p:dialog id="dlgInstall" widgetVar="dlgInstall" resizable="false" maximizable="false" minimizable="false" modal="true" appendTo="@(body)">
+                        <f:facet name="header">
+                            <h:outputText value="ASSIGN PERMISSIONS" ></h:outputText>
                         </f:facet>
-                        <h:form id="dlgForm">
-                            <h:panelGrid id="hd" columns="1">
-                                <h:outputText value="ROLE: #{assignPermissionMB.selectedRole.name}" ></h:outputText>
-                            </h:panelGrid>
+                        <h:form id="dlgInstallForm">
                             <h:panelGrid id="pg" columns="1">
-                                <p:pickList id="pickList" value="#{assignPermissionMB.dualListFacilities}" var="fac" effect="bounce"
-                                            itemValue="#{fac}" itemLabel="#{fac.name}" converter="converterFacilities">
-
-                                    <f:facet name="sourceCaption">Available</f:facet>
-                                    <f:facet name="targetCaption">Starting</f:facet>
-
-                                    <p:column>
-                                        <h:outputText value="#{fac.name}" />
-                                    </p:column>
+                                <h:outputText value="ROLE: #{assignPermissionMB.selectedRole.name}" ></h:outputText>
+                                <p:spacer/>
+                                <p:pickList value="#{assignPermissionMB.pickList}" var="p" itemValue="#{p}" itemLabel="#{p.description}"
+                                            converter="converterPickListFacilities" showSourceFilter="true" showTargetFilter="true" 
+                                            filterMatchMode="contains">
+                                    <p:ajax event="transfer" listener="#{assignPermissionMB.onTransfer}" 
+                                            update=":dlgInstallForm:pg"/>
+                                    <f:facet name="sourceCaption">Available Facilities</f:facet>
+                                    <f:facet name="targetCaption">Assign Facilities</f:facet>
                                 </p:pickList>
+                                <p:commandButton value="Save" actionListener="#{assignPermissionMB.save}" update=":f:tbl" oncomplete="PF('dlgInstall').hide();"/>
                             </h:panelGrid>
-                            <p:commandButton value="Assign" actionListener="#{assignPermissionMB.save}" oncomplete="PF('dlg').hide();"/>
                         </h:form>
                     </p:dialog>
                 </div>
@@ -83,3 +80,4 @@
         </div>
     </ui:define>
 </ui:composition>
+

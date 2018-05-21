@@ -15,7 +15,6 @@ import com.egtechnologies.sgtapp.web.bean.Software;
 import com.egtechnologies.sgtapp.web.bean.User;
 import com.egtechnologies.sgtapp.web.common.Items;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.Iterator;
@@ -28,7 +27,6 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import org.apache.commons.lang3.StringUtils;
 import org.primefaces.context.RequestContext;
-import org.primefaces.model.DualListModel;
 import org.springframework.util.CollectionUtils;
 
 /**
@@ -51,7 +49,6 @@ public class HardwareMB implements Serializable {
     private String licenseNumber;
     private List<Hardware> listHardwares;
     private Hardware selectedItem;
-    private DualListModel<Software> dualListSoftwares;
     private List<Software> listTargetSoftwares;
     private Software selectedTargetSoftware;
     private List<Software> listSourceSoftwares;
@@ -157,14 +154,6 @@ public class HardwareMB implements Serializable {
         this.selectedItem = selectedItem;
     }
 
-    public DualListModel<Software> getDualListSoftwares() {
-        return dualListSoftwares;
-    }
-
-    public void setDualListSoftwares(DualListModel<Software> dualListSoftwares) {
-        this.dualListSoftwares = dualListSoftwares;
-    }
-
     public List<Software> getListTargetSoftwares() {
         return listTargetSoftwares;
     }
@@ -202,7 +191,6 @@ public class HardwareMB implements Serializable {
         try {
             HardwareService hardwareService = (HardwareService) JSFUtils.findBean("HardwareService");
             this.setListHardwares(hardwareService.getAllHardwares());
-            this.setDualListSoftwares(new DualListModel<>(new ArrayList(), new ArrayList()));
         } catch (Exception e) {
             e.getMessage();
         }
@@ -320,7 +308,6 @@ public class HardwareMB implements Serializable {
             this.setSelectedItem(hardware);
             this.setListSourceSoftwares(notAssigned);
             this.setListTargetSoftwares(assigned);
-            this.setDualListSoftwares(new DualListModel<>(notAssigned, assigned));
         } catch (NumberFormatException e) {
             e.getMessage();
         }
@@ -363,7 +350,7 @@ public class HardwareMB implements Serializable {
             Collections.sort(assigned, Software.Comparators.IDSOFTWARE);
 
             SoftwareService softwareService = (SoftwareService) JSFUtils.findBean("SoftwareService");
-            List<Software> target = this.getDualListSoftwares().getTarget();
+            List<Software> target = this.getListTargetSoftwares();
             if (!CollectionUtils.isEmpty(target)) {
                 User user = (User) JSFUtils.getSessionAttribute("usuario");
                 for (int i = 0; i < target.size(); i++) {
@@ -384,7 +371,7 @@ public class HardwareMB implements Serializable {
 
                 }
             }
-            List<Software> source = this.getDualListSoftwares().getSource();
+            List<Software> source = this.getListSourceSoftwares();
             if (!CollectionUtils.isEmpty(source)) {
                 for (int i = 0; i < source.size(); i++) {
                     Software software = source.get(i);

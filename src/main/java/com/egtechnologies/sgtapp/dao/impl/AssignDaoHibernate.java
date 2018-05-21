@@ -13,6 +13,7 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
@@ -32,6 +33,7 @@ public class AssignDaoHibernate extends HibernateDaoSupport  implements AssignDa
     }
     
     @Override
+    @Transactional(readOnly = false)
     public void deleteHardwaresByEmployee(Integer idEmployee) {
         Criteria criteria = this.getSessionFactory().openSession().createCriteria(TAssignation.class);
         criteria.add(Restrictions.eq("idEmployee", idEmployee));
@@ -39,6 +41,7 @@ public class AssignDaoHibernate extends HibernateDaoSupport  implements AssignDa
     }
     
     @Override
+    @Transactional(readOnly = false)
     public void saveOrUpdate(TAssignation tassignation) {
         getHibernateTemplate().saveOrUpdate(tassignation);
     }

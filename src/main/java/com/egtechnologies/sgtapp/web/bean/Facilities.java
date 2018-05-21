@@ -6,13 +6,14 @@
 package com.egtechnologies.sgtapp.web.bean;
 
 import java.io.Serializable;
+import java.util.Comparator;
 import java.util.Date;
 
 /**
  *
  * @author Jonathan
  */
-public class Facilities implements Serializable{
+public class Facilities implements Serializable, Comparable<Facilities> {
     
     private Integer idFacilities;
     private String name;
@@ -89,6 +90,18 @@ public class Facilities implements Serializable{
     public void setModifiedDate(Date modifiedDate) {
         this.modifiedDate = modifiedDate;
     }
+
+    @Override
+    public int compareTo(Facilities o) {
+        return Comparators.ID.compare(this, o);
+    }
     
-    
+    public static class Comparators {
+        public static Comparator<Facilities> ID = new Comparator<Facilities>() {
+            @Override
+            public int compare(Facilities o1, Facilities o2) {
+                return o1.getIdFacilities() - o2.getIdFacilities();
+            }
+        };
+    }
 }

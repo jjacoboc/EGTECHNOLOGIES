@@ -8,6 +8,7 @@ package com.egtechnologies.sgtapp.dao.impl;
 import com.egtechnologies.sgtapp.dao.RoleDao;
 import com.egtechnologies.sgtapp.domain.TRole;
 import com.egtechnologies.sgtapp.domain.TUser;
+import java.math.BigDecimal;
 import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Criteria;
@@ -62,6 +63,7 @@ public class RoleDaoHibernate extends HibernateDaoSupport implements RoleDao {
     @Override
     public List<TRole> getAllRoles() {
         Criteria criteria = this.getSessionFactory().openSession().createCriteria(TRole.class);
+        criteria.add(Restrictions.ne("idRole", BigDecimal.ONE.intValue()));
         criteria.addOrder(Order.asc("name"));
         return (List<TRole>) criteria.list();
     }
@@ -69,6 +71,7 @@ public class RoleDaoHibernate extends HibernateDaoSupport implements RoleDao {
     @Override
     public List<TRole> getAllActiveRoles() {
         Criteria criteria = this.getSessionFactory().openSession().createCriteria(TRole.class);
+        criteria.add(Restrictions.ne("idRole", BigDecimal.ONE.intValue()));
         criteria.add(Restrictions.eq("active", Boolean.TRUE));
         criteria.addOrder(Order.asc("name"));
         return (List<TRole>) criteria.list();
@@ -77,6 +80,7 @@ public class RoleDaoHibernate extends HibernateDaoSupport implements RoleDao {
     @Override
     public List<TRole> search(TRole trole) {
         Criteria criteria = this.getSessionFactory().openSession().createCriteria(TRole.class);
+        criteria.add(Restrictions.ne("idRole", BigDecimal.ONE.intValue()));
         if(StringUtils.isNotBlank(trole.getName())) {
             criteria.add(Restrictions.like("name", trole.getName(), MatchMode.ANYWHERE));
         }

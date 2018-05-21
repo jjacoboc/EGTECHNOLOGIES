@@ -67,7 +67,7 @@ public class PasswordMB implements Serializable {
         try {
             User user = (User) JSFUtils.getSessionAttribute("usuario");
             if (this.getCurrentPassword() != null && !"".equals(this.getCurrentPassword())) {
-                if (this.getCurrentPassword() != null && !"".equals(this.getCurrentPassword())) {
+                if (this.getNewPassword() != null && !"".equals(this.getNewPassword())) {
                     encryptedPassword = SHA1BASE64.encriptar(this.getCurrentPassword().trim());
                     PasswordService passwordService = (PasswordService) com.egtechnologies.sgtapp.util.JSFUtils.findBean("PasswordService");
                     Password password = passwordService.getActivePasswordbyUser(user);
